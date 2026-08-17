@@ -1,0 +1,76 @@
+{
+  "id": "./",
+  "name": "CRM هاله سجادی و هالین",
+  "short_name": "Haleh CRM",
+  "description": "مدیریت فروش، سفارش، مشتری، پرداخت و موجودی هاله سجادی و هالین",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#f8f8fb",
+  "theme_color": "#5d38c8",
+  "orientation": "portrait-primary",
+  "categories": [
+    "business",
+    "productivity",
+    "shopping"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "فروش جدید",
+      "short_name": "فروش",
+      "url": "./?source=pwa#sale",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "سفارش‌ها",
+      "short_name": "سفارش‌ها",
+      "url": "./?source=pwa#orders",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
