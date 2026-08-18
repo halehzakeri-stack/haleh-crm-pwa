@@ -129,6 +129,40 @@ button{letter-spacing:-.01em}
  .product-card:nth-child(n+2){display:none!important}
 }
 </style>
+
+<style id="typographyBalancePatch">
+/* Readable type scale for desktop and installed PWA. */
+body{font-size:15px;line-height:1.7}
+.nav-btn{font-size:11px}.brand-switch button{font-size:11px}.topbar h1{font-size:16px}
+.sale-search input{font-size:12px}.filter-chip{font-size:11px}
+.product-name{font-size:13px}.product-price{font-size:11.5px}.size{font-size:10.5px}.stock-note{font-size:9.5px;line-height:1.5}
+.section-title small,.metric small{font-size:11px}.today-metrics .metric small{font-size:10.5px}.today-metrics .metric b{font-size:10px}
+.sales-chart-card .section-title small,.sales-change,.chart-labels{font-size:10px}
+.list-row strong{font-size:13px}.list-row small{font-size:11px}.status{font-size:10.5px}
+.table th{font-size:11px}.table td{font-size:12px}.action{font-size:11px}
+.sheet h3{font-size:18px}.sheet-row strong{font-size:13px}.sheet-row small{font-size:11px}
+.cart-line strong{font-size:13px}.cart-line small{font-size:11px}.qty span{font-size:12px}
+.row-title strong{font-size:13px}.row-title small{font-size:11px}.text-link{font-size:12px}
+.selected-person strong{font-size:12px}.selected-person small{font-size:11px}
+.segments button,.payment-options button{font-size:11.5px}.field{font-size:13px}
+.total-row{font-size:12px}.total-row.final{font-size:17px}.microcopy{font-size:10px}
+.receipt-row{font-size:12px}.success-card>p{font-size:12px}.next-action strong{font-size:13px}.next-action small{font-size:11px}
+
+@media(max-width:760px){
+ body{font-size:15px;line-height:1.65}
+ .mobile-top h1{font-size:17px}.mobile-top small{font-size:11px}
+ .sale-search input{font-size:13px}
+ .product-name{font-size:14px}.product-price{font-size:12px}.size{font-size:11.5px}.stock-note{font-size:10px}
+ .cart-line strong{font-size:12.5px}.cart-line small{font-size:10.5px}
+ .row-title strong{font-size:13px}.segments button,.payment-options button{font-size:12px}.field{font-size:13px}
+ .total-row{font-size:12px}.total-row.final{font-size:17px}
+ .mobile-sale-summary strong{font-size:13px}.mobile-sale-summary small{font-size:10px}.mobile-sale-summary .btn-primary{font-size:12px}
+ .bottom-nav small{font-size:10px}
+ .mobile-greeting strong{font-size:16px}.mobile-greeting small{font-size:11px}.today-primary{font-size:15px}
+ .today-metrics .metric small{font-size:10.5px}.today-metrics .metric b{font-size:10.5px}
+ .success-card p,.receipt-row{font-size:12px}
+}
+</style>
 </head>
 <body>
 <div id="app" class="app">
