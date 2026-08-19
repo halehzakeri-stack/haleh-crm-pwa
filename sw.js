@@ -1,10 +1,11 @@
-const CACHE = 'haleh-crm-v25-pages-2';
+const CACHE = 'haleh-crm-v25-pages-3';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
   '',
   'index.html',
   'manifest.webmanifest',
+  'vazirmatn.woff2',
   'icon-192.png',
   'icon-512.png',
   'icon-maskable-192.png',
