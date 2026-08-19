@@ -200,6 +200,31 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media(prefers-reduced-transparency:reduce){.topbar,.mobile-top,.bottom-nav,.side,.sheet,.success-overlay,.toast{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}.toast{background:#26262d;color:#fff}.sheet-backdrop{backdrop-filter:none;-webkit-backdrop-filter:none}}
 @media(prefers-contrast:more){:root{--line:#b8b8c2;--hairline:#aaaab5}.card,.product-card,.field,.search,.sheet{border-width:2px}.topbar,.mobile-top,.bottom-nav{background:#fff}}
 </style>
+<style id="rtlSystemPatch">
+html,body,.app{direction:rtl;text-align:right}
+input,textarea,select{direction:rtl;text-align:right}.ltr{direction:ltr!important;text-align:left!important}
+.desktop-shell{direction:rtl!important}
+.side{grid-column:1!important;direction:rtl!important;border-right:0!important;border-left:1px solid var(--line)!important}
+.main{grid-column:2!important;direction:rtl!important}
+.topbar{direction:rtl!important}.topbar-title{direction:rtl!important}.topbar:after{margin-right:auto!important;margin-left:0!important}
+.nav-btn{direction:rtl!important;text-align:right!important}.nav-btn>span:not(.icon):not(.nav-badge){direction:rtl!important;text-align:right!important;flex:1}.nav-badge{margin-right:auto!important;margin-left:0!important}
+.sale-layout,.catalog,.checkout,.sale-search,.filters,.filter-chip,.product-grid,.product-card{direction:rtl!important}
+.sale-search input{direction:rtl!important;text-align:right!important}.search>.icon{order:0}.search>input{order:1}
+.filter-chip{justify-content:space-between}.filter-chip .icon{margin-right:0;margin-left:5px}
+.sizes,.dots,.row-title,.selected-person,.receipt-row,.section-title,.sheet-row{direction:rtl}
+.table{direction:rtl}.table th,.table td{text-align:right}
+.sheet,.sheet-list,.success-card,.receipt,.next-action{direction:rtl;text-align:right}
+.sheet-row>div:first-child{order:0}.sheet-row>.icon[data-icon="chevron"]{order:1}
+.icon[data-icon="chevron"]{transform:scaleX(-1);transform-origin:center}
+#mobileLeftIcon[data-icon="chevron"]{transform:none}
+.mobile-top{direction:rtl!important}.mobile-top>div{direction:rtl}.bottom-nav{direction:rtl}
+@media(max-width:760px){
+ .product-card{direction:rtl!important;grid-template-columns:92px minmax(0,1fr)!important;grid-template-areas:"img name" "img price" "img dots" "img sizes" "img note"!important}
+ .product-card>*:not(.product-image){direction:rtl!important;text-align:right!important}
+ .product-card .sizes,.product-card .dots{direction:rtl!important;justify-content:flex-start}
+ .mobile-sale-summary{direction:rtl}.mobile-sale-summary .sum-info{text-align:right!important}
+}
+</style>
 </head>
 <body>
 <div id="app" class="app">
