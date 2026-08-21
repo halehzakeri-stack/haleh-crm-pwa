@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v25-pages-7';
+const CACHE = 'haleh-crm-v25-pages-9';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
@@ -10,7 +10,15 @@ const APP_SHELL = [
   'icon-512.png',
   'icon-maskable-192.png',
   'icon-maskable-512.png',
-  'apple-touch-icon.png'
+  'apple-touch-icon.png',
+  'assets/category-icons/jeans.png',
+  'assets/category-icons/casual.png',
+  'assets/category-icons/coat.png',
+  'assets/category-icons/shirt.png',
+  'assets/category-icons/suit.png',
+  'assets/category-icons/accessory.png',
+  'assets/category-icons/search.png',
+  'assets/category-icons/manage.png'
 ].map(path => new URL(path, BASE_URL).href);
 
 self.addEventListener('install', event => {
