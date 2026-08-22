@@ -69,6 +69,20 @@ The combined comparison shows the same information order and overall composition
 
 final result: passed
 
+## Mobile brand-switch placement QC — v26
+
+- Source visual truth: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_zoIT9D/Screenshot 1405-05-31 at 18.45.33.png`.
+- Implementation screenshot: `qc-brand-switch-mobile-v26.png`.
+- Viewport: 390 × 844 CSS px; Today dashboard, aggregated-brand state.
+- Finding [P2]: the brand selector and its `نمایش اطلاعات` caption appeared below the greeting, creating an oversized and visually disconnected welcome region.
+- Fix: on mobile only, the selector now occupies a full-width row immediately below the header; the redundant caption is hidden and the greeting follows with a 14 px rhythm.
+- Post-fix evidence: selector width 350 px inside a 358 px content row, selector above greeting, no horizontal overflow.
+- Desktop regression check: at 1280 × 720 the selector stays beside the greeting and its caption remains visible.
+- Typography, tokens, icon assets, card styling, and surrounding dashboard content are unchanged.
+- Console: no errors or warnings.
+
+final result: passed
+
 ## Time-aware greeting copy QC — v24
 
 - Source visual truth: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_APrgx4/Screenshot 1405-05-31 at 17.26.46.png` (574 × 186 px focused greeting crop).
