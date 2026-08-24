@@ -1,17 +1,32 @@
-const CACHE = 'haleh-crm-v25-pages-1';
+const CACHE = 'haleh-crm-v27-pages-21';
+const BASE_URL = new URL('./', self.registration.scope);
+const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
-  './',
-  './index.html',
-  './manifest.webmanifest',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-maskable-192.png',
-  './icons/icon-maskable-512.png',
-  './icons/apple-touch-icon.png'
-];
+  '',
+  'index.html',
+  'manifest.webmanifest',
+  'vazirmatn.woff2',
+  'icon-192.png',
+  'icon-512.png',
+  'icon-maskable-192.png',
+  'icon-maskable-512.png',
+  'apple-touch-icon.png',
+  'assets/category-icons/jeans.png',
+  'assets/category-icons/casual.png',
+  'assets/category-icons/coat.png',
+  'assets/category-icons/shirt.png',
+  'assets/category-icons/suit.png',
+  'assets/category-icons/accessory.png',
+  'assets/category-icons/search.png',
+  'assets/category-icons/manage.png'
+].map(path => new URL(path, BASE_URL).href);
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
+  event.waitUntil(
+    caches.open(CACHE)
+      .then(cache => Promise.allSettled(APP_SHELL.map(asset => cache.add(asset))))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', event => {
@@ -31,10 +46,10 @@ self.addEventListener('fetch', event => {
       fetch(event.request)
         .then(response => {
           const copy = response.clone();
-          caches.open(CACHE).then(cache => cache.put('./index.html', copy));
+          caches.open(CACHE).then(cache => cache.put(INDEX_URL, copy));
           return response;
         })
-        .catch(() => caches.match('./index.html'))
+        .catch(() => caches.match(INDEX_URL))
     );
     return;
   }

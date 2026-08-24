@@ -5,7 +5,7 @@
   "description": "مدیریت فروش، سفارش، مشتری، پرداخت و موجودی هاله سجادی و هالین",
   "lang": "fa",
   "dir": "rtl",
-  "start_url": "./?source=pwa",
+  "start_url": "./?source=pwa#/today",
   "scope": "./",
   "display": "standalone",
   "display_override": [
@@ -23,25 +23,25 @@
   ],
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "./icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-maskable-192.png",
+      "src": "./icon-maskable-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "icons/icon-maskable-512.png",
+      "src": "./icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -51,10 +51,10 @@
     {
       "name": "فروش جدید",
       "short_name": "فروش",
-      "url": "./?source=pwa#sale",
+      "url": "./?source=pwa#/sale",
       "icons": [
         {
-          "src": "icons/icon-192.png",
+          "src": "./icon-192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
@@ -63,10 +63,10 @@
     {
       "name": "سفارش‌ها",
       "short_name": "سفارش‌ها",
-      "url": "./?source=pwa#orders",
+      "url": "./?source=pwa#/orders",
       "icons": [
         {
-          "src": "icons/icon-192.png",
+          "src": "./icon-192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
