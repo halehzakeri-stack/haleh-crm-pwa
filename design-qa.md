@@ -69,6 +69,25 @@ The combined comparison shows the same information order and overall composition
 
 final result: passed
 
+## Home v31 — unified live dashboard
+
+Reference: `exec-51aa2069-9bdd-4c12-b596-50aa774dad55.png`
+Prototype: `home-v31-final.png`
+Side-by-side evidence: `qc-home-v31-comparison.png`
+
+- The sales total and new-order count now share one card and are not repeated in the chart header.
+- The chart uses a smooth cubic path and derives its points from filtered order dates and totals.
+- Brand scope updates sales, orders, inventory, finance/fulfillment counts, and tasks together.
+- Profile add/change/delete is available from the greeting avatar and persists through the same local data layer.
+- Quick access links route to Orders, Finance, Inventory, and Fulfillment; Today tasks remain last.
+- Mobile verification at 390×844: document width equals viewport width, all four quick-access icons remain rendered after brand switching, and the fixed navigation bottom remains 830 px before and after scrolling.
+- Week/month selection and brand scope persist after leaving Home and returning from Orders.
+- Console: no errors or warnings.
+
+Remaining P3: with an empty sales database the line is intentionally flat; it becomes curved as real sales arrive.
+
+final result: passed
+
 ---
 
 # Design QA — Corrected mezon navigation v24
