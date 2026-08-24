@@ -71,6 +71,41 @@ final result: passed
 
 ---
 
+# Design QA — Corrected mezon navigation v24
+
+- source visual truth: `/Users/mac/Downloads/exec-faad11d5-00f0-4e21-bd35-c588bca5e89f.png`
+- rendered implementation: `qc-nav-v24-full.png`
+- normalized combined comparison: `qc-nav-v24-comparison.png`
+- source pixels: 1800 × 900; focused source crop: 1800 × 450
+- implementation viewport: 390 × 600 CSS px at density 1; focused implementation crop: 390 × 120
+- state: Today dashboard, all brands, navigation closed
+
+## Findings and comparison history
+
+1. [P1] v23 made the center circle 72 px and lifted it too far above the bar, materially changing the approved silhouette. Fix: reduced the orb to 48 px and placed it only 8 px above the 64 px pill surface.
+2. [P1] v23 looked like a floating circle over a mostly straight bar. Fix: moved the 32 px radial cutout center 14 px inside the bar so the white surface now wraps around the orb as the broad U-shaped notch shown in the reference.
+3. [P2] Side actions were too visually weak. Fix: increased side icons to 27 px and labels to 11 px while preserving muted gray and purple active tokens.
+4. [P2] The original navigation used a tighter horizontal inset and softer pill geometry. Fix: set 18 px mobile insets, 36 px end radii, and matched the soft border/shadow treatment.
+
+## Fidelity surfaces
+
+- Typography: Vazirmatn retained; labels use the same hierarchy and RTL flow as the reference.
+- Spacing/layout: three equal tracks, centered orb, Orders on the left and Menu on the right; zero horizontal overflow at 390 px.
+- Colors/tokens: white surface, pale violet halo, purple active action, and muted gray secondary actions match the reference direction.
+- Icons: existing product icon system retained; storefront, menu, and bag remain sharp and functional.
+- Copy: exact visible labels are `سفارش‌ها`, `مزون`, and `منو`.
+
+## Interactions tested
+
+- Menu opens and begins with Customers then New Sale.
+- Orders navigates to the Orders screen.
+- Mezon returns to Today.
+- Active states update after each navigation action.
+
+final result: passed
+
+---
+
 # Design QA — Three-item mezon navigation v23
 
 - source visual truth: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-faad11d5-00f0-4e21-bd35-c588bca5e89f.png`
