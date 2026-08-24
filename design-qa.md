@@ -69,6 +69,31 @@ The combined comparison shows the same information order and overall composition
 
 final result: passed
 
+---
+
+# Design QA — Three-item mezon navigation v23
+
+- source visual truth: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-faad11d5-00f0-4e21-bd35-c588bca5e89f.png`
+- implementation evidence: `qc-nav-v23.png`
+- viewport: 390 × 650 CSS px inside the in-app browser QA harness
+- state: Today dashboard, all brands
+
+## Findings and fixes
+
+1. [P1] The deployed center action looked like a circle sitting on a straight bar, while the approved design used a real concave notch. Fix: the navigation surface now has a 44 px radial cutout and the 72 px mezon orb is elevated into that cutout.
+2. [P2] The `مزون` label appeared inside the circle. Fix: the label now sits on the navigation body below the orb, matching the approved hierarchy.
+3. [P2] The three actions needed operational verification after the structural CSS change. Fix: hamburger opens the complete mezon menu; Orders navigates to `#/orders`; Mezon returns to `#/today`; active states update correctly.
+
+## Fidelity and regression checks
+
+- RTL order is Menu, Mezon, Orders with the primary action centered.
+- The established purple/lilac token, Vazirmatn typography, white glass surface, shadows, and icon set are preserved.
+- The mobile document has no horizontal overflow.
+- Hamburger contents retain Customers first, New Sale second, and Sales Opportunities marked `به‌زودی` and disabled.
+- Service-worker cache was advanced so installed PWAs receive the corrected navigation.
+
+final result: passed
+
 ## Mobile brand-switch placement QC — v26
 
 - Source visual truth: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_zoIT9D/Screenshot 1405-05-31 at 18.45.33.png`.
