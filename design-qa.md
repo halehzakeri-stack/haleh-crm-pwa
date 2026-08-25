@@ -68,7 +68,6 @@ The combined comparison shows the same information order and overall composition
 - [P3] Desktop retains the existing CRM side navigation and checkout because those are product requirements not represented in the mobile reference.
 
 final result: passed
-
 ## Home v31 — unified live dashboard
 
 Reference: `exec-51aa2069-9bdd-4c12-b596-50aa774dad55.png`
@@ -327,5 +326,28 @@ The implementation retains the selected mockup's floating header, weekday, perso
 ## Follow-up polish
 
 - [P3] The empty-data implementation is naturally shorter than the populated visual mockup; live tasks and sales expand the same components without changing hierarchy.
+
+final result: passed
+
+---
+
+# Design QA — صفحه مزون تأییدشده v2.5
+
+- مرجع تأییدشده: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-fcad45d2-cc8f-4c15-a51c-fa95db7653f5.png`
+- خروجی موبایل: `design-qa-mobile-final.png`
+- خروجی دسکتاپ: `design-qa-desktop-final.png`
+- اندازه تست موبایل: `423 × 926`
+- اندازه تست دسکتاپ: `1280 × 800`
+
+## موارد بررسی‌شده
+
+- هدر، خوشامدگویی، انتخاب برند، کارت فروش و کارت‌های وضعیت با مرجع تطبیق داده شدند.
+- نوار موبایل سه‌تایی است و دقیقاً ۱۶ پیکسل از کف فاصله دارد.
+- نوار هنگام اسکرول ثابت می‌ماند و فوکوس لمسی کادر اضافه ایجاد نمی‌کند.
+- منوی همبرگری با «مشتریان» و «فروش جدید» در ابتدای فهرست باز می‌شود؛ «فرصت‌های فروش (به‌زودی)» مشخص است.
+- تغییر برند آیکون‌های وضعیت را حذف نمی‌کند.
+- مسیر سفارش‌ها و بازگشت به مزون کار می‌کند.
+- نمای دسکتاپ بدون اسکرول افقی و بدون اثر جانبی باقی مانده است.
+- خطای JavaScript و خطای کنسول مشاهده نشد.
 
 final result: passed
