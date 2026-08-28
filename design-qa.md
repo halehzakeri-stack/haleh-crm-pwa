@@ -71,6 +71,35 @@ final result: passed
 
 ---
 
+# Design QA — کارت‌های مستقل سفارش در PWA
+
+- source visual truth path: `orders-table-source.png`
+- implementation screenshot: `orders-mobile-card-qa.png`
+- viewport: `812 × 814` CSS px
+- state: یک سفارش ثبت‌شده، پرداخت تسویه، تحویل حضوری
+
+## Full-view and focused comparison evidence
+
+نمای قبلی یک جدول هشت‌ستونه بود که در عرض PWA به اسکرول افقی نیاز داشت. نمای جدید هر سفارش را به یک کارت مستقل تمام‌عرض تبدیل می‌کند و اطلاعات اصلی مشتری، تاریخ، برند، مبلغ، شماره سفارش، پرداخت و تحویل را بدون اسکرول افقی نشان می‌دهد.
+
+## Required fidelity surfaces
+
+- فونت، رنگ‌ها، شعاع گوشه‌ها و status pillها از توکن‌های موجود v2.5 استفاده می‌کنند.
+- نسخه دسکتاپ همان جدول کامل را نگه می‌دارد و کارت‌ها فقط زیر breakpoint موبایل نمایش داده می‌شوند.
+- هر کارت یک کنترل واحد و قابل لمس است؛ انتخاب کارت همان پنل «جزئیات سفارش» موجود را باز می‌کند.
+- عرض سند و viewport هر دو `812px` اندازه‌گیری شدند؛ overflow افقی وجود ندارد.
+
+## Primary interactions tested
+
+- ثبت یک فروش واقعی از مسیر انتخاب کالا، سبد، تأیید نهایی و ذخیره سفارش
+- نمایش کارت سفارش بلافاصله پس از ثبت
+- لمس کارت و بازشدن پنل «جزئیات سفارش»
+- بررسی JavaScript syntax و `git diff --check`
+
+final result: passed
+
+---
+
 # Design QA — Empty message notification state
 
 - source visual truth path: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_hhmz8P/Screenshot 1405-06-06 at 10.23.23.png`
