@@ -21,8 +21,12 @@
  --purple:#6044ce;--purple2:#755ce0;--purpleSoft:#f1edff;--green:#15965a;--greenSoft:#eaf8f0;--orange:#da7a24;--orangeSoft:#fff3e8;
  --red:#c64848;--redSoft:#fff0f0;--navy:#283c52;--haleh:#6b4a78;--shadow:0 12px 40px rgba(27,29,39,.07);
  --r1:10px;--r2:14px;--r3:20px;--safe-bottom:env(safe-area-inset-bottom,0px);
+ --type-display:36px;--type-page:24px;--type-section:20px;--type-card:16px;
+ --type-body:14px;--type-control:14px;--type-label:13px;--type-caption:12px;
+ --weight-regular:400;--weight-medium:500;--weight-semibold:600;--weight-bold:700;--weight-extrabold:800;
+ --leading-display:1.25;--leading-title:1.35;--leading-body:1.75;--leading-label:1.55;
 }
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:"Estedad",-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif}body{font-size:14px;line-height:1.65}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.ltr{direction:ltr;unicode-bidi:isolate}.money{font-variant-numeric:tabular-nums}.icon{width:20px;height:20px;display:inline-grid;place-items:center;flex:0 0 20px}.icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:"Vazirmatn",-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif}body{font-size:var(--type-body);line-height:var(--leading-body)}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.ltr{direction:ltr;unicode-bidi:isolate}.money{font-variant-numeric:tabular-nums}.icon{width:20px;height:20px;display:inline-grid;place-items:center;flex:0 0 20px}.icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 button{border:0}.btn{min-height:44px;border-radius:12px;padding:0 16px;font-weight:650;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn-primary{background:linear-gradient(135deg,var(--purple2),var(--purple));color:#fff;box-shadow:0 9px 24px rgba(96,68,206,.2)}.btn-secondary{background:var(--purpleSoft);color:var(--purple)}.btn-ghost{background:transparent;color:var(--sub)}.btn-outline{background:#fff;border:1px solid var(--line);color:var(--text)}.btn-danger{background:var(--redSoft);color:var(--red)}.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
 .app{min-height:100vh}.desktop-shell{display:grid;grid-template-columns:230px minmax(0,1fr);direction:rtl;min-height:100vh}.side{background:#fff;border-left:1px solid var(--line);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:16px 12px;z-index:20}.brand-box{display:flex;align-items:center;gap:10px;padding:7px 8px 17px;border-bottom:1px solid var(--line)}.brand-mark{width:38px;height:38px;border-radius:12px;background:var(--purpleSoft);color:var(--purple);display:grid;place-items:center}.brand-box strong{display:block;font-size:14px}.brand-box small{display:block;color:var(--muted);font-size:10px}.brand-switch{margin:14px 4px 8px;display:flex;background:var(--surface2);padding:4px;border-radius:11px}.brand-switch button{flex:1;background:transparent;border-radius:8px;min-height:35px;font-size:11px;color:var(--sub)}.brand-switch button.active{background:#fff;color:var(--text);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.05)}.nav{display:grid;gap:3px;margin-top:4px;overflow:auto}.nav::-webkit-scrollbar{display:none}.nav-title{font-size:9px;color:var(--muted);padding:11px 10px 4px}.nav-btn{width:100%;min-height:41px;background:transparent;color:var(--sub);border-radius:10px;display:flex;align-items:center;gap:10px;padding:0 11px;text-align:right}.nav-btn.active{background:var(--purpleSoft);color:var(--purple);font-weight:700}.nav-btn:hover{background:var(--surface2)}.nav-badge{margin-right:auto;min-width:19px;height:19px;border-radius:10px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:9px}.side-footer{margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
 .main{min-width:0}.topbar{height:72px;background:rgba(255,255,255,.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:15}.topbar-title{display:flex;align-items:center;gap:10px}.topbar-title .page-icon{width:34px;height:34px;border-radius:10px;background:var(--purpleSoft);color:var(--purple);display:grid;place-items:center}.topbar h1{font-size:18px;margin:0;font-weight:720}.topbar p{font-size:10px;color:var(--muted);margin:1px 0 0}.top-actions{display:flex;align-items:center;gap:8px}.round-btn{width:40px;height:40px;border-radius:12px;background:#fff;border:1px solid var(--line);color:var(--sub);display:grid;place-items:center}.avatar{width:38px;height:38px;border-radius:50%;background:#34363c;color:#fff;display:grid;place-items:center;font-size:11px}
@@ -48,8 +52,8 @@ button{border:0}.btn{min-height:44px;border-radius:12px;padding:0 16px;font-weig
  --r1:9px;--r2:13px;--r3:18px;
 }
 html,body{background:#f7f7fa;color:var(--text);font-weight:400}
-body{letter-spacing:-.015em}
-button{letter-spacing:-.01em}
+body{letter-spacing:0}
+button{letter-spacing:0}
 .card{border-color:var(--line);box-shadow:0 2px 8px rgba(26,24,35,.025);border-radius:13px}
 .desktop-shell{
  direction:ltr;grid-template-columns:180px minmax(0,1fr);grid-template-rows:36px minmax(0,1fr);
@@ -325,17 +329,73 @@ input,textarea,select{direction:rtl;text-align:right}.ltr{direction:ltr!importan
  .bottom-nav button.active{color:var(--purple)!important}
  .bottom-nav button:focus:not(:focus-visible){outline:none!important}
  .bottom-nav button:focus-visible{outline:3px solid rgba(93,56,200,.24)!important;outline-offset:2px}
- .bottom-nav .nav-mezon{align-content:center!important;transform:translateY(-18px)!important;gap:2px!important;color:var(--purple)!important}
+ .bottom-nav .nav-mezon{align-content:center!important;transform:translateY(-18px)!important;gap:6px!important;color:var(--purple)!important}
  .bottom-nav .nav-mezon::before{content:"";position:absolute;z-index:-2;top:-12px;left:50%;width:88px;height:88px;transform:translateX(-50%);border-radius:50%;background:#f7f5ff}
  .bottom-nav .nav-mezon::after{content:"";position:absolute;z-index:-1;top:-4px;left:50%;width:74px;height:74px;transform:translateX(-50%);border-radius:50%;background:#fff;border:1px solid #ececf2;box-shadow:0 8px 24px rgba(64,42,139,.13)}
- .mezon-orb{width:74px;height:54px;display:grid;place-items:center;color:var(--purple)}
+ .mezon-orb{width:74px;height:31px;display:grid;place-items:center;color:var(--purple)}
  .mezon-orb .icon{width:31px!important;height:31px!important}
- .bottom-nav .nav-mezon small{color:var(--purple)!important;font-size:10px!important;font-weight:750!important}
+ .bottom-nav .nav-mezon small{color:var(--purple)!important;font-size:12px!important;line-height:1.2!important;font-weight:750!important}
  .mobile-sale-summary{bottom:calc(108px + var(--safe-bottom))!important}
  .toast{bottom:calc(118px + var(--safe-bottom))!important}
 }
 @media(min-width:861px){
  .today-status-card strong{font-size:11px}
+}
+</style>
+<style id="typography-system-v25">
+/* Unified Persian type system: Vazirmatn only, shared by desktop and PWA. */
+html,body,button,input,select,textarea{
+ font-family:"Vazirmatn",-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif!important;
+ font-optical-sizing:auto;
+ letter-spacing:0!important;
+}
+body{font-size:var(--type-body)!important;line-height:var(--leading-body)!important;font-weight:var(--weight-regular)}
+h1,h2,h3,h4,p{letter-spacing:0}
+h1{font-size:var(--type-page);font-weight:var(--weight-extrabold);line-height:var(--leading-title)}
+h2,.section-title h2{font-size:var(--type-section);font-weight:var(--weight-bold);line-height:var(--leading-title)}
+h3{font-size:var(--type-card);font-weight:var(--weight-bold);line-height:var(--leading-title)}
+small,.status,.product-code,.stock-note,.microcopy,.row-title small,.selected-person small,.cart-line small,
+.sheet-row small,.receipt-detail,.order-detail-head small,.mobile-sale-summary small,.backup-card p,.backup-meta{
+ font-size:var(--type-caption)!important;line-height:var(--leading-label)!important;font-weight:var(--weight-regular)
+}
+.btn,.field,.search input,.filter-chip,.segments button,.payment-options button,.size,.text-link,.action,
+.quick-create-card,.product-photo-button,.dashboard-brand-switch button,.brand-switch button,.nav-btn{
+ font-size:var(--type-control)!important;line-height:var(--leading-label)!important;font-weight:var(--weight-semibold)!important
+}
+.topbar h1,.mobile-top h1{font-size:var(--type-page)!important;font-weight:var(--weight-extrabold)!important;line-height:var(--leading-title)!important}
+.brand-box strong,.product-name,.checkout-head h2,.sheet h3,.brand-ledger-title strong,.backup-card h3{
+ font-size:var(--type-card)!important;font-weight:var(--weight-bold)!important;line-height:var(--leading-title)!important
+}
+.list-row strong,.row-title strong,.selected-person strong,.cart-line strong,.sheet-row strong,.receipt-row,
+.table td,.product-price,.total-row,.interbrand-glance strong,.today-status-card strong{
+ font-size:var(--type-body)!important;line-height:var(--leading-label)!important
+}
+.table th,.nav-title{font-size:var(--type-caption)!important;line-height:var(--leading-label)!important}
+.metric .value,.interbrand-balance .balance-value{font-size:32px!important;font-weight:var(--weight-extrabold)!important;line-height:var(--leading-display)!important}
+.today-hero-copy h2,.today-hero-copy h2 span{font-size:var(--type-display)!important;font-weight:var(--weight-extrabold)!important;line-height:var(--leading-display)!important}
+.quick-sale-banner h2{font-size:var(--type-section)!important;font-weight:var(--weight-bold)!important}
+.total-row.final{font-size:var(--type-card)!important;font-weight:var(--weight-bold)!important}
+.bottom-nav small,.bottom-nav .nav-mezon small{font-size:var(--type-caption)!important;line-height:var(--leading-label)!important;font-weight:var(--weight-semibold)!important}
+.filter-select,.category-heading p,.product-select-label,.inventory-brand-picker small,.inventory-brand-picker strong,
+.interbrand-balance p{font-size:var(--type-caption)!important;line-height:var(--leading-label)!important}
+.money,.metric .value,.today-hero-copy h2,.brand-ledger-values b,.balance-value{font-variant-numeric:tabular-nums lining-nums}
+@media(max-width:860px){
+ :root{--type-display:32px;--type-page:22px;--type-section:18px;--type-card:16px;--type-body:14px;--type-control:14px;--type-label:13px;--type-caption:12px}
+ .mobile-top{display:flex!important;direction:rtl!important;justify-content:space-between!important}
+ .mobile-top>div{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;direction:rtl!important;text-align:center!important}
+ .mobile-top h1{font-size:18px!important}
+ .mobile-top small,.mobile-date,.mobile-dot{font-size:var(--type-caption)!important;line-height:var(--leading-label)!important}
+ .today-welcome .today-greeting strong{font-size:var(--type-page)!important;font-weight:var(--weight-extrabold)!important;line-height:var(--leading-title)!important}
+ .daypart-label{font-size:var(--type-label)!important;font-weight:var(--weight-bold)!important}
+ .today-hero-copy>small,.today-hero-copy .sales-change{font-size:var(--type-label)!important;line-height:var(--leading-label)!important}
+ .today-status-section .section-title h2,.today-priority-card .section-title h2{font-size:var(--type-section)!important}
+ .today-status-card strong{font-size:var(--type-label)!important}
+ .today-status-card small,.interbrand-glance small,.interbrand-glance .status,.today-priority-card .section-title small,
+ .today-priority-card .text-link{font-size:var(--type-caption)!important}
+ .product-name{font-size:var(--type-card)!important}
+ .product-price{font-size:var(--type-body)!important}
+ .product-code,.stock-note{font-size:var(--type-caption)!important}
+ .toast{font-size:var(--type-label)!important;line-height:var(--leading-label)!important}
 }
 </style>
 </head>
@@ -354,7 +414,7 @@ input,textarea,select{direction:rtl;text-align:right}.ltr{direction:ltr!importan
     <div class="nav-title">کار روزانه</div>
     <button class="nav-btn" data-page="today"><span class="icon" data-icon="home"></span><span>امروز</span></button>
     <button class="nav-btn active" data-page="sale"><span class="icon" data-icon="plus"></span><span>فروش جدید</span></button>
-    <button class="nav-btn" data-page="messages"><span class="icon" data-icon="message"></span><span>پیام‌ها</span><span class="nav-badge" id="msgBadge">۲</span></button>
+    <button class="nav-btn" data-page="messages"><span class="icon" data-icon="message"></span><span>پیام‌ها</span><span class="nav-badge" id="msgBadge" hidden></span></button>
     <button class="nav-btn" data-page="customers"><span class="icon" data-icon="users"></span><span>مشتریان</span></button>
     <button class="nav-btn" data-page="opportunities"><span class="icon" data-icon="target"></span><span>فرصت‌های فروش</span></button>
     <button class="nav-btn" data-page="tasks"><span class="icon" data-icon="check"></span><span>کارها</span></button>
@@ -420,7 +480,7 @@ const K={data:'hs.crm.v24.data',orders:'hs.crm.v24.orders',tasks:'hs.crm.v24.tas
 let data=JSON.parse(localStorage.getItem(K.data)||'null')||structuredClone(DEFAULT); localStorage.setItem(K.data,JSON.stringify(data));
 let orders=JSON.parse(localStorage.getItem(K.orders)||'[]');
 let tasks=JSON.parse(localStorage.getItem(K.tasks)||'null')||[{id:'t1',title:'پیگیری پرداخت سفارش سارا احمدی',done:false,due:'امروز'},{id:'t2',title:'هماهنگی پیک سفارش نگار محمدی',done:false,due:'امروز'},{id:'t3',title:'بررسی موجودی شلوار فلر سایز ۴۰',done:false,due:'امروز'}];
-let messages=JSON.parse(localStorage.getItem(K.messages)||'null')||[{id:'m1',name:'الهام',text:'قیمت شلوار فلر آبی رو می‌فرستین؟',needsReply:true},{id:'m2',name:'ترانه',text:'سایز ۳۸ دوباره موجود میشه؟',needsReply:true}];
+let messages=JSON.parse(localStorage.getItem(K.messages)||'null')||[];
 let returns=JSON.parse(localStorage.getItem(K.returns)||'[]');
 let inventoryMoves=JSON.parse(localStorage.getItem(K.inventoryMoves)||'[]');
 let interBrandTransactions=JSON.parse(localStorage.getItem(K.interBrand)||'[]');
@@ -544,8 +604,9 @@ function openSheet(html,wire){$('#sheetHost').innerHTML=`<div class="sheet-backd
 function closeSheet(){$('#sheetHost').innerHTML=''}
 function openMobileCheckout(){if(!state.cart.length){closeSheet();return toast('سبد فروش خالی شد.')}const html=`<div class="checkout-sheet-head"><h3>سبد و تسویه</h3><small>${fmt(state.cart.reduce((a,i)=>a+i.qty,0))} کالا · ${toman(totals().total)}</small></div><div class="cart sheet-cart">${state.cart.map(cartLine).join('')}</div>${checkoutSections(totals())}<button class="btn btn-primary" style="width:100%;margin-top:12px" id="sheetSubmit">${submitText(totals())}</button><div class="microcopy">پیش از ثبت نهایی، خلاصه کامل فروش برای تأیید نمایش داده می‌شود.</div>`;openSheet(html,host=>{wireCheckout(host);$('#sheetSubmit',host).onclick=()=>validateSubmit(true)})}
 function openMore(){const pages=['customers','sale','messages','opportunities','tasks','fulfillment','returns','products','inventory','finance','reports','settings'];openSheet(`<h3>منو</h3><div class="sheet-list">${pages.map(p=>`<button class="sheet-row" data-morepage="${p}"><div style="display:flex;gap:9px;align-items:center"><span class="icon" data-icon="${META[p][2]}"></span><strong>${META[p][0]}${p==='opportunities'?' (به‌زودی)':''}</strong></div><span class="icon" data-icon="chevron"></span></button>`).join('')}</div>`,host=>$$('[data-morepage]',host).forEach(b=>b.onclick=()=>{closeSheet();setPage(b.dataset.morepage)}))}
-function updateBadges(){const n=messages.filter(m=>m.needsReply).length;$('#msgBadge').textContent=fmt(n);$('#msgBadge').style.display=n?'grid':'none'}
-$$('#desktopNav .nav-btn,.side-footer .nav-btn').forEach(b=>b.onclick=()=>setPage(b.dataset.page));$$('#bottomNav button').forEach(b=>b.onclick=()=>setPage(b.dataset.page));$$('[data-go]').forEach(b=>b.onclick=()=>setPage(b.dataset.go));$$('#brandSwitch button').forEach(b=>b.onclick=()=>{const next=b.dataset.brand;if(next===state.brand)return;if(state.cart.length&&!confirm('با تغییر برند، فروش جاری خالی می‌شود. ادامه می‌دهید؟'))return;state.brand=next;resetSale(false);$$('#brandSwitch button').forEach(x=>x.classList.toggle('active',x.dataset.brand===next));$('#mobileBrand').textContent=brandLabel(next);render();injectIcons()});$('#scanBtn').onclick=()=>state.page==='today'?openCalendarSheet():state.page==='sale'?toast('بارکدخوان آماده اتصال به دوربین است.'):openMore();$('#mobileBack').onclick=()=>{if(state.page==='today')toast('اعلان جدیدی ندارید.');else if(state.page==='sale')setPage('today');else history.length>1?history.back():setPage('today')};window.addEventListener('popstate',()=>setPage((location.hash.split('/')[1]||'today'),false));
+function unreadMessageCount(){return messages.filter(message=>message.needsReply).length}
+function updateBadges(){const n=unreadMessageCount(),badge=$('#msgBadge');badge.textContent=n?fmt(n):'';badge.hidden=n===0;badge.style.display=n?'grid':'none'}
+$$('#desktopNav .nav-btn,.side-footer .nav-btn').forEach(b=>b.onclick=()=>setPage(b.dataset.page));$$('#bottomNav button').forEach(b=>b.onclick=()=>setPage(b.dataset.page));$$('[data-go]').forEach(b=>b.onclick=()=>setPage(b.dataset.go));$$('#brandSwitch button').forEach(b=>b.onclick=()=>{const next=b.dataset.brand;if(next===state.brand)return;if(state.cart.length&&!confirm('با تغییر برند، فروش جاری خالی می‌شود. ادامه می‌دهید؟'))return;state.brand=next;resetSale(false);$$('#brandSwitch button').forEach(x=>x.classList.toggle('active',x.dataset.brand===next));$('#mobileBrand').textContent=brandLabel(next);render();injectIcons()});$('#scanBtn').onclick=()=>state.page==='today'?openCalendarSheet():state.page==='sale'?toast('بارکدخوان آماده اتصال به دوربین است.'):openMore();$('#mobileBack').onclick=()=>{if(state.page==='today')unreadMessageCount()?setPage('messages'):toast('پیام خوانده‌نشده‌ای ندارید.');else if(state.page==='sale')setPage('today');else history.length>1?history.back():setPage('today')};window.addEventListener('popstate',()=>setPage((location.hash.split('/')[1]||'today'),false));
 function dashboardOrders(source=orders){return state.dashboardBrand==='ALL'?source:source.filter(o=>o.brand===state.dashboardBrand)}
 function interBrandBalance(){return interBrandTransactions.reduce((sum,entry)=>sum+(entry.fromBrand==='HALIN'?entry.amount:-entry.amount),0)}
 function interBrandBalanceCopy(){const balance=interBrandBalance();if(!balance)return{title:'حساب دو برند تسویه است',detail:'مانده فی‌مابین صفر',className:'success'};const creditor=balance>0?'هالین':'هاله سجادی',debtor=balance>0?'هاله سجادی':'هالین';return{title:`${debtor} به ${creditor} بدهکار است`,detail:toman(Math.abs(balance)),className:'warn'}}
@@ -621,11 +682,11 @@ const baseStockReceiptForm=newStockReceiptForm;newStockReceiptForm=function(){co
 const baseWorkspaceBody=workspaceBody;workspaceBody=page=>page==='finance'?financeWorkspace():page==='inventory'?inventoryWorkspace():baseWorkspaceBody(page);
 const baseWireWorkspace=wireWorkspace;wireWorkspace=(r,page)=>{baseWireWorkspace(r,page);if(page==='inventory')$('#inventoryBrandPicker',r)?.addEventListener('click',openInventoryBrandPicker);if(page==='finance'){$('#newSharedExpense',r)?.addEventListener('click',()=>openInterBrandEntry('SHARED_EXPENSE'));$('#newInterBrandTransfer',r)?.addEventListener('click',()=>openInterBrandEntry('TRANSFER'));$('#newInterBrandSettlement',r)?.addEventListener('click',()=>openInterBrandEntry('SETTLEMENT'));$('#backupNow',r)?.addEventListener('click',async()=>{downloadExcelBackup();if(backupConfig.googleUrl)await performCloudBackup(true);else openBackupSetup()});$('#downloadExcelBackup',r)?.addEventListener('click',downloadExcelBackup);$('#backupSettings',r)?.addEventListener('click',openBackupSetup)}if(page==='settings'){const exportButton=$('#exportData',r);if(exportButton)exportButton.onclick=()=>{const blob=new Blob([JSON.stringify({version:'2.7',exportedAt:new Date().toISOString(),data,orders,tasks,messages,returns,inventoryMoves,interBrandTransactions},null,2)],{type:'application/json'}),link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=`haleh-crm-backup-${new Date().toISOString().slice(0,10)}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000)}}};
 function todayPersianDate(date=new Date()){return new Intl.DateTimeFormat('fa-IR-u-ca-persian',{timeZone:IRAN_TIME_ZONE,day:'numeric',month:'long'}).format(date)}
-function syncTodayHeader(){const isToday=state.page==='today',date=$('#mobileDate'),dot=$('#mobileNotifyDot'),calendar=$('#scanBtn'),back=$('#mobileBack');if(!date||!dot||!calendar||!back)return;calendar.classList.toggle('today-calendar',isToday);date.classList.toggle('hidden',!isToday);if(isToday)date.textContent=todayPersianDate();const count=messages.filter(m=>m.needsReply).length+orders.filter(o=>o.paymentStatus==='نیاز به تأیید').length;dot.textContent=fmt(count);dot.classList.toggle('hidden',!isToday||count===0);back.setAttribute('aria-label',count?`${fmt(count)} اعلان نیازمند اقدام`:'اعلانی ندارید')}
+function syncTodayHeader(){const isToday=state.page==='today',date=$('#mobileDate'),dot=$('#mobileNotifyDot'),calendar=$('#scanBtn'),back=$('#mobileBack');if(!date||!dot||!calendar||!back)return;calendar.classList.toggle('today-calendar',isToday);date.classList.toggle('hidden',!isToday);if(isToday)date.textContent=todayPersianDate();const count=unreadMessageCount();dot.textContent=count?fmt(count):'';dot.classList.toggle('hidden',!isToday||count===0);back.setAttribute('aria-label',count?`${fmt(count)} پیام خوانده‌نشده`:'پیام خوانده‌نشده‌ای ندارید')}
 const baseUpdateBadges=updateBadges;updateBadges=()=>{baseUpdateBadges();syncTodayHeader()};
 const baseSetPage=setPage;setPage=(page,push=true)=>{baseSetPage(page,push);if(page==='sale'){const left=$('#mobileLeftIcon');left.dataset.icon='chevron';injectIcons()}if(page==='today'){$('#mobileBrand').textContent=new Intl.DateTimeFormat('fa-IR',{timeZone:IRAN_TIME_ZONE,weekday:'long'}).format(new Date())}if(page==='inventory')$('#mobileBrand').textContent=inventoryBrandLabel();syncTodayHeader()};
 const saleIsDrilledDown=()=>state.query.trim()||state.category!=='همه'||state.colorFilter!=='همه'||state.sizeFilter!=='همه';
-$('#mobileBack').onclick=()=>{if(state.page==='today')return toast('اعلان جدیدی ندارید.');if(state.page==='sale'){if(saleIsDrilledDown()){resetSaleFilters();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});return}if(history.state?.page==='sale'&&history.length>1)return history.back();return setPage('today')}history.length>1?history.back():setPage('today')};
+$('#mobileBack').onclick=()=>{if(state.page==='today')return unreadMessageCount()?setPage('messages'):toast('پیام خوانده‌نشده‌ای ندارید.');if(state.page==='sale'){if(saleIsDrilledDown()){resetSaleFilters();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});return}if(history.state?.page==='sale'&&history.length>1)return history.back();return setPage('today')}history.length>1?history.back():setPage('today')};
 const initial=location.hash.split('/')[1];if(initial&&META[initial])state.page=initial;setPage(state.page,false);injectIcons();
 runDailyBackup();
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});

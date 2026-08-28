@@ -68,6 +68,129 @@ The combined comparison shows the same information order and overall composition
 - [P3] Desktop retains the existing CRM side navigation and checkout because those are product requirements not represented in the mobile reference.
 
 final result: passed
+
+---
+
+# Design QA — Empty message notification state
+
+- source visual truth path: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_hhmz8P/Screenshot 1405-06-06 at 10.23.23.png`
+- normalized source: `notification-source-normalized.png`
+- implementation screenshot: `notification-empty-state-final.png`
+- combined comparison: `notification-comparison.png`
+- viewport: 812 × 814 CSS px; compared header crop 812 × 139 px
+- pixels: source 1624 × 278 normalized to 812 × 139; implementation 812 × 139
+- state: Today page, zero unread messages
+
+## Full-view and focused comparison evidence
+
+The combined comparison shows the same header, date, title, bell icon, spacing, and visual hierarchy before and after the correction. The only visible change is the removal of the misleading count above the bell. A separate focused crop was not needed because the complete comparison is already a focused header region and the count is legible at 1:1 size.
+
+## Required fidelity surfaces
+
+- Fonts and typography: unchanged Vazirmatn family, weight, size, line height, and Persian number treatment.
+- Spacing and layout rhythm: the bell remains in the same slot; hiding the badge causes no shift or reflow.
+- Colors and visual tokens: the existing purple bell treatment remains unchanged; no empty-state notification color is rendered.
+- Image quality and asset fidelity: the established bell icon is preserved with no replacement or degradation.
+- Copy and content: the empty state exposes the accessible label «پیام خوانده‌نشده‌ای ندارید» and the tap feedback uses the same wording.
+
+## Comparison history
+
+1. User-reported finding [P1]: the Today header displayed «۲» even when the Messages section had no unread message. Root cause: the badge combined unread messages with pending-payment count. Fix: derive both mobile and desktop message badges exclusively from `unreadMessageCount()`, hide and clear the element when zero, and remove seeded sample messages from an empty installation. Post-fix evidence: `notification-empty-state-final.png` and `notification-comparison.png`.
+
+## Primary interactions tested
+
+- zero unread messages: mobile badge hidden and empty
+- zero unread messages: desktop Messages badge hidden and empty
+- bell accessible label: «پیام خوانده‌نشده‌ای ندارید»
+- tapping the bell with zero unread messages keeps the Today route and shows the correct empty-state feedback
+- browser console checked with no errors or warnings
+- JavaScript syntax and `git diff --check` passed
+
+final result: passed
+
+---
+
+# Design QA — Unified Vazirmatn typography system
+
+- source visual truth path: `home-v32-reference-match.png`
+- implementation screenshot path: `typography-mobile-final.png`
+- combined comparison evidence: `typography-comparison.png`
+- viewport: `390 × 844` CSS px at density 1
+- pixels: source `390 × 1472`; implementation `390 × 844`; combined board `1200 × 1802`
+- normalization: both source and implementation are displayed at the same 390 px content width; the focused above-the-fold region is compared because the source contains a longer historical dashboard state.
+- state: Today dashboard, both brands, no sheet or toast open
+
+## Full-view and focused comparison evidence
+
+The combined board confirms that the implementation preserves the established Vazirmatn-led RTL hierarchy, white/lilac surfaces, purple actions, centered financial KPI, brand switch, semantic status colors, and compact three-action navigation. The focused above-the-fold region is sufficient for this typography-only change because no layout, asset, or information-architecture redesign was requested.
+
+## Required fidelity surfaces
+
+- Fonts and typography: Vazirmatn Variable is the sole primary family; body is 14 px, mobile captions and navigation labels have a 12 px floor, KPI is 32 px on mobile, and Persian letter spacing is zero. Runtime inspection confirms the loaded family is Vazirmatn.
+- Spacing and layout rhythm: the existing card dimensions, grid tracks, radii, shadows, and section rhythm are unchanged; all seven tested mobile routes report zero horizontal overflow.
+- Colors and visual tokens: no color, gradient, opacity, border, or elevation token was changed.
+- Image quality and asset fidelity: existing icons and product/profile assets are untouched; no new or replacement imagery was introduced.
+- Copy and content: all application copy and live CRM values are unchanged.
+- Accessibility: all visible direct text on Today, Sale, Orders, Customers, Products, Inventory, and Finance is at least 12 px on the 390 px mobile viewport.
+
+## Comparison history
+
+1. [P2] The code contained more than thirty hard-coded text sizes, including visible 8–11.5 px labels, and mixed legacy Estedad/Vazirmatn declarations. Fix: added a centralized type-token scale, made Vazirmatn the sole primary family, removed negative Persian tracking, and mapped interface roles to 12/13/14/16/18/22/32 px mobile sizes.
+2. [P2] First runtime pass found sub-12 px labels in Sale filters, Product selectors, Inventory picker, and Finance explanatory text. Fix: added explicit semantic-selector mappings to the 12 px caption token. Post-fix evidence: all seven routes report minimum visible direct text of 12 px and zero horizontal overflow.
+3. Post-fix pass: desktop body renders Vazirmatn at 14 px with zero horizontal overflow; brand selection works, the primary New Sale CTA remains enabled, and the browser console has no errors or warnings.
+
+## Primary interactions tested
+
+- brand selector updates its active state
+- New Sale primary CTA remains enabled
+- Today, Sale, Orders, Customers, Products, Inventory, and Finance render without horizontal overflow
+- JavaScript syntax check passes
+- browser console checked with no errors or warnings
+
+final result: passed
+
+---
+
+# Design QA — تناسب آیکون و عنوان مزون
+
+- source visual truth path: `qc-mezon-proportion-reference.png`
+- implementation screenshot path: `qc-mezon-proportion-mobile.png`
+- focused implementation evidence: `qc-mezon-proportion-focus.png`
+- combined comparison evidence: `qc-mezon-proportion-comparison.png`
+- viewport: `390 × 844` CSS px at browser density 1
+- pixels: source thumbnail `318 × 318`; implementation full view `390 × 844`; focused crop `150 × 144`
+- normalization: the focused implementation crop is displayed at approximately 2× in the comparison board so the 74 px navigation orb can be judged against the larger reference orb.
+- state: Today/مزون active, bottom navigation visible, no sheet or toast open
+
+## Full-view comparison evidence
+
+The browser-rendered mobile screen keeps the fixed three-item navigation, the centered raised orb, and the established white/lilac geometry. The icon artwork, circle sizes, nav position, and neighboring Menu/Orders actions are unchanged.
+
+## Focused region comparison evidence
+
+The combined board shows the approved storefront icon form beside the implemented PWA component. The title is visibly larger, the empty vertical area between icon and title is removed, and the icon/title group is centered inside the inner white orb.
+
+## Required fidelity surfaces
+
+- Fonts and typography: Vazirmatn is retained; `مزون` is 12 px, weight 750, line-height 1.2, and remains legible at the mobile viewport.
+- Spacing and layout rhythm: icon-to-label gap is 6 px; the former 54 px wrapper is reduced to the icon's 31 px height so the group has no artificial internal gap.
+- Colors and visual tokens: existing purple, pale-lilac halo, white orb, border, and shadow tokens are unchanged.
+- Image quality and asset fidelity: the established storefront icon remains the same vector from the product icon system; its 31 px size and stroke treatment are unchanged.
+- Copy and content: the exact label `مزون` is retained.
+
+## Comparison history
+
+1. [P2] The label was visually undersized and the 54 px icon wrapper created excessive separation below the storefront. Fix: increased the label from 10 px to 12 px, set the wrapper height to 31 px, and established a deliberate 6 px gap. Post-fix evidence: `qc-mezon-proportion-focus.png` and `qc-mezon-proportion-comparison.png`.
+2. Post-fix pass: no actionable P0/P1/P2 mismatch remains; icon appearance and overall navigation silhouette were preserved as requested.
+
+## Primary interactions tested
+
+- Orders navigates to `#/orders`.
+- Mezon returns to `#/today`.
+- browser console checked with no errors.
+- measured icon: `31 × 31` px; measured label: 12 px; measured gap: 6 px.
+
+final result: passed
 ## Home v31 — unified live dashboard
 
 Reference: `exec-51aa2069-9bdd-4c12-b596-50aa774dad55.png`
@@ -349,5 +472,45 @@ final result: passed
 - مسیر سفارش‌ها و بازگشت به مزون کار می‌کند.
 - نمای دسکتاپ بدون اسکرول افقی و بدون اثر جانبی باقی مانده است.
 - خطای JavaScript و خطای کنسول مشاهده نشد.
+
+final result: passed
+
+---
+
+# Design QA — Centered Today header
+
+- source visual truth path: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_2gOhKN/Screenshot 1405-06-06 at 10.46.57.png`
+- normalized source: `today-header-offcenter-source.png`
+- implementation screenshot: `today-header-narrow-fix.png`
+- combined comparison: `today-header-center-comparison.png`
+- viewport: 812 × 814 CSS px; compared header crop 812 × 91 px
+- pixels: source 1614 × 182 normalized to 812 × 91; implementation 812 × 91
+- state: Today page, Friday, zero unread messages
+
+## Full-view and focused comparison evidence
+
+The header crop is itself the focused region. The original flex layout and physical placement of the date and bell controls are preserved. Only the central title block is independently anchored to the horizontal center.
+
+## Required fidelity surfaces
+
+- Fonts and typography: Vazirmatn hierarchy, weight, size, and line height are unchanged.
+- Spacing and layout rhythm: header controls keep their original edge positions while the title and weekday share the exact 406 px horizontal center.
+- Colors and visual tokens: existing white glass surface and purple icon/date tokens are unchanged.
+- Image quality and asset fidelity: calendar and bell icons are preserved without substitution.
+- Copy and content: «امروز» and «جمعه» remain unchanged and now share one center axis.
+
+## Comparison history
+
+1. User-reported finding [P2]: «جمعه» appeared off-center because the date control was wider than the bell control inside a `space-between` flex header. Initial fix used a symmetric grid, but it unnecessarily changed the whole header layout.
+2. User feedback [P1]: the grid fix changed more than requested. Fix: restored the original RTL flex layout and icon positions; applied absolute centering only to the existing title/weekday group. Post-fix evidence: `today-header-narrow-fix.png` and `today-header-center-comparison.png`.
+
+## Primary checks
+
+- header geometric center: 406 px
+- title center: 406 px
+- weekday center: 406 px
+- measured center delta: 0 px
+- browser console checked with no errors or warnings
+- JavaScript syntax and `git diff --check` passed
 
 final result: passed
