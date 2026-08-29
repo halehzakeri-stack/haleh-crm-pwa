@@ -71,6 +71,61 @@ final result: passed
 
 ---
 
+# Design QA — کارت‌های مستقل مشتریان و ورودی نام فارسی
+
+- source visual truth path: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_z34wSG/Screenshot 1405-06-07 at 12.12.55.png`
+- normalized source: `customers-source-content.png`
+- implementation screenshot: `customers-tablet-after.png`
+- mobile screenshot: `customers-mobile-after.png`
+- desktop screenshot: `customers-desktop-after.png`
+- combined comparison: `customers-qa-comparison.png`
+- viewport: `812 × 821` CSS px for the source/implementation comparison; mobile verification at `390 px` width; desktop resilience at `1366 px` width
+- pixels and density normalization: source app content was cropped from the supplied `2880 × 1800` screenshot, then normalized from `1625 × 1642` px to `812 × 821` px; implementation comparison is `812 × 821` px at browser density 1
+- state: Customers list with three existing customer records; the source has one populated purchase total while the isolated local test data has zero totals
+
+## Full-view comparison evidence
+
+The combined comparison preserves the page header, add-customer action, RTL hierarchy, floating three-item navigation, white canvas, purple accent, radii, and overall vertical rhythm. The requested structural change is visible: the former shared list surface is replaced by one independent, tappable card per customer. At the supplied PWA width the cards use a two-column grid; at the narrow mobile breakpoint they collapse to one column.
+
+## Focused region comparison evidence
+
+- Customer identity: every card includes a consistent customer icon tile, Persian name, Persian-digit mobile number, and a clear affordance to open the file.
+- Customer metrics: purchase total and order count remain tied to the same live customer/order data; outstanding balance appears only when non-zero.
+- Form behavior: the new and edit forms share the same Persian/Arabic-only name sanitizer and validation message. English characters and digits are removed while Persian and Arabic keyboard variants are retained.
+
+## Required fidelity surfaces
+
+- Fonts and typography: Vazirmatn remains the sole project typeface; card name, phone, label, and metric weights preserve the existing CRM hierarchy.
+- Spacing and layout rhythm: independent 16–18 px radius cards, consistent internal padding, 9–12 px gaps, and responsive one/two/three-column tracks align with the established card system.
+- Colors and visual tokens: existing white surfaces, purple-soft icon tile, muted labels, line token, and orange balance chip are reused without introducing a new palette.
+- Image quality and asset fidelity: no new raster imagery is needed; the existing project `users` and `chevron` icon components are reused consistently.
+- Copy and content: names remain unchanged; phone strings preserve the leading zero while rendering all digits in Persian; form guidance explicitly asks for a Persian or Arabic keyboard.
+- Accessibility and interaction: each customer card is a semantic button with a descriptive label and focus ring; cards open the customer dashboard; the add and edit forms reject invalid Latin names.
+
+## Comparison history
+
+1. Source finding [P1]: all customers were grouped into one large list card, so individual records did not read as separate touch targets. Fix: replaced the shared list with responsive independent customer cards. Post-fix evidence: `customers-tablet-after.png` and `customers-mobile-after.png`.
+2. Source finding [P1]: mobile numbers were displayed with Latin digits. Fix: added a display-only Persian digit formatter that preserves stored normalized numbers and leading zeros. Post-fix evidence: all three numbers in `customers-tablet-after.png` and customer dashboard interaction output.
+3. Source finding [P1]: customer names accepted Latin input. Fix: added composition-safe input sanitizing and save-time validation to both create and edit forms. Post-fix evidence: browser interaction returned a blank value for Latin letters and preserved `سارا محمدي` from an Arabic keyboard layout.
+
+## Primary interactions tested
+
+- all three customer cards render and open the correct customer dashboard
+- displayed mobile number in both the card list and dashboard uses Persian digits
+- Latin name input is removed immediately
+- Persian and Arabic keyboard characters are accepted
+- new and edit forms share the same save-time validation
+- mobile, supplied PWA width, and desktop layouts render without console errors
+- JavaScript syntax, helper cases, and `git diff --check` passed
+
+## Follow-up polish
+
+- [P3] The supplied live screenshot includes a non-zero purchase total for one customer; the isolated local browser profile uses the default zero-order dataset, so only the content value differs, not the layout or data binding.
+
+final result: passed
+
+---
+
 # Design QA — کارت‌های مستقل سفارش در PWA
 
 - source visual truth path: `orders-table-source.png`
