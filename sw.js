@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v31-customer-search-sort';
+const CACHE = 'haleh-crm-v32-icon-render';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
