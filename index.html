@@ -771,7 +771,7 @@ const saleIsDrilledDown=()=>state.query.trim()||state.category!=='همه'||state
 $('#mobileBack').onclick=()=>{if(state.page==='today')return unreadMessageCount()?setPage('messages'):toast('پیام خوانده‌نشده‌ای ندارید.');if(state.page==='customers')return setPage('today');if(state.page==='sale'){if(saleIsDrilledDown()){resetSaleFilters();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});return}if(history.state?.page==='sale'&&history.length>1)return history.back();return setPage('today')}history.length>1?history.back():setPage('today')};
 const initial=location.hash.split('/')[1];if(initial&&META[initial])state.page=initial;setPage(state.page,false);injectIcons();
 runDailyBackup();
-if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
+if('serviceWorker'in navigator){let refreshingForUpdate=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(refreshingForUpdate)return;refreshingForUpdate=true;location.reload()});navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{})}
 })();
 </script>
 </body>
