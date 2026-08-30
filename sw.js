@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v43-category-drag-order';
+const CACHE = 'haleh-crm-v44-pointer-category-order';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
