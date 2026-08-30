@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v41-clean-category-manage-icon';
+const CACHE = 'haleh-crm-v42-safe-category-removal';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
