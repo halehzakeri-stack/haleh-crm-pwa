@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v48-independent-category-cards';
+const CACHE = 'haleh-crm-v49-operational-barcode-scanner';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
@@ -18,7 +18,8 @@ const APP_SHELL = [
   'assets/category-icons/suit.png',
   'assets/category-icons/accessory.png',
   'assets/category-icons/search.png',
-  'assets/category-icons/manage.png'
+  'assets/category-icons/manage.png',
+  'assets/vendor/zxing-browser-0.2.1.min.js?v=0.2.1'
 ].map(path => new URL(path, BASE_URL).href);
 
 self.addEventListener('install', event => {
