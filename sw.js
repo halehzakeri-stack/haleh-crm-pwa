@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v46-category-divider-cleanup';
+const CACHE = 'haleh-crm-v47-category-divider-cleanup';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
