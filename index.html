@@ -476,6 +476,58 @@ small,.status,.product-code,.stock-note,.microcopy,.row-title small,.selected-pe
  .sheet:has(.catalog-sheet-title){padding-bottom:calc(26px + var(--safe-bottom));max-height:86vh}
 }
 </style>
+<style id="sale-independent-category-cards-v48">
+.category-surface{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:12px!important;
+ padding:0!important;
+ background:transparent!important;
+ background-image:none!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ overflow:visible!important;
+}
+.category-surface .category-tile,
+.category-surface .category-tile:nth-child(odd),
+.category-surface .category-tile:nth-last-child(-n+2),
+.category-surface .category-tile:last-child{
+ min-height:104px!important;
+ margin:0!important;
+ padding:14px 16px!important;
+ border:1px solid var(--sale-stroke)!important;
+ border-radius:20px!important;
+ background:#fff!important;
+ box-shadow:0 9px 26px rgba(38,31,68,.045)!important;
+}
+.category-surface .category-tile.is-zero{background:#fbfbfd!important}
+.category-surface .category-tile:last-child:nth-child(odd){grid-column:1/-1}
+.category-surface .category-tile:hover,
+.category-surface .category-tile:focus-visible{background:#f8f6ff!important;border-color:#d5ccfb!important}
+.category-surface .category-tile:active{transform:scale(.985)}
+@media(max-width:560px){
+ .category-surface{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+ .category-surface .category-tile,
+ .category-surface .category-tile:nth-child(odd),
+ .category-surface .category-tile:nth-last-child(-n+2),
+ .category-surface .category-tile:last-child{
+  min-height:96px!important;
+  grid-template-columns:48px minmax(0,1fr) 18px!important;
+  gap:9px!important;
+  padding:12px 10px!important;
+  border:1px solid var(--sale-stroke)!important;
+  border-radius:18px!important;
+ }
+ .category-surface .category-icon{width:48px!important;height:48px!important;border-radius:15px!important}
+ .category-surface .category-copy strong{font-size:14px!important}
+ .category-surface .category-copy small{font-size:10px!important}
+}
+@media(max-width:340px){
+ .category-surface{grid-template-columns:1fr!important}
+ .category-surface .category-tile:last-child:nth-child(odd){grid-column:auto}
+}
+</style>
 </head>
 <body>
 <div id="app" class="app">
@@ -613,7 +665,7 @@ r.innerHTML=`<section class="page today-page"><div class="page-inner">
 </div></div></section>`;wireCommon(r)}
 function orderRow(o){return `<div class="list-row"><div><strong>${o.customer?.name||'فروش حضوری'}</strong><small>${o.id} · ${brandLabel(o.brand)} · ${o.items.length} قلم</small></div><div style="text-align:left"><strong class="money">${toman(o.total)}</strong><span class="status ${o.balance?'warn':'success'}">${o.balance?'دارای مانده':'تسویه'}</span></div></div>`}
 function categoryIconFile(category){const map={'جین':'jeans.png','کژوال':'casual.png','مانتو':'coat.png','شومیز':'shirt.png','کت و شلوار':'suit.png','اکسسوری':'accessory.png'};return `./assets/category-icons/${map[category]||'casual.png'}`}
-function categoryLanding(products){const categories=warehouseCatalogs.categories;return `<section class="category-landing" id="categoryLanding"><div class="category-heading"><div><h2>دسته‌بندی کالاها</h2><p>برای مشاهده کالاها یک دسته‌بندی را انتخاب کنید</p></div><button class="category-manage" id="manageSaleCategories"><span class="icon" data-icon="settings"></span>مدیریت</button></div><div class="category-surface ${categories.length?'':'is-empty'}">${categories.length?categories.map(category=>{const count=products.filter(p=>p.cat===category).length,safeCategory=escapeText(category);return `<button class="category-tile ${count===0?'is-zero':''}" data-sale-category="${safeCategory}" aria-label="${safeCategory}، ${count===0?'بدون کالا':`${fmt(count)} کالا`}"><img class="category-icon" src="${categoryIconFile(category)}" alt=""><span class="category-copy"><strong>${safeCategory}</strong><small class="category-count ${count===0?'is-zero':''}">${count===0?'بدون کالا':`${fmt(count)} کالا`}</small></span><span class="icon category-arrow" data-icon="chevron"></span></button>`}).join('')+(categories.length%2?'<div class="category-tile category-placeholder" aria-hidden="true"><span class="category-placeholder-dots">…</span><small>جای دسته‌بندی بعدی</small></div>':''):'<div class="category-empty-state"><div><strong>هنوز دسته‌بندی‌ای ندارید</strong><span>از بخش مدیریت یک دسته‌بندی جدید بسازید.</span></div></div>'}</div></section>`}
+function categoryLanding(products){const categories=warehouseCatalogs.categories;return `<section class="category-landing" id="categoryLanding"><div class="category-heading"><div><h2>دسته‌بندی کالاها</h2><p>برای مشاهده کالاها یک دسته‌بندی را انتخاب کنید</p></div><button class="category-manage" id="manageSaleCategories"><span class="icon" data-icon="settings"></span>مدیریت</button></div><div class="category-surface ${categories.length?'':'is-empty'}">${categories.length?categories.map(category=>{const count=products.filter(p=>p.cat===category).length,safeCategory=escapeText(category);return `<button class="category-tile ${count===0?'is-zero':''}" data-sale-category="${safeCategory}" aria-label="${safeCategory}، ${count===0?'بدون کالا':`${fmt(count)} کالا`}"><img class="category-icon" src="${categoryIconFile(category)}" alt=""><span class="category-copy"><strong>${safeCategory}</strong><small class="category-count ${count===0?'is-zero':''}">${count===0?'بدون کالا':`${fmt(count)} کالا`}</small></span><span class="icon category-arrow" data-icon="chevron"></span></button>`}).join(''):'<div class="category-empty-state"><div><strong>هنوز دسته‌بندی‌ای ندارید</strong><span>از بخش مدیریت یک دسته‌بندی جدید بسازید.</span></div></div>'}</div></section>`}
 function renderSale(r){const products=activeBrandProducts(),cats=['همه',...warehouseCatalogs.categories],colors=['همه',...new Set(products.flatMap(p=>p.colors.map(c=>c.name)))],sizes=['همه',...new Set(products.flatMap(p=>p.colors.flatMap(c=>Object.keys(c.sizes))))].sort((a,b)=>a==='همه'?-1:b==='همه'?1:Number(normalizeDigits(a))-Number(normalizeDigits(b))),q=state.query.trim().toLowerCase();const ps=saleFilteredProducts(),showCategories=state.category==='همه'&&state.colorFilter==='همه'&&state.sizeFilter==='همه'&&!q;
 r.innerHTML=`<section class="page sale-page"><div class="page-inner"><div class="sale-layout"><div class="catalog"><div class="sale-toolbar"><div class="search sale-search"><button class="search-scan" id="scanProduct" aria-label="اسکن بارکد"><span class="icon" data-icon="scan"></span></button><input id="productSearch" aria-label="جستجوی کالا" placeholder="نام، کد یا بارکد کالا" value="${state.query}"></div><div class="filters sale-filters"><label class="filter-select">دسته‌بندی<select id="categoryFilter">${cats.map(x=>`<option ${x===state.category?'selected':''}>${x}</option>`).join('')}</select></label><label class="filter-select">رنگ<select id="colorFilter">${colors.map(x=>`<option ${x===state.colorFilter?'selected':''}>${x}</option>`).join('')}</select></label><label class="filter-select">سایز<select id="sizeFilter">${sizes.map(x=>`<option value="${x}" ${x===state.sizeFilter?'selected':''}>${x==='همه'?'همه':fmt(x)}</option>`).join('')}</select></label><button class="filter-reset ${showCategories?'hidden':''}" id="resetSaleFilters">پاک کردن فیلترها</button></div></div>${categoryLanding(products)}<section class="product-view ${showCategories?'hidden':''}" id="saleProductView"><div class="product-results-head"><div class="catalog-result"><strong id="saleResultCount">${fmt(ps.length)} کالا</strong><small>برای انتخاب رنگ و سایز، کالا را باز کنید.</small></div><button class="category-back" id="backToCategories">همه دسته‌بندی‌ها</button></div><div class="product-grid" id="saleProductGrid">${ps.map(productCard).join('')||'<div class="card catalog-empty">کالایی با این فیلتر پیدا نشد.<button class="text-link" id="emptyReset">نمایش همه کالاها</button></div>'}</div></section></div>${checkoutHtml()}</div></div></section>`;wireSale(r)}
 function productCard(p){const img=p.image||PRODUCT_IMAGES[p.id]||PRODUCT_IMAGES.h258,total=p.colors.reduce((a,c)=>a+Object.values(c.sizes).reduce((x,q)=>x+Number(q||0),0),0),selected=state.cart.filter(i=>i.pid===p.id).reduce((a,i)=>a+i.qty,0),low=total>0&&total<=3;return `<article class="product-card ${selected?'selected':''}"><button class="product-open" data-pick-product="${p.id}" aria-label="انتخاب رنگ و سایز ${escapeText(p.name)}"><div class="product-image"><img src="${img}" alt="${escapeText(p.name)}"></div><div class="product-name">${escapeText(p.name)}</div><div class="product-code"><bdi dir="ltr">${escapeText(p.code)}</bdi></div><div class="product-price money">${toman(p.price)}</div><div class="product-colors" aria-label="${fmt(p.colors.length)} رنگ">${p.colors.map(c=>`<span class="product-color-chip"><span class="dot" aria-hidden="true" style="background:${c.hex}"></span><span>${escapeText(c.name)}</span></span>`).join('')}</div><div class="product-availability ${total===0?'danger':low?'warn':''}">${total===0?'ناموجود':low?`فقط ${fmt(total)} عدد باقی‌مانده`:`${fmt(total)} عدد موجود`}</div><div class="product-select-label">${selected?`${fmt(selected)} عدد در سبد`:'انتخاب رنگ و سایز'}<span class="icon" data-icon="chevron"></span></div></button></article>`}
