@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <meta name="theme-color" content="#5d38c8"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
@@ -530,6 +530,311 @@ small,.status,.product-code,.stock-note,.microcopy,.row-title small,.selected-pe
 .barcode-sheet{display:grid;gap:12px}.barcode-sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.barcode-sheet-head h3{margin:0 0 4px}.barcode-sheet-head p{margin:0;color:var(--sub);font-size:11px;line-height:1.7}.barcode-viewfinder{position:relative;min-height:230px;overflow:hidden;border:1px solid #ded8f7;border-radius:18px;background:#17151f;display:grid;place-items:center}.barcode-viewfinder video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#17151f}.barcode-viewfinder::after{content:"";position:absolute;inset:19% 11%;border:2px solid rgba(255,255,255,.94);border-radius:16px;box-shadow:0 0 0 999px rgba(12,10,18,.3);pointer-events:none}.barcode-scan-line{position:absolute;z-index:2;left:15%;right:15%;top:50%;height:2px;border-radius:999px;background:#8f74f4;box-shadow:0 0 12px rgba(143,116,244,.9);opacity:0}.barcode-viewfinder.scanning .barcode-scan-line{opacity:1;animation:barcodeLine 1.8s ease-in-out infinite}.barcode-camera-empty{position:relative;z-index:1;display:grid;place-items:center;gap:7px;padding:28px;text-align:center;color:#fff}.barcode-camera-empty .icon{width:38px;height:38px;color:#b7a6ff}.barcode-camera-empty strong{font-size:14px}.barcode-camera-empty small{max-width:260px;color:#c5c1ce;font-size:10px;line-height:1.8}.barcode-viewfinder.scanning .barcode-camera-empty{display:none}.barcode-status{min-height:24px;margin:0;padding:7px 10px;border-radius:10px;background:#f5f2ff;color:var(--purple);font-size:10px;line-height:1.7}.barcode-status.error{background:#fff0f1;color:var(--red)}.barcode-status.success{background:#eaf9f1;color:#0b9a58}.barcode-actions{display:grid;grid-template-columns:1fr auto;gap:8px}.barcode-actions .btn{min-height:44px}.barcode-stop{min-width:92px}.barcode-manual{padding-top:10px;border-top:1px solid var(--line)}.barcode-manual strong{display:block;margin-bottom:7px;font-size:12px}.barcode-manual-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.barcode-manual-row .field{margin:0;direction:ltr;text-align:left}.barcode-manual-row .btn{min-width:100px}.barcode-help{display:block;margin-top:6px;color:var(--muted);font-size:9px;line-height:1.7}@keyframes barcodeLine{0%,100%{transform:translateY(-72px)}50%{transform:translateY(72px)}}
 @media(max-width:560px){.sheet:has(.barcode-sheet){max-height:90vh}.barcode-viewfinder{min-height:250px}.barcode-actions{grid-template-columns:1fr}.barcode-stop{width:100%}.barcode-manual-row{grid-template-columns:1fr}.barcode-manual-row .btn{width:100%}}
 </style>
+<style id="persian-typography-system-v50">
+/*
+  Responsive Persian type system.
+  The role tokens use rem so browser and OS text scaling remain effective.
+*/
+:root{
+ --type-display:clamp(2rem,4vw,2.25rem);
+ --type-page:1.5rem;
+ --type-section:1.25rem;
+ --type-card:1rem;
+ --type-body:1rem;
+ --type-control:.9375rem;
+ --type-label:.875rem;
+ --type-meta:.8125rem;
+ --type-caption:.75rem;
+ --leading-display:1.3;
+ --leading-title:1.45;
+ --leading-body:1.75;
+ --leading-label:1.6;
+}
+html{
+ font-size:100%;
+ -webkit-text-size-adjust:100%;
+ text-size-adjust:100%;
+}
+html[lang="fa"] *,html[lang="fa"] *::before,html[lang="fa"] *::after{
+ letter-spacing:normal!important;
+}
+body,button,input,select,textarea{
+ font-family:"Vazirmatn",Tahoma,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+ font-optical-sizing:auto;
+ font-kerning:normal;
+}
+body{font-size:var(--type-body)!important;line-height:var(--leading-body)!important}
+p{line-height:var(--leading-body)}
+h1,h2,h3,h4{margin-block-start:0;line-height:var(--leading-title)!important}
+h1{font-size:var(--type-page)!important;font-weight:800!important}
+h2,.section-title h2{font-size:var(--type-section)!important;font-weight:750!important}
+h3{font-size:var(--type-card)!important;font-weight:700!important}
+
+/* Page chrome and primary navigation */
+.topbar h1{font-size:var(--type-page)!important}
+.topbar p,.brand-box small,.nav-title{font-size:var(--type-caption)!important;line-height:var(--leading-label)!important}
+.mac-window-title{font-size:var(--type-caption)!important;line-height:var(--leading-label)!important}
+.brand-box strong{font-size:var(--type-card)!important}
+.nav-btn,.brand-switch button,.dashboard-brand-switch button{font-size:var(--type-label)!important;line-height:var(--leading-label)!important}
+.nav-badge,.mobile-dot{font-size:var(--type-caption)!important;line-height:1!important}
+.mobile-top h1{font-size:1.125rem!important;line-height:1.4!important}
+.mobile-top small,.mobile-date{font-size:var(--type-caption)!important;line-height:var(--leading-label)!important}
+.bottom-nav small,.bottom-nav .nav-mezon small{font-size:var(--type-caption)!important;line-height:1.5!important;font-weight:650!important}
+
+/* Controls: large enough to read and safe from automatic iOS input zoom. */
+.btn,.field,.search input,.sale-search input,.filter-chip,.filter-select,.segments button,
+.payment-options button,.size,.text-link,.action,.quick-create-card,.product-photo-button,
+.customer-tool,.customer-add,.customer-list-tabs button,.catalog-sheet-close,
+.birth-date-selects select,.birth-date-actions button,.barcode-manual-row input{
+ font-size:var(--type-control)!important;
+ line-height:var(--leading-label)!important;
+ font-weight:600!important;
+}
+.field,.search input,.sale-search input,.customer-search input{font-size:var(--type-body)!important}
+input,select,textarea{font-size:var(--type-body)!important;line-height:var(--leading-label)!important}
+.field{min-height:44px!important;height:auto!important}
+
+/* Cards, lists and data tables */
+.brand-box strong,.product-name,.checkout-head h2,.sheet h3,.brand-ledger-title strong,
+.backup-card h3,.customer-card-person strong,.order-person-name strong,.catalog-sheet-title h3,
+.barcode-camera-empty strong,.barcode-manual strong,.category-copy strong{
+ font-size:var(--type-card)!important;
+ line-height:var(--leading-title)!important;
+ font-weight:700!important;
+}
+.list-row strong,.row-title strong,.selected-person strong,.cart-line strong,.sheet-row strong,
+.receipt-row,.table td,.product-price,.total-row,.interbrand-glance strong,.today-status-card strong,
+.order-person-meta strong,.order-person-foot>span:first-child,.order-person-open,.birth-date-copy strong,
+.deleted-customer-person strong{
+ font-size:var(--type-label)!important;
+ line-height:var(--leading-label)!important;
+}
+.section-title small,.metric small,.list-row small,.row-title small,.selected-person small,
+.cart-line small,.sheet-row small,.receipt-detail,.order-detail-head small,.order-person-name small,
+.order-person-meta small,.customer-card-person small,.deleted-customer-person>small,.backup-card p,
+.category-heading p,.catalog-sheet-title p,.barcode-sheet-head p,.barcode-status,.birth-date-copy span,
+.customer-name-help,.customer-phone-help,.product-select-label,.inventory-brand-picker small,
+.inventory-brand-picker strong,.interbrand-balance p{
+ font-size:var(--type-meta)!important;
+ line-height:var(--leading-label)!important;
+}
+.status,.table th,.product-code,.stock-note,.microcopy,.mobile-sale-summary small,.backup-meta,
+.barcode-camera-empty small,.barcode-help,.birth-date-week,.birth-date-days .birth-date-empty{
+ font-size:var(--type-caption)!important;
+ line-height:var(--leading-label)!important;
+}
+.empty-cart{font-size:var(--type-meta)!important;line-height:var(--leading-body)!important}
+.table th{font-weight:600!important}
+.customer-toolbar-title h2{font-size:var(--type-section)!important}
+.customer-toolbar-title small{font-size:var(--type-meta)!important;line-height:var(--leading-label)!important}
+.customer-list-tabs b{font-size:var(--type-caption)!important;line-height:1!important}
+.customer-profile-header{align-items:flex-start!important;gap:10px!important;flex-wrap:wrap!important}
+.customer-profile-header>div:first-child{min-width:0}
+.customer-profile-header .customer-profile-actions{
+ width:auto!important;
+ display:flex!important;
+ align-items:center!important;
+ gap:8px!important;
+ flex-wrap:nowrap!important;
+}
+.customer-profile-header .customer-profile-actions .btn{
+ width:auto!important;
+ min-height:36px!important;
+ padding-inline:13px!important;
+ border-radius:10px!important;
+ font-size:var(--type-label)!important;
+ line-height:1.4!important;
+ font-weight:750!important;
+ white-space:nowrap!important;
+}
+.workspace-grid .card>p{font-size:var(--type-meta)!important;line-height:var(--leading-body)!important}
+.category-surface .category-copy strong{font-size:var(--type-card)!important}
+.category-surface .category-copy small{font-size:var(--type-meta)!important;line-height:var(--leading-label)!important}
+.product-color-chip{font-size:var(--type-caption)!important}
+.birth-date-days button{font-size:var(--type-label)!important;line-height:1!important}
+
+/* Hierarchy for financial and dashboard values */
+.metric .value,.interbrand-balance .balance-value{
+ font-size:2rem!important;
+ line-height:var(--leading-display)!important;
+ font-weight:800!important;
+}
+.today-hero-copy h2,.today-hero-copy h2 span{
+ font-size:var(--type-display)!important;
+ line-height:var(--leading-display)!important;
+ font-weight:800!important;
+}
+.today-welcome .today-greeting strong{font-size:var(--type-page)!important;line-height:var(--leading-title)!important}
+.today-status-section .section-title h2,.today-priority-card .section-title h2{font-size:var(--type-section)!important}
+.today-hero-copy>small,.today-hero-copy .sales-change,.daypart-label{font-size:var(--type-label)!important;line-height:var(--leading-label)!important}
+.quick-sale-banner h2{font-size:var(--type-section)!important}
+.quick-sale-banner p{font-size:var(--type-meta)!important;line-height:var(--leading-label)!important}
+.total-row.final{font-size:var(--type-card)!important;font-weight:750!important}
+.money,.metric .value,.today-hero-copy h2,.brand-ledger-values b,.balance-value,.fa-phone{
+ font-variant-numeric:tabular-nums lining-nums;
+}
+.toast{font-size:var(--type-label)!important;line-height:var(--leading-label)!important}
+
+/* Features intentionally unavailable in this release. */
+.coming-soon-badge{
+ margin-inline-start:auto;
+ padding:3px 8px;
+ border:1px solid #e4e4e8;
+ border-radius:999px;
+ background:#f3f3f5;
+ color:#9899a2;
+ font-size:var(--type-caption)!important;
+ line-height:1.45!important;
+ font-weight:600!important;
+ white-space:nowrap;
+}
+.nav-btn.coming-soon,.sheet-row.coming-soon{
+ color:#a3a4ad!important;
+ background:#fafafa!important;
+ cursor:not-allowed!important;
+ opacity:1!important;
+}
+.nav-btn.coming-soon .icon,.sheet-row.coming-soon .icon{color:#b4b5bc!important}
+.nav-btn.coming-soon:hover{background:#fafafa!important}
+.sheet-row.coming-soon strong{color:#a3a4ad!important;font-weight:600!important}
+.sheet-row.coming-soon .coming-soon-badge{margin-inline-start:0}
+.mobile-top #mobileBack.coming-soon-header{color:#b1b2ba!important;cursor:default!important}
+
+@media(max-width:860px){
+ :root{
+  --type-display:2rem;
+  --type-page:1.375rem;
+  --type-section:1.125rem;
+  --type-card:1rem;
+  --type-body:1rem;
+  --type-control:.9375rem;
+  --type-label:.875rem;
+  --type-meta:.8125rem;
+  --type-caption:.75rem;
+ }
+ .mobile-top h1{font-size:1.125rem!important}
+ .today-welcome .today-greeting strong{font-size:var(--type-page)!important}
+ .today-status-card strong{font-size:var(--type-label)!important}
+ .product-name{font-size:var(--type-card)!important}
+ .product-price{font-size:var(--type-label)!important}
+ .customer-card-person strong{font-size:var(--type-card)!important}
+ .order-person-name strong{font-size:var(--type-card)!important}
+ .barcode-actions .btn,.barcode-manual-row .btn{font-size:var(--type-control)!important}
+ @media(max-width:640px){
+  .customer-profile-header>div:first-child{width:100%!important}
+  .customer-profile-header .customer-profile-actions{flex-basis:100%!important;justify-content:flex-start!important}
+ }
+
+ /* Balanced mobile header: equal side zones, quieter metadata, clear title. */
+ .mobile-top{
+  display:grid!important;
+  grid-template-columns:minmax(72px,1fr) minmax(112px,128px) minmax(72px,1fr)!important;
+  align-items:center!important;
+  direction:ltr!important;
+  padding-inline:12px!important;
+ }
+ .mobile-top>div{
+  position:static!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  min-width:0!important;
+  transform:none!important;
+  text-align:center!important;
+  direction:rtl!important;
+ }
+ .mobile-top h1{font-size:1.0625rem!important;font-weight:750!important;line-height:1.4!important}
+ .mobile-top small{font-size:.6875rem!important;font-weight:450!important;line-height:1.45!important;margin-top:0!important}
+ .mobile-top .round-btn{width:40px!important;height:40px!important;padding:0!important}
+ .mobile-top #mobileBack{grid-column:3!important;grid-row:1!important;justify-self:end!important}
+ .mobile-top #scanBtn{grid-column:1!important;grid-row:1!important;justify-self:start!important}
+ .mobile-top #scanBtn.today-calendar{
+  width:auto!important;
+  min-width:0!important;
+  padding-inline:4px!important;
+  gap:6px!important;
+ }
+ .mobile-top #mobileBack .icon{width:21px!important;height:21px!important}
+ .mobile-top #scanBtn .icon{width:20px!important;height:20px!important}
+ .mobile-top .mobile-date{font-size:.8125rem!important;font-weight:650!important;line-height:1.4!important}
+ .mobile-top .mobile-dot{top:-3px!important;right:-4px!important;min-width:16px!important;height:16px!important;font-size:.625rem!important;line-height:1!important}
+ .orders-page .section-title>.btn{
+  min-height:34px!important;
+  padding-inline:11px!important;
+  border-radius:10px!important;
+  gap:5px!important;
+  font-size:.75rem!important;
+  line-height:1.35!important;
+  box-shadow:0 5px 14px rgba(96,68,206,.14)!important;
+ }
+ .sale-search{
+  height:48px!important;
+  padding-inline:12px!important;
+  border-radius:15px!important;
+ }
+ .sale-search input{font-size:.9375rem!important;line-height:1.5!important}
+ .sale-filters{margin-top:11px!important;gap:7px!important}
+ .filter-select{
+  height:52px!important;
+  min-height:52px!important;
+  padding:5px 10px!important;
+  border-radius:14px!important;
+  font-size:.875rem!important;
+  line-height:1.35!important;
+ }
+ .filter-select select{font-size:.75rem!important;line-height:1.35!important}
+}
+
+/* Operational task workflow */
+.tasks-page .section-title{align-items:center}
+.tasks-head-actions{display:flex;align-items:center;gap:8px}
+.tasks-head-actions .btn{white-space:nowrap}
+.tasks-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:12px}
+.task-summary-card{min-height:74px;padding:12px 14px;border:1px solid var(--line);border-radius:15px;background:#fff}
+.task-summary-card small{display:block;color:var(--muted);font-size:var(--type-caption);line-height:1.4}
+.task-summary-card strong{display:block;margin-top:5px;font-size:var(--type-section);line-height:1.2}
+.task-filters{display:flex;gap:7px;overflow-x:auto;padding:1px 0 10px;scrollbar-width:none}
+.task-filters::-webkit-scrollbar{display:none}
+.task-filter{flex:0 0 auto;min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--sub);font-size:var(--type-label);font-weight:650;white-space:nowrap}
+.task-filter.active{border-color:#d9d0ff;background:var(--purpleSoft);color:var(--purple)}
+.task-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.task-card{width:100%;min-height:150px;padding:14px;border:1px solid var(--line);border-radius:17px;background:#fff;text-align:right;color:var(--text);display:flex;flex-direction:column;gap:11px;transition:border-color .16s,transform .16s,box-shadow .16s}
+.task-card:hover,.task-card:focus-visible{border-color:#d8d0fb;box-shadow:0 8px 24px rgba(55,42,110,.07);outline:0}
+.task-card:active{transform:scale(.99)}
+.task-card-top,.task-card-footer{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.task-card-title{min-width:0}
+.task-card-title strong{display:block;font-size:var(--type-card);line-height:1.65;font-weight:750}
+.task-card-title small{display:block;margin-top:2px;color:var(--muted);font-size:var(--type-caption);line-height:1.5}
+.task-status{flex:0 0 auto;display:inline-flex;align-items:center;min-height:25px;padding:0 8px;border-radius:999px;font-size:var(--type-caption);font-weight:700;white-space:nowrap}
+.task-status.new{background:var(--purpleSoft);color:var(--purple)}
+.task-status.progress{background:#edf4ff;color:#376aa4}
+.task-status.waiting{background:var(--orangeSoft);color:#a96313}
+.task-status.done{background:var(--greenSoft);color:var(--green)}
+.task-card-meta{display:flex;gap:6px;flex-wrap:wrap}
+.task-meta-chip{display:inline-flex;align-items:center;min-height:25px;padding:0 8px;border-radius:8px;background:var(--surface2);color:var(--sub);font-size:var(--type-caption);line-height:1.35}
+.task-card-footer{margin-top:auto;align-items:center;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:var(--type-caption)}
+.task-card-open{display:inline-flex;align-items:center;gap:4px;color:var(--purple);font-weight:700}
+.task-card-open .icon{width:15px;height:15px}
+.tasks-empty{grid-column:1/-1;padding:34px 16px;border:1px dashed var(--line);border-radius:16px;text-align:center;color:var(--muted)}
+.task-detail-intro{margin:0 0 10px;color:var(--sub);font-size:var(--type-body);line-height:1.8}
+.task-detail-meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
+.task-detail-meta>div{padding:9px 10px;border-radius:11px;background:var(--surface2)}
+.task-detail-meta small{display:block;color:var(--muted);font-size:var(--type-caption)}
+.task-detail-meta strong{display:block;margin-top:3px;font-size:var(--type-label)}
+.task-field-label{display:block;margin-top:10px;color:var(--sub);font-size:var(--type-label);font-weight:650}
+.task-history{margin-top:10px;padding:10px;border-radius:11px;background:var(--surface2);color:var(--muted);font-size:var(--type-caption);line-height:1.7}
+.today-priority-card .list-row:has(input[data-task]){cursor:pointer}
+.today-priority-card input[data-task]{display:none!important}
+@media(max-width:860px){
+ .tasks-page .section-title{align-items:flex-start;gap:9px}
+ .tasks-head-actions .btn{min-height:36px;padding-inline:12px;font-size:var(--type-label)}
+ .tasks-summary{gap:7px}
+ .task-summary-card{min-height:66px;padding:10px;border-radius:13px}
+ .task-summary-card strong{font-size:1rem}
+ .task-grid{grid-template-columns:1fr;gap:8px}
+ .task-card{min-height:136px;padding:12px;border-radius:15px;gap:9px}
+ .task-detail-meta{grid-template-columns:1fr 1fr}
+}
+</style>
 </head>
 <body>
 <div id="app" class="app">
@@ -546,14 +851,14 @@ small,.status,.product-code,.stock-note,.microcopy,.row-title small,.selected-pe
     <div class="nav-title">کار روزانه</div>
     <button class="nav-btn" data-page="today"><span class="icon" data-icon="home"></span><span>امروز</span></button>
     <button class="nav-btn active" data-page="sale"><span class="icon" data-icon="plus"></span><span>فروش جدید</span></button>
-    <button class="nav-btn" data-page="messages"><span class="icon" data-icon="message"></span><span>پیام‌ها</span><span class="nav-badge" id="msgBadge" hidden></span></button>
+    <button class="nav-btn coming-soon" data-page="messages" disabled aria-disabled="true"><span class="icon" data-icon="message"></span><span>پیام‌ها</span><span class="coming-soon-badge">به‌زودی</span></button>
     <button class="nav-btn" data-page="customers"><span class="icon" data-icon="users"></span><span>مشتریان</span></button>
-    <button class="nav-btn" data-page="opportunities"><span class="icon" data-icon="target"></span><span>فرصت‌های فروش</span></button>
+    <button class="nav-btn coming-soon" data-page="opportunities" disabled aria-disabled="true"><span class="icon" data-icon="target"></span><span>فرصت‌های فروش</span><span class="coming-soon-badge">به‌زودی</span></button>
     <button class="nav-btn" data-page="tasks"><span class="icon" data-icon="check"></span><span>کارها</span></button>
     <div class="nav-title">عملیات فروش</div>
     <button class="nav-btn" data-page="orders"><span class="icon" data-icon="receipt"></span><span>سفارش‌ها</span></button>
-    <button class="nav-btn" data-page="fulfillment"><span class="icon" data-icon="truck"></span><span>ارسال و تحویل</span></button>
-    <button class="nav-btn" data-page="returns"><span class="icon" data-icon="rotate"></span><span>مرجوعی و تعویض</span></button>
+    <button class="nav-btn coming-soon" data-page="fulfillment" disabled aria-disabled="true"><span class="icon" data-icon="truck"></span><span>ارسال و تحویل</span><span class="coming-soon-badge">به‌زودی</span></button>
+    <button class="nav-btn coming-soon" data-page="returns" disabled aria-disabled="true"><span class="icon" data-icon="rotate"></span><span>مرجوعی و تعویض</span><span class="coming-soon-badge">به‌زودی</span></button>
     <button class="nav-btn" data-page="products"><span class="icon" data-icon="tag"></span><span>کالاها</span></button>
     <button class="nav-btn" data-page="inventory"><span class="icon" data-icon="boxes"></span><span>انبارداری</span></button>
     <button class="nav-btn" data-page="finance"><span class="icon" data-icon="wallet"></span><span>مالی</span></button>
@@ -626,6 +931,7 @@ let warehouseCatalogs=savedWarehouseCatalogs||{categories:[...new Set([...defaul
 const save=()=>{localStorage.setItem(K.data,JSON.stringify(data));localStorage.setItem(K.deletedCustomers,JSON.stringify(deletedCustomers));localStorage.setItem(K.orders,JSON.stringify(orders));localStorage.setItem(K.tasks,JSON.stringify(tasks));localStorage.setItem(K.messages,JSON.stringify(messages));localStorage.setItem(K.returns,JSON.stringify(returns));localStorage.setItem(K.inventoryMoves,JSON.stringify(inventoryMoves));localStorage.setItem(K.catalogs,JSON.stringify(warehouseCatalogs));localStorage.setItem(K.interBrand,JSON.stringify(interBrandTransactions))};
 const state={page:'sale',brand:'HALIN',dashboardBrand:'ALL',inventoryBrand:'ALL',query:'',category:'همه',colorFilter:'همه',sizeFilter:'همه',cart:[],customer:null,customerProfileId:null,customerProfileTab:'overview',customerListView:'active',customerQuery:'',customerSearchOpen:false,customerSort:'recent',delivery:'IMMEDIATE',address:'',carrier:'پیک',payment:'POS',paid:null,discount:0,discountType:'amount',discountOpen:false,managerApproved:false,lastOrder:null};
 const META={today:['امروز','خلاصه کارهای مهم امروز','home'],sale:['فروش جدید','کالا، مشتری، تحویل و پرداخت. بقیه کارها با سیستم.','plus'],messages:['پیام‌ها','پیام‌هایی که نیاز به پاسخ دارند','message'],customers:['مشتریان','پرونده مشتری و سابقه خرید','users'],opportunities:['فرصت‌های فروش','نیازهای خرید و مشتری‌های منتظر','target'],tasks:['کارها','پیگیری‌های عملیاتی امروز','check'],orders:['سفارش‌ها','تمام فروش‌ها و وضعیت آن‌ها','receipt'],fulfillment:['ارسال و تحویل','آماده‌سازی تا تحویل نهایی','truck'],returns:['مرجوعی و تعویض','درخواست‌ها و وضعیت بررسی','rotate'],products:['کالاها','تعریف شناسنامه، عکس، رنگ و سایز','tag'],inventory:['انبارداری','ورود کالا، موجودی و گردش انبار','boxes'],finance:['مالی','دریافتی، مانده و تأیید پرداخت','wallet'],reports:['گزارش‌ها','فروش و عملکرد برندها','chart'],settings:['تنظیمات','داده، پشتیبان‌گیری و تنظیمات برنامه','settings']};
+const COMING_SOON_PAGES=new Set(['messages','opportunities','fulfillment','returns']);
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2300)}
 function brandLabel(b){return b==='HALIN'?'هالین':'هاله سجادی'}
 function activeBrandProducts(){return data.products.filter(p=>p.brand===state.brand)}
@@ -643,7 +949,7 @@ function wireCustomerNameField(input,help){if(!input)return;let composing=false;
 function localizedNumber(value){return Number(normalizeDigits(value).replace(/\D/g,''))||0}
 function localizedDecimal(value){const normalized=normalizeDigits(value).replace(/٫/g,'.').replace(/[^\d.]/g,''),parts=normalized.split('.');return Number(parts.shift()+(parts.length?'.'+parts.join(''):''))||0}
 function totals(){const subtotal=state.cart.reduce((a,i)=>a+i.price*i.qty,0);let d=0;if(state.discount>0)d=state.discountType==='percent'?subtotal*state.discount/100:state.discount;d=Math.min(subtotal,d);const total=Math.max(0,subtotal-d);let paid=state.paid===null?total:Number(state.paid||0);if(state.payment==='CARD_TRANSFER'&&state.paid===null)paid=total;paid=Math.max(0,Math.min(total,paid));return{subtotal,discount:d,total,paid,balance:total-paid}}
-function setPage(page,push=true){if(page==='more'){openMore();return}if(!META[page])page='today';state.page=page;const [title,sub,icon]=META[page];$('#pageTitle').textContent=title;$('#pageSub').textContent=sub;$('#pageIcon').dataset.icon=icon;$('#mobileTitle').textContent=title;$('#mobileBrand').textContent=page==='today'?'':brandLabel(state.brand);const left=$('#mobileLeftIcon'),right=$('#mobileRightIcon'),dot=$('#mobileNotifyDot');if(page==='today'){left.dataset.icon='bell';right.dataset.icon='calendar';$('#scanBtn').style.visibility='visible';dot.classList.remove('hidden')}else if(page==='sale'){left.dataset.icon='x';right.dataset.icon='scan';$('#scanBtn').style.visibility='visible';dot.classList.add('hidden')}else{left.dataset.icon='chevron';right.dataset.icon='more';$('#scanBtn').style.visibility='visible';dot.classList.add('hidden')}$$('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(push&&location.hash!==`#/${page}`)history.pushState({page},'',`#/${page}`);render();injectIcons();window.scrollTo(0,0)}
+function setPage(page,push=true){if(page==='more'){openMore();return}if(COMING_SOON_PAGES.has(page)){if(push)toast('این بخش به‌زودی فعال می‌شود.');page='today';if(location.hash!==`#/${page}`)history.replaceState({page},'',`#/${page}`)}if(!META[page])page='today';state.page=page;const [title,sub,icon]=META[page];$('#pageTitle').textContent=title;$('#pageSub').textContent=sub;$('#pageIcon').dataset.icon=icon;$('#mobileTitle').textContent=title;$('#mobileBrand').textContent=page==='today'?'':brandLabel(state.brand);const left=$('#mobileLeftIcon'),right=$('#mobileRightIcon'),dot=$('#mobileNotifyDot');if(page==='today'){left.dataset.icon='bell';right.dataset.icon='calendar';$('#scanBtn').style.visibility='visible';dot.classList.add('hidden')}else if(page==='sale'){left.dataset.icon='x';right.dataset.icon='scan';$('#scanBtn').style.visibility='visible';dot.classList.add('hidden')}else{left.dataset.icon='chevron';right.dataset.icon='more';$('#scanBtn').style.visibility='visible';dot.classList.add('hidden')}$$('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(push&&location.hash!==`#/${page}`)history.pushState({page},'',`#/${page}`);render();injectIcons();window.scrollTo(0,0)}
 function render(){const r=$('#pageRoot');if(state.page==='sale')renderSale(r);else if(state.page==='today')renderToday(r);else renderWorkspace(r,state.page);renderMobileSaleBar();updateBadges();injectIcons()}
 function persianDateParts(date){const parts=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{year:'numeric',month:'numeric',day:'numeric'}).formatToParts(date),get=t=>normalizeDigits(parts.find(x=>x.type===t)?.value||'0');return{year:Number(get('year')),month:Number(get('month')),day:Number(get('day'))}}
 function parsePersianBirthDate(value=''){const parts=normalizeDigits(value).match(/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/);return parts?{year:Number(parts[1]),month:Number(parts[2]),day:Number(parts[3])}:null}
@@ -731,7 +1037,7 @@ function openCustomerSortSheet(){const options=[['recent','جدیدترین','ب
 function openArchiveCustomerConfirm(c){const orderCount=customerOrders(c).length;openSheet(`<h3>انتقال مشتری به حذف‌شده‌ها</h3><p style="color:var(--sub);margin:0 0 12px">پرونده «${escapeText(c.name)}» از فهرست فعال خارج می‌شود و ابتدا به تب حذف‌شده‌ها می‌رود. ${orderCount?`${fmt(orderCount)} سفارش قبلی او محفوظ می‌ماند.`:'اطلاعات سفارش‌ها تغییری نمی‌کند.'}</p><div class="final-actions"><button class="btn btn-outline" id="cancelArchiveCustomer">انصراف</button><button class="btn btn-danger" id="confirmArchiveCustomer">انتقال به حذف‌شده‌ها</button></div>`,host=>{$('#cancelArchiveCustomer',host).onclick=closeSheet;$('#confirmArchiveCustomer',host).onclick=()=>{const index=data.customers.findIndex(x=>x.id===c.id);if(index<0)return;const [record]=data.customers.splice(index,1);deletedCustomers.unshift({...record,deletedAt:new Date().toISOString()});if(state.customer?.id===record.id)state.customer=null;state.customerProfileId=null;state.customerListView='deleted';save();closeSheet();render();toast('مشتری به حذف‌شده‌ها منتقل شد.')}})}
 function restoreCustomer(id){const index=deletedCustomers.findIndex(c=>c.id===id);if(index<0)return;const archived=deletedCustomers[index];if(data.customers.some(c=>c.phone===archived.phone))return toast('مشتری فعالی با این شماره وجود دارد.');const {deletedAt,...record}=archived;deletedCustomers.splice(index,1);data.customers.unshift(record);save();render();toast('مشتری بازیابی شد.')}
 function openPermanentCustomerDelete(c){openSheet(`<h3>حذف دائمی مشتری</h3><p style="color:var(--red);margin:0 0 7px;font-weight:700">این عملیات قابل بازگشت نیست.</p><p style="color:var(--sub);margin:0 0 12px">پرونده «${escapeText(c.name)}» برای همیشه از فهرست مشتریان حذف می‌شود. فاکتورهای قبلی برای صحت گزارش‌های مالی باقی می‌مانند.</p><div class="final-actions"><button class="btn btn-outline" id="cancelPermanentCustomerDelete">انصراف</button><button class="btn btn-danger" id="confirmPermanentCustomerDelete">حذف دائمی</button></div>`,host=>{$('#cancelPermanentCustomerDelete',host).onclick=closeSheet;$('#confirmPermanentCustomerDelete',host).onclick=()=>{deletedCustomers=deletedCustomers.filter(x=>x.id!==c.id);save();closeSheet();render();toast('پرونده مشتری برای همیشه حذف شد.')}})}
-function customerDashboard(c){const os=customerOrders(c),sum=os.reduce((a,o)=>a+o.total,0),paid=os.reduce((a,o)=>a+o.paid,0),balance=os.reduce((a,o)=>a+o.balance,0),items=os.reduce((a,o)=>a+o.items.reduce((x,i)=>x+i.qty,0),0),last=os[0],tab=state.customerProfileTab;return `<div class="section-title"><div><button class="text-link" id="backCustomers">بازگشت به همه مشتریان</button><h2 style="margin-top:7px">${escapeText(c.name)}</h2><small>داشبورد پرونده مشتری</small></div><div class="customer-profile-actions"><button class="btn btn-secondary" id="editCustomer">ویرایش مشخصات</button><button class="btn btn-danger" id="archiveCustomer">حذف مشتری</button></div></div><div class="segments" style="max-width:430px;margin-bottom:12px"><button data-customer-tab="overview" class="${tab==='overview'?'active':''}">نمای کلی</button><button data-customer-tab="purchases" class="${tab==='purchases'?'active':''}">ریز خریدها</button><button data-customer-tab="identity" class="${tab==='identity'?'active':''}">مشخصات</button></div>${tab==='overview'?`<div class="metric-grid"><div class="card metric purple"><div class="value">${toman(sum)}</div><small>ارزش کل خرید</small></div><div class="card metric green"><div class="value">${fmt(os.length)}</div><small>تعداد خرید</small></div><div class="card metric blue"><div class="value">${fmt(items)}</div><small>تعداد کالا</small></div><div class="card metric orange"><div class="value">${toman(balance)}</div><small>مانده پرداخت</small></div></div><div class="workspace-grid" style="margin-top:12px"><div class="card span6"><div class="section-title"><div><h2>اطلاعات تماس</h2><small>دسترسی سریع</small></div></div><div class="list"><div class="list-row"><span>موبایل</span><strong class="fa-phone">${c.phone?faDigits(c.phone):'—'}</strong></div><div class="list-row"><span>تلفن دوم</span><strong class="fa-phone">${c.phone2?faDigits(c.phone2):'—'}</strong></div><div class="list-row"><span>تاریخ تولد</span><strong>${c.birthDate?faDigits(c.birthDate):'—'}</strong></div><div class="list-row"><span>آدرس</span><strong>${c.address||'ثبت نشده'}</strong></div></div></div><div class="card span6"><div class="section-title"><div><h2>وضعیت ارتباط</h2><small>خلاصه مدیریتی</small></div></div><div class="list"><div class="list-row"><span>آخرین خرید</span><strong>${last?new Date(last.createdAt).toLocaleDateString('fa-IR'):'بدون خرید'}</strong></div><div class="list-row"><span>مبلغ پرداخت‌شده</span><strong>${toman(paid)}</strong></div><div class="list-row"><span>منبع آشنایی</span><strong>${c.source||'نامشخص'}</strong></div><div class="list-row"><span>یادداشت</span><strong>${c.notes||'بدون یادداشت'}</strong></div></div></div></div>`:tab==='purchases'?customerPurchaseHistory(os):customerIdentity(c)}`}
+function customerDashboard(c){const os=customerOrders(c),sum=os.reduce((a,o)=>a+o.total,0),paid=os.reduce((a,o)=>a+o.paid,0),balance=os.reduce((a,o)=>a+o.balance,0),items=os.reduce((a,o)=>a+o.items.reduce((x,i)=>x+i.qty,0),0),last=os[0],tab=state.customerProfileTab;return `<div class="section-title customer-profile-header"><div><button class="text-link" id="backCustomers">بازگشت به همه مشتریان</button><h2 style="margin-top:7px">${escapeText(c.name)}</h2><small>داشبورد پرونده مشتری</small></div><div class="customer-profile-actions"><button class="btn btn-secondary" id="editCustomer">ویرایش مشخصات</button><button class="btn btn-danger" id="archiveCustomer">حذف مشتری</button></div></div><div class="segments" style="max-width:430px;margin-bottom:12px"><button data-customer-tab="overview" class="${tab==='overview'?'active':''}">نمای کلی</button><button data-customer-tab="purchases" class="${tab==='purchases'?'active':''}">ریز خریدها</button><button data-customer-tab="identity" class="${tab==='identity'?'active':''}">مشخصات</button></div>${tab==='overview'?`<div class="metric-grid"><div class="card metric purple"><div class="value">${toman(sum)}</div><small>ارزش کل خرید</small></div><div class="card metric green"><div class="value">${fmt(os.length)}</div><small>تعداد خرید</small></div><div class="card metric blue"><div class="value">${fmt(items)}</div><small>تعداد کالا</small></div><div class="card metric orange"><div class="value">${toman(balance)}</div><small>مانده پرداخت</small></div></div><div class="workspace-grid" style="margin-top:12px"><div class="card span6"><div class="section-title"><div><h2>اطلاعات تماس</h2><small>دسترسی سریع</small></div></div><div class="list"><div class="list-row"><span>موبایل</span><strong class="fa-phone">${c.phone?faDigits(c.phone):'—'}</strong></div><div class="list-row"><span>تلفن دوم</span><strong class="fa-phone">${c.phone2?faDigits(c.phone2):'—'}</strong></div><div class="list-row"><span>تاریخ تولد</span><strong>${c.birthDate?faDigits(c.birthDate):'—'}</strong></div><div class="list-row"><span>آدرس</span><strong>${c.address||'ثبت نشده'}</strong></div></div></div><div class="card span6"><div class="section-title"><div><h2>وضعیت ارتباط</h2><small>خلاصه مدیریتی</small></div></div><div class="list"><div class="list-row"><span>آخرین خرید</span><strong>${last?new Date(last.createdAt).toLocaleDateString('fa-IR'):'بدون خرید'}</strong></div><div class="list-row"><span>مبلغ پرداخت‌شده</span><strong>${toman(paid)}</strong></div><div class="list-row"><span>منبع آشنایی</span><strong>${c.source||'نامشخص'}</strong></div><div class="list-row"><span>یادداشت</span><strong>${c.notes||'بدون یادداشت'}</strong></div></div></div></div>`:tab==='purchases'?customerPurchaseHistory(os):customerIdentity(c)}`}
 function customerPurchaseHistory(os){return `<div class="card"><div class="section-title"><div><h2>تاریخچه خرید</h2><small>فاکتورها و ریز اقلام</small></div></div><div class="list">${os.map(o=>`<div class="list-row" style="align-items:flex-start"><div><strong class="ltr">${o.id}</strong><small>${new Date(o.createdAt).toLocaleString('fa-IR')} · ${brandLabel(o.brand)}</small><small>${o.items.map(i=>`${i.name}، ${i.color}، سایز ${fmt(i.size)} × ${fmt(i.qty)}`).join('<br>')}</small></div><div style="text-align:left"><strong>${toman(o.total)}</strong><span class="status ${o.balance?'warn':'success'}">${o.balance?`${toman(o.balance)} مانده`:'تسویه'}</span><small>${deliveryFa(o.delivery)} · ${o.fulfillmentStatus}</small></div></div>`).join('')||'<div class="empty-cart">هنوز خریدی برای این مشتری ثبت نشده است.</div>'}</div></div>`}
 function customerIdentity(c){return `<div class="card"><div class="section-title"><div><h2>مشخصات پرونده</h2><small>اطلاعات هویتی و ارتباطی</small></div><button class="text-link" id="editCustomerInline">ویرایش</button></div><div class="list"><div class="list-row"><span>نام و نام خانوادگی</span><strong>${escapeText(c.name)}</strong></div><div class="list-row"><span>شماره موبایل</span><strong class="fa-phone">${faDigits(c.phone)}</strong></div><div class="list-row"><span>تلفن دوم</span><strong class="fa-phone">${c.phone2?faDigits(c.phone2):'—'}</strong></div><div class="list-row"><span>تاریخ تولد</span><strong>${c.birthDate?faDigits(c.birthDate):'—'}</strong></div><div class="list-row"><span>کد ملی</span><strong class="ltr">${c.nationalId||'—'}</strong></div><div class="list-row"><span>ایمیل</span><strong class="ltr">${c.email||'—'}</strong></div><div class="list-row"><span>آدرس</span><strong>${c.address||'—'}</strong></div><div class="list-row"><span>منبع آشنایی</span><strong>${c.source||'—'}</strong></div><div class="list-row"><span>یادداشت داخلی</span><strong>${c.notes||'—'}</strong></div></div></div>`}
 function editCustomerForm(c){openSheet(`<h3>ویرایش مشخصات مشتری</h3><input class="field" id="ecName" lang="fa" dir="rtl" inputmode="text" autocomplete="name" autocapitalize="off" spellcheck="false" aria-describedby="ecNameHelp" placeholder="نام و نام خانوادگی به فارسی" value="${escapeText(c.name||'')}"><small class="customer-name-help" id="ecNameHelp">نام را با کیبورد فارسی یا عربی وارد کنید.</small><input class="field ltr" id="ecPhone" inputmode="tel" aria-describedby="ecPhoneHelp" placeholder="شماره موبایل" value="${escapeText(c.phone||'')}"><small class="customer-phone-help" id="ecPhoneHelp">شماره استاندارد ۱۱ رقمی؛ مانند ۰۹۱۲۱۲۳۴۵۶۷</small><input class="field ltr" id="ecPhone2" inputmode="tel" placeholder="تلفن دوم" value="${escapeText(c.phone2||'')}">${birthDatePickerHtml(c.birthDate||'')}<input class="field ltr" id="ecNational" inputmode="numeric" placeholder="کد ملی" value="${escapeText(c.nationalId||'')}"><input class="field ltr" id="ecEmail" inputmode="email" placeholder="ایمیل" value="${escapeText(c.email||'')}"><input class="field" id="ecAddress" placeholder="آدرس کامل" value="${escapeText(c.address||'')}"><input class="field" id="ecSource" placeholder="منبع آشنایی" value="${escapeText(c.source||'')}"><textarea class="field" id="ecNotes" placeholder="یادداشت داخلی" rows="3">${escapeText(c.notes||'')}</textarea><button class="btn btn-primary" style="width:100%;margin-top:10px" id="saveCustomerEdit">ذخیره تغییرات</button>`,host=>{const nameInput=$('#ecName',host),help=$('#ecNameHelp',host),phoneInput=$('#ecPhone',host),phoneHelp=$('#ecPhoneHelp',host);wireCustomerNameField(nameInput,help);wireCustomerMobileField(phoneInput,phoneHelp);wireBirthDatePicker(host);$('#saveCustomerEdit',host).onclick=()=>{const name=normalizeCustomerName(nameInput.value),phone=normalizeCustomerMobile(phoneInput.value);if(!validCustomerName(name))return toast('نام مشتری را فقط با حروف فارسی یا عربی وارد کنید.');const phoneError=validateCustomerMobileField(phoneInput,phoneHelp);if(phoneError)return toast(phoneError);if(data.customers.some(x=>x.id!==c.id&&x.phone===phone))return toast('این شماره برای مشتری دیگری ثبت شده است.');Object.assign(c,{name,phone,phone2:normalizeDigits($('#ecPhone2',host).value).replace(/\D/g,''),birthDate:$('#ecBirth',host).value.trim(),nationalId:normalizeDigits($('#ecNational',host).value).replace(/\D/g,''),email:$('#ecEmail',host).value.trim(),address:$('#ecAddress',host).value.trim(),source:$('#ecSource',host).value.trim(),notes:$('#ecNotes',host).value.trim()});orders.forEach(o=>{if(o.customer?.id===c.id)o.customer={...o.customer,...c}});save();closeSheet();render();toast('مشخصات مشتری به‌روز شد.')}})}
@@ -781,12 +1087,12 @@ function openBarcodeScanner(){stopBarcodeScanner();openSheet(`<div class="barcod
 function openSheet(html,wire){$('#sheetHost').innerHTML=`<div class="sheet-backdrop" id="sheetBg"></div><div class="sheet"><div class="sheet-handle" aria-label="برای بستن به پایین بکشید"></div>${html}</div>`;$('#sheetBg').onclick=closeSheet;const sheet=$('.sheet',$('#sheetHost'));wireFluidSheet(sheet);injectIcons();if(wire)wire($('#sheetHost'))}
 function closeSheet(){stopBarcodeScanner();$('#sheetHost').innerHTML=''}
 function openMobileCheckout(){if(!state.cart.length){closeSheet();return toast('سبد فروش خالی شد.')}const html=`<div class="checkout-sheet-head"><h3>سبد و تسویه</h3><small>${fmt(state.cart.reduce((a,i)=>a+i.qty,0))} کالا · ${toman(totals().total)}</small></div><div class="cart sheet-cart">${state.cart.map(cartLine).join('')}</div>${checkoutSections(totals())}<button class="btn btn-primary" style="width:100%;margin-top:12px" id="sheetSubmit">${submitText(totals())}</button><div class="microcopy">پیش از ثبت نهایی، خلاصه کامل فروش برای تأیید نمایش داده می‌شود.</div>`;openSheet(html,host=>{wireCheckout(host);$('#sheetSubmit',host).onclick=()=>validateSubmit(true)})}
-function openMore(){const pages=['customers','sale','messages','opportunities','tasks','fulfillment','returns','products','inventory','finance','reports','settings'];openSheet(`<h3>منو</h3><div class="sheet-list">${pages.map(p=>`<button class="sheet-row" data-morepage="${p}"><div style="display:flex;gap:9px;align-items:center"><span class="icon" data-icon="${META[p][2]}"></span><strong>${META[p][0]}${p==='opportunities'?' (به‌زودی)':''}</strong></div><span class="icon" data-icon="chevron"></span></button>`).join('')}</div>`,host=>$$('[data-morepage]',host).forEach(b=>b.onclick=()=>{closeSheet();setPage(b.dataset.morepage)}))}
+function openMore(){const pages=['customers','sale','tasks','products','inventory','finance','reports','messages','opportunities','fulfillment','returns','settings'];openSheet(`<h3>منو</h3><div class="sheet-list">${pages.map(p=>{const comingSoon=COMING_SOON_PAGES.has(p);return `<button class="sheet-row ${comingSoon?'coming-soon':''}" data-morepage="${p}" ${comingSoon?'disabled aria-disabled="true"':''}><div style="display:flex;gap:9px;align-items:center"><span class="icon" data-icon="${META[p][2]}"></span><strong>${META[p][0]}</strong></div>${comingSoon?'<span class="coming-soon-badge">به‌زودی</span>':'<span class="icon" data-icon="chevron"></span>'}</button>`}).join('')}</div>`,host=>$$('[data-morepage]:not(:disabled)',host).forEach(b=>b.onclick=()=>{closeSheet();setPage(b.dataset.morepage)}))}
 function unreadMessageCount(){return messages.filter(message=>message.needsReply).length}
-function updateBadges(){const n=unreadMessageCount(),badge=$('#msgBadge');badge.textContent=n?fmt(n):'';badge.hidden=n===0;badge.style.display=n?'grid':'none'}
+function updateBadges(){const badge=$('#msgBadge');if(!badge)return;badge.textContent='';badge.hidden=true;badge.style.display='none'}
 document.addEventListener('click',event=>{const target=event.target.closest?.('#scanProduct,#scanBtn');if(!target||state.page!=='sale')return;event.preventDefault();event.stopImmediatePropagation();openBarcodeScanner()},true);
 document.addEventListener('keydown',event=>{if(event.key!=='Enter'||event.target?.id!=='productSearch')return;event.preventDefault();const result=findProductByBarcode(event.target.value);if(!result.product)return toast(result.error);state.query=result.product.code;state.category='همه';state.colorFilter='همه';state.sizeFilter='همه';render();requestAnimationFrame(()=>openVariantPicker(result.product.id));toast(`${result.product.name} پیدا شد.`)},true);
-$$('#desktopNav .nav-btn,.side-footer .nav-btn').forEach(b=>b.onclick=()=>setPage(b.dataset.page));$$('#bottomNav button').forEach(b=>b.onclick=()=>setPage(b.dataset.page));$$('[data-go]').forEach(b=>b.onclick=()=>setPage(b.dataset.go));$$('#brandSwitch button').forEach(b=>b.onclick=()=>{const next=b.dataset.brand;if(next===state.brand)return;if(state.cart.length&&!confirm('با تغییر برند، فروش جاری خالی می‌شود. ادامه می‌دهید؟'))return;state.brand=next;resetSale(false);$$('#brandSwitch button').forEach(x=>x.classList.toggle('active',x.dataset.brand===next));$('#mobileBrand').textContent=brandLabel(next);render();injectIcons()});$('#scanBtn').onclick=()=>state.page==='today'?openCalendarSheet():state.page==='sale'?toast('بارکدخوان آماده اتصال به دوربین است.'):openMore();$('#mobileBack').onclick=()=>{if(state.page==='today')unreadMessageCount()?setPage('messages'):toast('پیام خوانده‌نشده‌ای ندارید.');else if(state.page==='sale'||state.page==='customers')setPage('today');else history.length>1?history.back():setPage('today')};window.addEventListener('popstate',()=>setPage((location.hash.split('/')[1]||'today'),false));
+$$('#desktopNav .nav-btn:not(:disabled),.side-footer .nav-btn:not(:disabled)').forEach(b=>b.onclick=()=>setPage(b.dataset.page));$$('#bottomNav button').forEach(b=>b.onclick=()=>setPage(b.dataset.page));$$('[data-go]').forEach(b=>b.onclick=()=>setPage(b.dataset.go));$$('#brandSwitch button').forEach(b=>b.onclick=()=>{const next=b.dataset.brand;if(next===state.brand)return;if(state.cart.length&&!confirm('با تغییر برند، فروش جاری خالی می‌شود. ادامه می‌دهید؟'))return;state.brand=next;resetSale(false);$$('#brandSwitch button').forEach(x=>x.classList.toggle('active',x.dataset.brand===next));$('#mobileBrand').textContent=brandLabel(next);render();injectIcons()});$('#scanBtn').onclick=()=>state.page==='today'?openCalendarSheet():state.page==='sale'?toast('بارکدخوان آماده اتصال به دوربین است.'):openMore();$('#mobileBack').onclick=()=>{if(state.page==='today')return;else if(state.page==='sale'||state.page==='customers')setPage('today');else history.length>1?history.back():setPage('today')};window.addEventListener('popstate',()=>setPage((location.hash.split('/')[1]||'today'),false));
 function dashboardOrders(source=orders){return state.dashboardBrand==='ALL'?source:source.filter(o=>o.brand===state.dashboardBrand)}
 function interBrandBalance(){return interBrandTransactions.reduce((sum,entry)=>sum+(entry.fromBrand==='HALIN'?entry.amount:-entry.amount),0)}
 function interBrandBalanceCopy(){const balance=interBrandBalance();if(!balance)return{title:'حساب دو برند تسویه است',detail:'مانده فی‌مابین صفر',className:'success'};const creditor=balance>0?'هالین':'هاله سجادی',debtor=balance>0?'هاله سجادی':'هالین';return{title:`${debtor} به ${creditor} بدهکار است`,detail:toman(Math.abs(balance)),className:'warn'}}
@@ -863,11 +1169,36 @@ const baseStockReceiptForm=newStockReceiptForm;newStockReceiptForm=function(){co
 const baseWorkspaceBody=workspaceBody;workspaceBody=page=>page==='finance'?financeWorkspace():page==='inventory'?inventoryWorkspace():baseWorkspaceBody(page);
 const baseWireWorkspace=wireWorkspace;wireWorkspace=(r,page)=>{baseWireWorkspace(r,page);if(page==='inventory')$('#inventoryBrandPicker',r)?.addEventListener('click',openInventoryBrandPicker);if(page==='finance'){$('#newSharedExpense',r)?.addEventListener('click',()=>openInterBrandEntry('SHARED_EXPENSE'));$('#newInterBrandTransfer',r)?.addEventListener('click',()=>openInterBrandEntry('TRANSFER'));$('#newInterBrandSettlement',r)?.addEventListener('click',()=>openInterBrandEntry('SETTLEMENT'));$('#backupNow',r)?.addEventListener('click',async()=>{downloadExcelBackup();if(backupConfig.googleUrl)await performCloudBackup(true);else openBackupSetup()});$('#downloadExcelBackup',r)?.addEventListener('click',downloadExcelBackup);$('#backupSettings',r)?.addEventListener('click',openBackupSetup)}if(page==='settings'){const exportButton=$('#exportData',r);if(exportButton)exportButton.onclick=()=>{const blob=new Blob([JSON.stringify({version:'2.7',exportedAt:new Date().toISOString(),data,deletedCustomers,orders,tasks,messages,returns,inventoryMoves,interBrandTransactions},null,2)],{type:'application/json'}),link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=`haleh-crm-backup-${new Date().toISOString().slice(0,10)}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000)}}};
 function todayPersianDate(date=new Date()){return new Intl.DateTimeFormat('fa-IR-u-ca-persian',{timeZone:IRAN_TIME_ZONE,day:'numeric',month:'long'}).format(date)}
-function syncTodayHeader(){const isToday=state.page==='today',date=$('#mobileDate'),dot=$('#mobileNotifyDot'),calendar=$('#scanBtn'),back=$('#mobileBack');if(!date||!dot||!calendar||!back)return;calendar.classList.toggle('today-calendar',isToday);date.classList.toggle('hidden',!isToday);if(isToday)date.textContent=todayPersianDate();const count=unreadMessageCount();dot.textContent=count?fmt(count):'';dot.classList.toggle('hidden',!isToday||count===0);back.setAttribute('aria-label',count?`${fmt(count)} پیام خوانده‌نشده`:'پیام خوانده‌نشده‌ای ندارید')}
+function syncTodayHeader(){const isToday=state.page==='today',date=$('#mobileDate'),dot=$('#mobileNotifyDot'),calendar=$('#scanBtn'),back=$('#mobileBack');if(!date||!dot||!calendar||!back)return;calendar.classList.toggle('today-calendar',isToday);date.classList.toggle('hidden',!isToday);if(isToday)date.textContent=todayPersianDate();dot.textContent='';dot.classList.add('hidden');back.disabled=isToday;back.classList.toggle('coming-soon-header',isToday);back.setAttribute('aria-label',isToday?'پیام‌ها؛ به‌زودی':'بازگشت')}
 const baseUpdateBadges=updateBadges;updateBadges=()=>{baseUpdateBadges();syncTodayHeader()};
 const baseSetPage=setPage;setPage=(page,push=true)=>{baseSetPage(page,push);if(page==='sale'){const left=$('#mobileLeftIcon');left.dataset.icon='chevron';injectIcons()}if(page==='today'){$('#mobileBrand').textContent=new Intl.DateTimeFormat('fa-IR',{timeZone:IRAN_TIME_ZONE,weekday:'long'}).format(new Date())}if(page==='inventory')$('#mobileBrand').textContent=inventoryBrandLabel();syncTodayHeader()};
 const saleIsDrilledDown=()=>state.query.trim()||state.category!=='همه'||state.colorFilter!=='همه'||state.sizeFilter!=='همه';
-$('#mobileBack').onclick=()=>{if(state.page==='today')return unreadMessageCount()?setPage('messages'):toast('پیام خوانده‌نشده‌ای ندارید.');if(state.page==='customers')return setPage('today');if(state.page==='sale'){if(saleIsDrilledDown()){resetSaleFilters();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});return}if(history.state?.page==='sale'&&history.length>1)return history.back();return setPage('today')}history.length>1?history.back():setPage('today')};
+$('#mobileBack').onclick=()=>{if(state.page==='today')return;if(state.page==='customers')return setPage('today');if(state.page==='sale'){if(saleIsDrilledDown()){resetSaleFilters();window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});return}if(history.state?.page==='sale'&&history.length>1)return history.back();return setPage('today')}history.length>1?history.back():setPage('today')};
+
+const TASK_STATUS={
+ NEW:{label:'جدید',className:'new'},
+ IN_PROGRESS:{label:'در حال انجام',className:'progress'},
+ WAITING:{label:'منتظر پاسخ',className:'waiting'},
+ DONE:{label:'انجام‌شده',className:'done'}
+};
+function inferTaskSource(task){const title=String(task?.title||'');if(task?.type==='PAYMENT_APPROVAL')return'پرداخت سفارش';if(task?.orderId||/سفارش|پیک|آماده.?سازی/.test(title))return'سفارش‌ها';if(/موجودی|انبار/.test(title))return'انبار';if(/پرداخت|مانده/.test(title))return'مالی';return'ثبت دستی'}
+function normalizeOperationalTask(task,index=0){const source=task.source||inferTaskSource(task),systemMade=source!=='ثبت دستی',status=TASK_STATUS[task.status]?task.status:(task.done?'DONE':'NEW');return{...task,status,done:status==='DONE',source,createdBy:task.createdBy||(systemMade?'سیستم':'هاله'),assignedBy:task.assignedBy||(systemMade?'سیستم':'هاله'),assignee:task.assignee||'هاله',description:task.description||(systemMade?`این کار به‌صورت خودکار از بخش ${source} ساخته شده است.`:'شرحی برای این کار ثبت نشده است.'),response:task.response||'',createdAt:task.createdAt||new Date(Date.now()-index*60000).toISOString(),updatedAt:task.updatedAt||'',completedAt:status==='DONE'?(task.completedAt||task.updatedAt||new Date().toISOString()):'',readAt:task.readAt||'',history:Array.isArray(task.history)?task.history:[]}}
+function ensureTaskRecords(persist=true){let changed=false;tasks=tasks.map((task,index)=>{const normalized=normalizeOperationalTask(task,index);if(!task.status||!task.source||!task.createdBy||!task.assignedBy||!task.assignee||!task.description||!Array.isArray(task.history))changed=true;return normalized});if(changed&&persist)save();return tasks}
+function taskStatusInfo(status){return TASK_STATUS[status]||TASK_STATUS.NEW}
+function taskStatusHtml(task){const info=taskStatusInfo(task.status);return`<span class="task-status ${info.className}">${info.label}</span>`}
+function taskCardHtml(task){const info=taskStatusInfo(task.status),summary=task.description==='شرحی برای این کار ثبت نشده است.'?'برای مشاهده و ثبت نتیجه، پرونده را باز کنید.':task.description;return`<button class="task-card" type="button" data-open-task="${task.id}" aria-label="مشاهده کار ${escapeText(task.title)}؛ وضعیت ${info.label}"><span class="task-card-top"><span class="task-card-title"><strong>${escapeText(task.title)}</strong><small>${escapeText(summary)}</small></span>${taskStatusHtml(task)}</span><span class="task-card-meta"><span class="task-meta-chip">منبع: ${escapeText(task.source)}</span><span class="task-meta-chip">ارجاع از: ${escapeText(task.assignedBy)}</span><span class="task-meta-chip">مسئول: ${escapeText(task.assignee)}</span></span><span class="task-card-footer"><span>موعد: ${escapeText(task.due||'بدون موعد')}</span><span class="task-card-open">مشاهده و پاسخ <span class="icon" data-icon="chevron"></span></span></span></button>`}
+function tasksWorkspace(){ensureTaskRecords();const counts={open:tasks.filter(task=>task.status!=='DONE').length,new:tasks.filter(task=>task.status==='NEW').length,waiting:tasks.filter(task=>task.status==='WAITING').length},filter=state.taskFilter||'ACTIVE',visible=tasks.filter(task=>filter==='ACTIVE'?task.status!=='DONE':task.status===filter),filters=[['ACTIVE','باز'],['NEW','جدید'],['IN_PROGRESS','در حال انجام'],['WAITING','منتظر پاسخ'],['DONE','انجام‌شده']];return`<div class="section-title"><div><h2>کارها</h2><small>${fmt(counts.open)} کار باز؛ هر کار دارای مسئول، منبع و وضعیت مشخص است</small></div><div class="tasks-head-actions"><button class="btn btn-secondary" id="createOperationalTask">+ کار جدید</button></div></div><div class="tasks-summary"><div class="task-summary-card"><small>کارهای باز</small><strong>${fmt(counts.open)}</strong></div><div class="task-summary-card"><small>جدید</small><strong>${fmt(counts.new)}</strong></div><div class="task-summary-card"><small>منتظر پاسخ</small><strong>${fmt(counts.waiting)}</strong></div></div><div class="task-filters" role="tablist" aria-label="فیلتر وضعیت کارها">${filters.map(([value,label])=>`<button class="task-filter ${filter===value?'active':''}" type="button" role="tab" aria-selected="${filter===value}" data-task-filter="${value}">${label} ${value==='ACTIVE'?fmt(counts.open):fmt(tasks.filter(task=>task.status===value).length)}</button>`).join('')}</div><div class="task-grid">${visible.map(taskCardHtml).join('')||'<div class="tasks-empty">در این وضعیت کاری وجود ندارد.</div>'}</div>`}
+function taskAssigneeOptions(selected){return['هاله','تیم فروش','تیم انبار'].map(name=>`<option ${name===selected?'selected':''}>${name}</option>`).join('')}
+function taskStatusOptions(selected){return Object.entries(TASK_STATUS).map(([value,info])=>`<option value="${value}" ${value===selected?'selected':''}>${info.label}</option>`).join('')}
+function openNewOperationalTask(){openSheet(`<h3>کار جدید</h3><p class="task-detail-intro">کار را با شرح روشن، منبع و مسئول مشخص بسازید تا قابل پیگیری باشد.</p><input class="field" id="taskTitle" placeholder="عنوان کوتاه کار"><textarea class="field" id="taskDescription" rows="3" placeholder="شرح کار و نتیجه‌ای که انتظار دارید"></textarea><label class="task-field-label">منبع کار<select class="field" id="taskSource"><option>ثبت دستی</option><option>مشتری</option><option>سفارش‌ها</option><option>انبار</option><option>مالی</option></select></label><label class="task-field-label">مسئول<select class="field" id="taskAssignee">${taskAssigneeOptions('هاله')}</select></label><label class="task-field-label">موعد<select class="field" id="taskDue"><option>امروز</option><option>فردا</option><option>این هفته</option><option>بدون موعد</option></select></label><div class="task-history">ارجاع‌دهنده: هاله · وضعیت اولیه: جدید</div><button class="btn btn-primary" style="width:100%;margin-top:10px" id="saveOperationalTask">ساخت و ارجاع کار</button>`,host=>{$('#saveOperationalTask',host).onclick=()=>{const title=$('#taskTitle',host).value.trim(),description=$('#taskDescription',host).value.trim();if(!title)return toast('عنوان کار را وارد کنید.');if(!description)return toast('شرح کار را بنویسید تا قابل پیگیری باشد.');const createdAt=new Date().toISOString();tasks.unshift({id:uid('t'),title,description,source:$('#taskSource',host).value,createdBy:'هاله',assignedBy:'هاله',assignee:$('#taskAssignee',host).value,due:$('#taskDue',host).value,status:'NEW',done:false,response:'',createdAt,updatedAt:createdAt,completedAt:'',readAt:'',history:[{at:createdAt,by:'هاله',status:'NEW',note:'کار ایجاد و ارجاع شد.'}]});save();closeSheet();state.taskFilter='ACTIVE';render();toast('کار ساخته و به مسئول ارجاع شد.')}})}
+function taskHistoryHtml(task){const entries=(task.history||[]).slice(-3).reverse();return entries.length?entries.map(entry=>`<div><strong>${escapeText(entry.by||'سیستم')}</strong> · ${taskStatusInfo(entry.status).label}<br><span>${new Date(entry.at).toLocaleString('fa-IR')} · ${escapeText(entry.note||'وضعیت به‌روزرسانی شد.')}</span></div>`).join('<hr style="border:0;border-top:1px solid var(--line);margin:7px 0">'):'هنوز تغییری برای این کار ثبت نشده است.'}
+function openTaskDetails(taskId){ensureTaskRecords();const task=tasks.find(item=>item.id===taskId);if(!task)return toast('کار پیدا نشد.');if(!task.readAt){task.readAt=new Date().toISOString();save()}openSheet(`<div class="order-detail-head"><div><h3>پرونده کار</h3><strong>${escapeText(task.title)}</strong><small>${new Date(task.createdAt).toLocaleString('fa-IR')}</small></div>${taskStatusHtml(task)}</div><p class="task-detail-intro">${escapeText(task.description)}</p><div class="task-detail-meta"><div><small>منبع</small><strong>${escapeText(task.source)}</strong></div><div><small>ایجادکننده</small><strong>${escapeText(task.createdBy)}</strong></div><div><small>ارجاع‌دهنده</small><strong>${escapeText(task.assignedBy)}</strong></div><div><small>موعد</small><strong>${escapeText(task.due||'بدون موعد')}</strong></div></div>${task.orderId?`<button class="btn btn-outline" style="width:100%;margin-bottom:8px" id="openTaskOrder">مشاهده سفارش مرتبط ${escapeText(task.orderId)}</button>`:''}<label class="task-field-label">مسئول<select class="field" id="taskDetailAssignee">${taskAssigneeOptions(task.assignee)}</select></label><label class="task-field-label">وضعیت<select class="field" id="taskDetailStatus">${taskStatusOptions(task.status)}</select></label><label class="task-field-label">پاسخ یا نتیجه اقدام<textarea class="field" id="taskDetailResponse" rows="4" placeholder="چه اقدامی انجام شد یا منتظر چه پاسخی هستید؟">${escapeText(task.response)}</textarea></label><div class="task-history"><strong>آخرین تغییرات</strong><div style="margin-top:6px">${taskHistoryHtml(task)}</div></div><div class="final-actions"><button class="btn btn-outline" id="closeTaskDetails">بستن</button><button class="btn btn-primary" id="saveTaskProgress">ذخیره تغییرات</button></div>`,host=>{$('#closeTaskDetails',host).onclick=closeSheet;$('#openTaskOrder',host)?.addEventListener('click',()=>openOrderDetails(task.orderId));$('#saveTaskProgress',host).onclick=()=>{const status=$('#taskDetailStatus',host).value,response=$('#taskDetailResponse',host).value.trim(),assignee=$('#taskDetailAssignee',host).value;if(status==='DONE'&&!response)return toast('برای اتمام کار، نتیجه اقدام را بنویسید.');const now=new Date().toISOString(),statusChanged=status!==task.status,assigneeChanged=assignee!==task.assignee;task.status=status;task.done=status==='DONE';task.response=response;task.assignee=assignee;task.updatedAt=now;task.completedAt=status==='DONE'?now:'';task.history.push({at:now,by:'هاله',status,note:statusChanged?`وضعیت به ${taskStatusInfo(status).label} تغییر کرد.`:assigneeChanged?`مسئول به ${assignee} تغییر کرد.`:response?'پاسخ یا نتیجه اقدام به‌روزرسانی شد.':'اطلاعات کار ذخیره شد.'});save();closeSheet();render();toast(status==='DONE'?'کار با نتیجه ثبت‌شده انجام شد.':'وضعیت و پاسخ کار ذخیره شد.')}})}
+function wireTasksWorkspace(root){$('#createOperationalTask',root)?.addEventListener('click',openNewOperationalTask);$$('[data-task-filter]',root).forEach(button=>button.onclick=()=>{state.taskFilter=button.dataset.taskFilter;render()});$$('[data-open-task]',root).forEach(button=>button.onclick=()=>openTaskDetails(button.dataset.openTask))}
+ensureTaskRecords();
+state.taskFilter=state.taskFilter||'ACTIVE';
+const operationalWorkspaceBodyBase=workspaceBody;workspaceBody=page=>page==='tasks'?tasksWorkspace():operationalWorkspaceBodyBase(page);
+const operationalWireWorkspaceBase=wireWorkspace;wireWorkspace=(root,page)=>{operationalWireWorkspaceBase(root,page);if(page==='tasks')wireTasksWorkspace(root)};
+const operationalWireCommonBase=wireCommon;wireCommon=root=>{operationalWireCommonBase(root);$$('.today-priority-card input[data-task]',root).forEach(input=>{const row=input.closest('.list-row');if(!row)return;row.setAttribute('role','button');row.setAttribute('tabindex','0');row.setAttribute('aria-label',`مشاهده کار ${tasks.find(task=>task.id===input.dataset.task)?.title||''}`);const open=event=>{event.preventDefault();event.stopPropagation();openTaskDetails(input.dataset.task)};row.onclick=open;row.onkeydown=event=>{if(event.key==='Enter'||event.key===' ')open(event)}})};
 const initial=location.hash.split('/')[1];if(initial&&META[initial])state.page=initial;setPage(state.page,false);injectIcons();
 runDailyBackup();
 if('serviceWorker'in navigator){let refreshingForUpdate=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(refreshingForUpdate)return;refreshingForUpdate=true;location.reload()});navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{})}
