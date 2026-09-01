@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v57-operational-tasks';
+const CACHE = 'haleh-crm-v59-product-detail-wide';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
