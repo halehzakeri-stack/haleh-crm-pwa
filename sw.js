@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v62-operational-dark-mode';
+const CACHE = 'haleh-crm-v63-consistent-back-navigation-2';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
