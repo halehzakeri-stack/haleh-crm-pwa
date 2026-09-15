@@ -1,627 +1,516 @@
-# Design QA — Category-first sale screen
+# Design QA — Sale UI gap fixes v45
 
-- source visual truth path: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-23e30be8-4b9a-4a09-ba87-bd34fec26059.png`
-- normalized source: `design-reference-normalized.png`
-- implementation screenshot: `design-implementation-mobile.png`
-- desktop screenshot: `design-implementation-desktop.png`
-- combined comparison: `design-comparison.png`
-- header-spacing verification: `header-spacing-today.png`, `header-spacing-sale.png`
-- hierarchical back verification: `sale-back-to-categories.png`
-- latest mobile Today verification: `qc-today-mobile.png`
-- latest mobile product-list verification: `qc-products-mobile.png`
-- latest category-grid verification: `qc-sale-mobile.png`
-- latest focused source/implementation comparison: `qc-category-comparison.png`
-- product quick-create verification: `qc-product-quick-create.png`
-- state: HALIN sale landing, no query, all filters, category landing visible
-- viewport: 512 × 768 CSS px for the mobile comparison; 1280 × 720 CSS px for desktop resilience
-- density normalization: source 1024 × 1536 px was downsampled to 512 × 768 px; implementation capture is 512 × 768 px at browser density 1
-- latest viewport: 393 × 852 CSS px at browser density 1; focused user source is 650 × 578 px and the implementation captures are 393 × 852 px
+## Source of visual truth
 
-## Full-view comparison evidence
+- Audit board: https://www.figma.com/design/EV7T9IGc6zYoBSq9eMdUrg
+- Before captures: `qa-audit-sale-ui-gap-2026-08-30/01-sale-landing.png` through `04-category-products.png`
+- Before viewport: 395 × 814 px
 
-The combined comparison shows the same information order and overall composition: floating header, search, three filters, category heading and management action, a two-column grouped category surface, six semantic colored category icons, selected Jeans state, and floating bottom navigation. The live implementation preserves the existing checkout on desktop and hides it on the mobile category landing.
+## Implementation under test
 
-## Focused region comparison evidence
+- Local URL: `http://127.0.0.1:8767/?qa=sale-ui-gap-v45#/sale`
+- After viewport: 390 × 844 px
+- After captures: `qa-audit-sale-ui-gap-2026-08-30/after-01-sale-landing.png` through `after-05-last-product-safe-area.png`
+- Normalization: screenshots compared in equal-height 814 px frames using `object-fit: contain` in `sale-ui-gap-v45-comparison.html`.
 
-- Header/search/filter region: matching translucent white surfaces, purple accent, rounded geometry, RTL order, Vazirmatn typography, and compact three-column filters.
-- Category grid: matching two-column/three-row grouping, real raster icon assets extracted from the selected visual, separators, selected Jeans surface, labels, counts, and RTL chevrons.
-- Navigation: matching five destinations, translucent floating surface, and purple active sale state.
+## State coverage
 
-## Required fidelity surfaces
-
-- Fonts and typography: Vazirmatn is enforced for HTML, controls, and inputs. Hierarchy, weights, RTL alignment, and line height are consistent with the selected visual.
-- Spacing and layout rhythm: header-to-search spacing, filter gaps, heading spacing, category row rhythm, radii, and bottom navigation placement match after iteration.
-- Colors and visual tokens: near-white/lilac canvas, translucent white surfaces, purple active states, soft semantic icon tiles, and low-contrast dividers map to the reference.
-- Image quality and asset fidelity: category, search, and management icons are raster crops from the selected visual; no placeholder imagery is used for these assets.
-- Copy and content: app copy is coherent and matches the selected flow. Product counts remain live data rather than copied mock values.
-- Responsiveness: no horizontal overflow at 512 px or 1280 px. The mobile layout hides checkout; desktop keeps the operational checkout alongside the category surface.
-- Accessibility: semantic buttons, labels, alt handling, visible focus states, practical tap targets, reduced-motion support, and RTL direction are retained.
-
-## Comparison history
-
-1. Initial implementation finding [P2]: excessive space between the floating header and search changed above-the-fold density. Fix: reduced mobile sale top padding from 104 px to 44 px. Post-fix evidence: `design-implementation-mobile.png` and `design-comparison.png`.
-2. Initial implementation finding [P2]: the reference showed Jeans as the visually preferred category, while the implementation had no featured state. Fix: added the selected lilac surface and purple label/chevron to the first category. Post-fix evidence: `design-implementation-mobile.png` and `design-comparison.png`.
-3. Initial implementation finding [P2]: management used a generic gear instead of the reference slider icon. Fix: extracted and used the exact management icon from the selected visual. Post-fix evidence: `design-implementation-mobile.png`.
-4. User-reported finding [P1]: the fixed floating header overlapped the first content block on Today and Sale. Fix: moved the shared mobile content origin below the 74 px header plus its top inset, and normalized page-level top padding. Post-fix evidence: `header-spacing-today.png` and `header-spacing-sale.png`; measured Sale gap is 37 px and overlap is 0 px, while Today page top is 107 px below the header bottom at 84 px.
-5. User-reported finding [P1]: the Sale header back button jumped from a category product list directly to Today. Fix: added hierarchical back handling so an active query/category/color/size is cleared first and the category landing is restored; only the next back action leaves Sale. Post-fix evidence: `sale-back-to-categories.png`, with the route remaining `#/sale`, category landing visible, and product view hidden.
-6. User-reported finding [P1]: mobile content inherited both body top padding and main top padding, creating a large empty band below the floating header. Fix: removed the duplicate body offset and retained one 94 px content origin. Post-fix evidence: `qc-today-mobile.png`; measured header bottom is 84 px, page top is 94 px, and greeting top is 131 px.
-7. User-reported finding [P2]: category dividers were interrupted by the selected tile and differed between cells. Fix: moved dividers from individual tile borders to a continuous grid background and removed competing per-tile borders. Post-fix evidence: `qc-category-comparison.png` and `qc-sale-mobile.png`.
-8. User-reported finding [P2]: the management icon carried a visible pale square from the raster background. Fix: blended the icon asset against the sale canvas while preserving the supplied icon artwork. Post-fix evidence: `qc-sale-mobile.png`.
-9. User-reported finding [P2]: stock quantity/status text added unnecessary density to the mobile buying cards. Fix: removed the availability row from the sale catalog and collapsed its grid track. Post-fix evidence: `qc-products-mobile.png`.
-10. User-requested workflow improvement [P2]: defining a missing category or color required leaving the product form. Fix: added compact inline “ساخت دسته‌بندی” and “ساخت رنگ” cards; each expands in place, saves the reference value, and immediately selects it without clearing product-form data. Post-fix evidence: `qc-product-quick-create.png`.
-
-## Primary interactions tested
-
-- selecting Jeans opens the filtered product list and exposes “همه دسته‌بندی‌ها”
-- returning restores the category landing
-- sequential search typing keeps the input focused and filters results
-- management opens the warehouse category manager
-- Today, Sale category landing, and product-list states render at 393 × 852 without header overlap
-- category grid shows continuous vertical and horizontal dividers
-- product-list stock status is hidden while product selection remains operational
-- category and color quick-create panels open in place and preserve entered product fields
-- browser console checked with no errors
-
-## Follow-up polish
-
-- [P3] Product counts intentionally reflect live inventory, so they differ from the concept mock.
-- [P3] Desktop retains the existing CRM side navigation and checkout because those are product requirements not represented in the mobile reference.
-
-final result: passed
-
----
-
-# Design QA — کارت سبک مشتری، جست‌وجو و مرتب‌سازی
-
-- مرجع صفحه مشتریان: `customers-light-reference.png`
-- خروجی نهایی: `customers-light-final.png`
-- مقایسه کنارهم: `customers-light-comparison.png`
-- اندازه بررسی PWA: `390 × 844` و `812 × 900`
-- وضعیت: فهرست مشتریان هالین با سه پرونده
-
-## بررسی بصری
-
-- ساختار، رنگ‌ها، فونت، شعاع گوشه‌ها و نوار پایین از طراحی موجود حفظ شده است.
-- اطلاعات تکراری مجموع خرید و تعداد سفارش از کارت فهرست حذف شده‌اند؛ هر کارت فقط نام، شماره فارسی و مسیر ورود به پرونده را نشان می‌دهد.
-- ارتفاع کارت‌ها از ۱۶۸ پیکسل به ۸۲ پیکسل کاهش یافته و در موبایل تک‌ستونه و در اندازه تبلت دو‌ستونه باقی می‌ماند.
-- کنترل‌های «جست‌وجو»، «مرتب‌سازی» و «+ مشتری» کنار عنوان قرار گرفته‌اند و در موبایل بدون سرریز در یک ردیف سه‌تایی می‌نشینند.
-
-## تعامل‌های تست‌شده
-
-- جست‌وجوی «نگار» فهرست را از سه پرونده به یک پرونده کاهش می‌دهد و شمارنده به «۱ از ۳» تغییر می‌کند.
-- مرتب‌سازی با سه گزینه «جدیدترین»، «نام الفبایی» و «بیشترین خرید» باز و اعمال می‌شود.
-- لمس کارت «نگار محمدی» پرونده کامل او را باز می‌کند و شماره تماس در آن فارسی است.
-- چیدمان در عرض ۳۹۰ و ۸۱۲ پیکسل بدون اسکرول افقی یا هم‌پوشانی است.
-- بررسی نحوی JavaScript و `git diff --check` بدون خطا گذشت.
-
-final result: passed
-
----
-
-# Design QA — کارت‌های مستقل مشتریان و ورودی نام فارسی
-
-- source visual truth path: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_z34wSG/Screenshot 1405-06-07 at 12.12.55.png`
-- normalized source: `customers-source-content.png`
-- implementation screenshot: `customers-tablet-after.png`
-- mobile screenshot: `customers-mobile-after.png`
-- desktop screenshot: `customers-desktop-after.png`
-- combined comparison: `customers-qa-comparison.png`
-- viewport: `812 × 821` CSS px for the source/implementation comparison; mobile verification at `390 px` width; desktop resilience at `1366 px` width
-- pixels and density normalization: source app content was cropped from the supplied `2880 × 1800` screenshot, then normalized from `1625 × 1642` px to `812 × 821` px; implementation comparison is `812 × 821` px at browser density 1
-- state: Customers list with three existing customer records; the source has one populated purchase total while the isolated local test data has zero totals
-
-## Full-view comparison evidence
-
-The combined comparison preserves the page header, add-customer action, RTL hierarchy, floating three-item navigation, white canvas, purple accent, radii, and overall vertical rhythm. The requested structural change is visible: the former shared list surface is replaced by one independent, tappable card per customer. At the supplied PWA width the cards use a two-column grid; at the narrow mobile breakpoint they collapse to one column.
-
-## Focused region comparison evidence
-
-- Customer identity: every card includes a consistent customer icon tile, Persian name, Persian-digit mobile number, and a clear affordance to open the file.
-- Customer metrics: purchase total and order count remain tied to the same live customer/order data; outstanding balance appears only when non-zero.
-- Form behavior: the new and edit forms share the same Persian/Arabic-only name sanitizer and validation message. English characters and digits are removed while Persian and Arabic keyboard variants are retained.
-
-## Required fidelity surfaces
-
-- Fonts and typography: Vazirmatn remains the sole project typeface; card name, phone, label, and metric weights preserve the existing CRM hierarchy.
-- Spacing and layout rhythm: independent 16–18 px radius cards, consistent internal padding, 9–12 px gaps, and responsive one/two/three-column tracks align with the established card system.
-- Colors and visual tokens: existing white surfaces, purple-soft icon tile, muted labels, line token, and orange balance chip are reused without introducing a new palette.
-- Image quality and asset fidelity: no new raster imagery is needed; the existing project `users` and `chevron` icon components are reused consistently.
-- Copy and content: names remain unchanged; phone strings preserve the leading zero while rendering all digits in Persian; form guidance explicitly asks for a Persian or Arabic keyboard.
-- Accessibility and interaction: each customer card is a semantic button with a descriptive label and focus ring; cards open the customer dashboard; the add and edit forms reject invalid Latin names.
-
-## Comparison history
-
-1. Source finding [P1]: all customers were grouped into one large list card, so individual records did not read as separate touch targets. Fix: replaced the shared list with responsive independent customer cards. Post-fix evidence: `customers-tablet-after.png` and `customers-mobile-after.png`.
-2. Source finding [P1]: mobile numbers were displayed with Latin digits. Fix: added a display-only Persian digit formatter that preserves stored normalized numbers and leading zeros. Post-fix evidence: all three numbers in `customers-tablet-after.png` and customer dashboard interaction output.
-3. Source finding [P1]: customer names accepted Latin input. Fix: added composition-safe input sanitizing and save-time validation to both create and edit forms. Post-fix evidence: browser interaction returned a blank value for Latin letters and preserved `سارا محمدي` from an Arabic keyboard layout.
-
-## Primary interactions tested
-
-- all three customer cards render and open the correct customer dashboard
-- displayed mobile number in both the card list and dashboard uses Persian digits
-- Latin name input is removed immediately
-- Persian and Arabic keyboard characters are accepted
-- new and edit forms share the same save-time validation
-- mobile, supplied PWA width, and desktop layouts render without console errors
-- JavaScript syntax, helper cases, and `git diff --check` passed
-
-## Follow-up polish
-
-- [P3] The supplied live screenshot includes a non-zero purchase total for one customer; the isolated local browser profile uses the default zero-order dataset, so only the content value differs, not the layout or data binding.
-
-final result: passed
-
----
-
-# Design QA — کارت‌های مستقل سفارش در PWA
-
-- source visual truth path: `orders-table-source.png`
-- implementation screenshot: `orders-mobile-card-qa.png`
-- viewport: `812 × 814` CSS px
-- state: یک سفارش ثبت‌شده، پرداخت تسویه، تحویل حضوری
-
-## Full-view and focused comparison evidence
-
-نمای قبلی یک جدول هشت‌ستونه بود که در عرض PWA به اسکرول افقی نیاز داشت. نمای جدید هر سفارش را به یک کارت مستقل تمام‌عرض تبدیل می‌کند و اطلاعات اصلی مشتری، تاریخ، برند، مبلغ، شماره سفارش، پرداخت و تحویل را بدون اسکرول افقی نشان می‌دهد.
-
-## Required fidelity surfaces
-
-- فونت، رنگ‌ها، شعاع گوشه‌ها و status pillها از توکن‌های موجود v2.5 استفاده می‌کنند.
-- نسخه دسکتاپ همان جدول کامل را نگه می‌دارد و کارت‌ها فقط زیر breakpoint موبایل نمایش داده می‌شوند.
-- هر کارت یک کنترل واحد و قابل لمس است؛ انتخاب کارت همان پنل «جزئیات سفارش» موجود را باز می‌کند.
-- عرض سند و viewport هر دو `812px` اندازه‌گیری شدند؛ overflow افقی وجود ندارد.
-
-## Primary interactions tested
-
-- ثبت یک فروش واقعی از مسیر انتخاب کالا، سبد، تأیید نهایی و ذخیره سفارش
-- نمایش کارت سفارش بلافاصله پس از ثبت
-- لمس کارت و بازشدن پنل «جزئیات سفارش»
-- بررسی JavaScript syntax و `git diff --check`
-
-final result: passed
-
----
-
-# Design QA — Empty message notification state
-
-- source visual truth path: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_hhmz8P/Screenshot 1405-06-06 at 10.23.23.png`
-- normalized source: `notification-source-normalized.png`
-- implementation screenshot: `notification-empty-state-final.png`
-- combined comparison: `notification-comparison.png`
-- viewport: 812 × 814 CSS px; compared header crop 812 × 139 px
-- pixels: source 1624 × 278 normalized to 812 × 139; implementation 812 × 139
-- state: Today page, zero unread messages
-
-## Full-view and focused comparison evidence
-
-The combined comparison shows the same header, date, title, bell icon, spacing, and visual hierarchy before and after the correction. The only visible change is the removal of the misleading count above the bell. A separate focused crop was not needed because the complete comparison is already a focused header region and the count is legible at 1:1 size.
-
-## Required fidelity surfaces
-
-- Fonts and typography: unchanged Vazirmatn family, weight, size, line height, and Persian number treatment.
-- Spacing and layout rhythm: the bell remains in the same slot; hiding the badge causes no shift or reflow.
-- Colors and visual tokens: the existing purple bell treatment remains unchanged; no empty-state notification color is rendered.
-- Image quality and asset fidelity: the established bell icon is preserved with no replacement or degradation.
-- Copy and content: the empty state exposes the accessible label «پیام خوانده‌نشده‌ای ندارید» and the tap feedback uses the same wording.
-
-## Comparison history
-
-1. User-reported finding [P1]: the Today header displayed «۲» even when the Messages section had no unread message. Root cause: the badge combined unread messages with pending-payment count. Fix: derive both mobile and desktop message badges exclusively from `unreadMessageCount()`, hide and clear the element when zero, and remove seeded sample messages from an empty installation. Post-fix evidence: `notification-empty-state-final.png` and `notification-comparison.png`.
-
-## Primary interactions tested
-
-- zero unread messages: mobile badge hidden and empty
-- zero unread messages: desktop Messages badge hidden and empty
-- bell accessible label: «پیام خوانده‌نشده‌ای ندارید»
-- tapping the bell with zero unread messages keeps the Today route and shows the correct empty-state feedback
-- browser console checked with no errors or warnings
-- JavaScript syntax and `git diff --check` passed
-
-final result: passed
-
----
-
-# Design QA — Unified Vazirmatn typography system
-
-- source visual truth path: `home-v32-reference-match.png`
-- implementation screenshot path: `typography-mobile-final.png`
-- combined comparison evidence: `typography-comparison.png`
-- viewport: `390 × 844` CSS px at density 1
-- pixels: source `390 × 1472`; implementation `390 × 844`; combined board `1200 × 1802`
-- normalization: both source and implementation are displayed at the same 390 px content width; the focused above-the-fold region is compared because the source contains a longer historical dashboard state.
-- state: Today dashboard, both brands, no sheet or toast open
-
-## Full-view and focused comparison evidence
-
-The combined board confirms that the implementation preserves the established Vazirmatn-led RTL hierarchy, white/lilac surfaces, purple actions, centered financial KPI, brand switch, semantic status colors, and compact three-action navigation. The focused above-the-fold region is sufficient for this typography-only change because no layout, asset, or information-architecture redesign was requested.
-
-## Required fidelity surfaces
-
-- Fonts and typography: Vazirmatn Variable is the sole primary family; body is 14 px, mobile captions and navigation labels have a 12 px floor, KPI is 32 px on mobile, and Persian letter spacing is zero. Runtime inspection confirms the loaded family is Vazirmatn.
-- Spacing and layout rhythm: the existing card dimensions, grid tracks, radii, shadows, and section rhythm are unchanged; all seven tested mobile routes report zero horizontal overflow.
-- Colors and visual tokens: no color, gradient, opacity, border, or elevation token was changed.
-- Image quality and asset fidelity: existing icons and product/profile assets are untouched; no new or replacement imagery was introduced.
-- Copy and content: all application copy and live CRM values are unchanged.
-- Accessibility: all visible direct text on Today, Sale, Orders, Customers, Products, Inventory, and Finance is at least 12 px on the 390 px mobile viewport.
-
-## Comparison history
-
-1. [P2] The code contained more than thirty hard-coded text sizes, including visible 8–11.5 px labels, and mixed legacy Estedad/Vazirmatn declarations. Fix: added a centralized type-token scale, made Vazirmatn the sole primary family, removed negative Persian tracking, and mapped interface roles to 12/13/14/16/18/22/32 px mobile sizes.
-2. [P2] First runtime pass found sub-12 px labels in Sale filters, Product selectors, Inventory picker, and Finance explanatory text. Fix: added explicit semantic-selector mappings to the 12 px caption token. Post-fix evidence: all seven routes report minimum visible direct text of 12 px and zero horizontal overflow.
-3. Post-fix pass: desktop body renders Vazirmatn at 14 px with zero horizontal overflow; brand selection works, the primary New Sale CTA remains enabled, and the browser console has no errors or warnings.
-
-## Primary interactions tested
-
-- brand selector updates its active state
-- New Sale primary CTA remains enabled
-- Today, Sale, Orders, Customers, Products, Inventory, and Finance render without horizontal overflow
-- JavaScript syntax check passes
-- browser console checked with no errors or warnings
-
-final result: passed
-
----
-
-# Design QA — تناسب آیکون و عنوان مزون
-
-- source visual truth path: `qc-mezon-proportion-reference.png`
-- implementation screenshot path: `qc-mezon-proportion-mobile.png`
-- focused implementation evidence: `qc-mezon-proportion-focus.png`
-- combined comparison evidence: `qc-mezon-proportion-comparison.png`
-- viewport: `390 × 844` CSS px at browser density 1
-- pixels: source thumbnail `318 × 318`; implementation full view `390 × 844`; focused crop `150 × 144`
-- normalization: the focused implementation crop is displayed at approximately 2× in the comparison board so the 74 px navigation orb can be judged against the larger reference orb.
-- state: Today/مزون active, bottom navigation visible, no sheet or toast open
-
-## Full-view comparison evidence
-
-The browser-rendered mobile screen keeps the fixed three-item navigation, the centered raised orb, and the established white/lilac geometry. The icon artwork, circle sizes, nav position, and neighboring Menu/Orders actions are unchanged.
-
-## Focused region comparison evidence
-
-The combined board shows the approved storefront icon form beside the implemented PWA component. The title is visibly larger, the empty vertical area between icon and title is removed, and the icon/title group is centered inside the inner white orb.
-
-## Required fidelity surfaces
-
-- Fonts and typography: Vazirmatn is retained; `مزون` is 12 px, weight 750, line-height 1.2, and remains legible at the mobile viewport.
-- Spacing and layout rhythm: icon-to-label gap is 6 px; the former 54 px wrapper is reduced to the icon's 31 px height so the group has no artificial internal gap.
-- Colors and visual tokens: existing purple, pale-lilac halo, white orb, border, and shadow tokens are unchanged.
-- Image quality and asset fidelity: the established storefront icon remains the same vector from the product icon system; its 31 px size and stroke treatment are unchanged.
-- Copy and content: the exact label `مزون` is retained.
-
-## Comparison history
-
-1. [P2] The label was visually undersized and the 54 px icon wrapper created excessive separation below the storefront. Fix: increased the label from 10 px to 12 px, set the wrapper height to 31 px, and established a deliberate 6 px gap. Post-fix evidence: `qc-mezon-proportion-focus.png` and `qc-mezon-proportion-comparison.png`.
-2. Post-fix pass: no actionable P0/P1/P2 mismatch remains; icon appearance and overall navigation silhouette were preserved as requested.
-
-## Primary interactions tested
-
-- Orders navigates to `#/orders`.
-- Mezon returns to `#/today`.
-- browser console checked with no errors.
-- measured icon: `31 × 31` px; measured label: 12 px; measured gap: 6 px.
-
-final result: passed
-## Home v31 — unified live dashboard
-
-Reference: `exec-51aa2069-9bdd-4c12-b596-50aa774dad55.png`
-Prototype: `home-v31-final.png`
-Side-by-side evidence: `qc-home-v31-comparison.png`
-
-- The sales total and new-order count now share one card and are not repeated in the chart header.
-- The chart uses a smooth cubic path and derives its points from filtered order dates and totals.
-- Brand scope updates sales, orders, inventory, finance/fulfillment counts, and tasks together.
-- Profile add/change/delete is available from the greeting avatar and persists through the same local data layer.
-- Quick access links route to Orders, Finance, Inventory, and Fulfillment; Today tasks remain last.
-- Mobile verification at 390×844: document width equals viewport width, all four quick-access icons remain rendered after brand switching, and the fixed navigation bottom remains 830 px before and after scrolling.
-- Week/month selection and brand scope persist after leaving Home and returning from Orders.
-- Console: no errors or warnings.
-
-Remaining P3: with an empty sales database the line is intentionally flat; it becomes curved as real sales arrive.
-
-final result: passed
-
----
-
-# Design QA — Corrected mezon navigation v24
-
-- source visual truth: `/Users/mac/Downloads/exec-faad11d5-00f0-4e21-bd35-c588bca5e89f.png`
-- rendered implementation: `qc-nav-v24-full.png`
-- normalized combined comparison: `qc-nav-v24-comparison.png`
-- source pixels: 1800 × 900; focused source crop: 1800 × 450
-- implementation viewport: 390 × 600 CSS px at density 1; focused implementation crop: 390 × 120
-- state: Today dashboard, all brands, navigation closed
-
-## Findings and comparison history
-
-1. [P1] v23 made the center circle 72 px and lifted it too far above the bar, materially changing the approved silhouette. Fix: reduced the orb to 48 px and placed it only 8 px above the 64 px pill surface.
-2. [P1] v23 looked like a floating circle over a mostly straight bar. Fix: moved the 32 px radial cutout center 14 px inside the bar so the white surface now wraps around the orb as the broad U-shaped notch shown in the reference.
-3. [P2] Side actions were too visually weak. Fix: increased side icons to 27 px and labels to 11 px while preserving muted gray and purple active tokens.
-4. [P2] The original navigation used a tighter horizontal inset and softer pill geometry. Fix: set 18 px mobile insets, 36 px end radii, and matched the soft border/shadow treatment.
-
-## Fidelity surfaces
-
-- Typography: Vazirmatn retained; labels use the same hierarchy and RTL flow as the reference.
-- Spacing/layout: three equal tracks, centered orb, Orders on the left and Menu on the right; zero horizontal overflow at 390 px.
-- Colors/tokens: white surface, pale violet halo, purple active action, and muted gray secondary actions match the reference direction.
-- Icons: existing product icon system retained; storefront, menu, and bag remain sharp and functional.
-- Copy: exact visible labels are `سفارش‌ها`, `مزون`, and `منو`.
-
-## Interactions tested
-
-- Menu opens and begins with Customers then New Sale.
-- Orders navigates to the Orders screen.
-- Mezon returns to Today.
-- Active states update after each navigation action.
-
-final result: passed
-
----
-
-# Design QA — Three-item mezon navigation v23
-
-- source visual truth: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-faad11d5-00f0-4e21-bd35-c588bca5e89f.png`
-- implementation evidence: `qc-nav-v23.png`
-- viewport: 390 × 650 CSS px inside the in-app browser QA harness
-- state: Today dashboard, all brands
+- Category landing with no selected category
+- Empty/zero-product category states
+- Category management sheet
+- Reorder selection and destination state
+- Product list with visible color names
+- Last product scrolled above the fixed bottom navigation
 
 ## Findings and fixes
 
-1. [P1] The deployed center action looked like a circle sitting on a straight bar, while the approved design used a real concave notch. Fix: the navigation surface now has a 44 px radial cutout and the 72 px mezon orb is elevated into that cutout.
-2. [P2] The `مزون` label appeared inside the circle. Fix: the label now sits on the navigation body below the orb, matching the approved hierarchy.
-3. [P2] The three actions needed operational verification after the structural CSS change. Fix: hamburger opens the complete mezon menu; Orders navigates to `#/orders`; Mezon returns to `#/today`; active states update correctly.
+1. P0 — Fixed bottom navigation overlapped the lower product cards. Added mobile safe-area padding to the sale page and product list. Measured final gap between the last product and the navigation: 150.8 px.
+2. P1 — Categories with zero products looked actionable but gave weak feedback. Added explicit `بدون کالا` labels and muted styling.
+3. P1 — Category management lacked a clear exit. Added a visible `بستن` control while preserving pull-down and backdrop dismissal.
+4. P1 — Reorder selection was ambiguous. Added strong selected styling, destination hints, `aria-pressed`, and 44 × 44 px drag handles.
+5. P2 — Product color dots were hard to interpret. Replaced them with compact named color chips.
+6. P2 — Odd category counts ended with an unexplained blank tile. Kept the requested ellipsis concept and clarified it as `جای دسته‌بندی بعدی`.
+7. P3 — A vertical divider between the two category columns was visually inconsistent with the open card treatment. Removed the vertical divider while preserving the horizontal row separators.
 
-## Fidelity and regression checks
+## Visual surfaces reviewed
 
-- RTL order is Menu, Mezon, Orders with the primary action centered.
-- The established purple/lilac token, Vazirmatn typography, white glass surface, shadows, and icon set are preserved.
-- The mobile document has no horizontal overflow.
-- Hamburger contents retain Customers first, New Sale second, and Sales Opportunities marked `به‌زودی` and disabled.
-- Service-worker cache was advanced so installed PWAs receive the corrected navigation.
+- Typography: Persian hierarchy and weights remain consistent with Vazirmatn.
+- Spacing: bottom safe area and sheet header spacing corrected; no clipped final action.
+- Color: existing purple system preserved; selected and empty states now use consistent purple/neutral tokens.
+- Image fidelity: product images remain uncropped and use existing assets.
+- Copy: labels are concise and Persian; no internal/technical text exposed.
 
-final result: passed
+## Interaction verification
 
-## Mobile brand-switch placement QC — v26
+- Open/close category management: passed
+- Select source and destination to reorder: passed; first two categories swapped and persisted locally
+- Open a category and render seven products: passed
+- Bottom navigation remains fixed while the last card and its action remain fully visible: passed
+- Browser console warnings/errors: none
 
-- Source visual truth: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_zoIT9D/Screenshot 1405-05-31 at 18.45.33.png`.
-- Implementation screenshot: `qc-brand-switch-mobile-v26.png`.
-- Viewport: 390 × 844 CSS px; Today dashboard, aggregated-brand state.
-- Finding [P2]: the brand selector and its `نمایش اطلاعات` caption appeared below the greeting, creating an oversized and visually disconnected welcome region.
-- Fix: on mobile only, the selector now occupies a full-width row immediately below the header; the redundant caption is hidden and the greeting follows with a 14 px rhythm.
-- Post-fix evidence: selector width 350 px inside a 358 px content row, selector above greeting, no horizontal overflow.
-- Desktop regression check: at 1280 × 720 the selector stays beside the greeting and its caption remains visible.
-- Typography, tokens, icon assets, card styling, and surrounding dashboard content are unchanged.
-- Console: no errors or warnings.
+## Comparison history
 
-final result: passed
+- Pass 1: identified bottom-nav overlap, weak empty states, unclear reorder state, and unlabeled color dots.
+- Pass 2: implemented fixes and captured all required states.
+- Pass 3: measured last-card clearance, verified persistence, and checked console output.
+- Pass 4: compared `qa-divider-source.png` with `qa-audit-sale-ui-gap-2026-08-30/after-06-divider-focused.png` in `divider-removal-comparison.png`; the vertical divider is gone, row rhythm is preserved, and the browser console remains clean.
 
-## Time-aware greeting copy QC — v24
+## Independent category cards — approved implementation v48
 
-- Source visual truth: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_APrgx4/Screenshot 1405-05-31 at 17.26.46.png` (574 × 186 px focused greeting crop).
-- Implementation evidence: `qc-greeting-v24.png` (812 × 814 px browser-rendered viewport, focused greeting in the same Today state).
-- State: Today dashboard, aggregated brands, night period.
-- Full-view evidence: hierarchy, RTL alignment, spacing, Vazirmatn typography, moon icon, lilac token, and surrounding dashboard layout remain unchanged.
-- Focused comparison: the separate `شب` label is replaced by the requested complete phrase while keeping the icon and baseline alignment intact.
-- Copy assertions: daytime → `هاله عزیزم شبت بخیر`; nighttime → `هاله عزیزم روزت بخیر`.
-- Responsive check: 390 × 844 CSS viewport, no horizontal overflow.
-- Console: no errors or warnings.
+- Source visual truth: `qa-audit-sale-ui-gap-2026-08-30/selected-independent-category-cards-preview.png` (1419 × 1108 px; component-focused generated preview approved by the user).
+- Browser-rendered implementation: `qa-audit-sale-ui-gap-2026-08-30/independent-cards-approved-state-390.png` (390 × 1050 px at a 390 × 844 CSS viewport, device scale factor 1).
+- Focused implementation region: `qa-audit-sale-ui-gap-2026-08-30/independent-cards-approved-focus-390.png` (390 × 410 px).
+- Same-input comparison: `qa-audit-sale-ui-gap-2026-08-30/independent-category-cards-comparison.png`.
+- State: five stored categories in the user-approved order, no active filter, sale landing visible.
+- Density normalization: the reference is a magnified component crop; the implementation was inspected at the real PWA width. Structural proportions were compared in the side-by-side board rather than treating the reference crop as a full-page viewport.
 
-final result: passed
+### Fidelity surfaces
 
-## Today header and status-icon regression QC — v22
+- Fonts and typography: existing Vazirmatn hierarchy, optical weights, RTL alignment, line height, and compact count labels are preserved.
+- Spacing and layout rhythm: two equal tracks, 10 px mobile gap, independent 18 px card radii, no internal dividers, and the fifth card spans the complete 366 px content width.
+- Colors and tokens: existing white surfaces, subtle purple-neutral strokes, shadows, and zero-inventory muted state are preserved.
+- Image quality and assets: the existing category icon assets remain sharp, correctly scaled, and uncropped.
+- Copy and content: category names and inventory counts match the approved reference state; the placeholder copy and ellipsis are completely removed.
 
-- Calendar header order is explicitly date first and calendar icon second in RTL at both 390 px and 812 px.
-- The greeting explicitly displays the current period (`روز` or `شب`) beside `هاله عزیزم`, with the matching sun/moon icon.
-- All visible status cards render their real package, card, users, and task icons; SVG visibility, stroke color, and non-zero dimensions were asserted in-browser.
-- Screenshots: `qc-today-390-v22.png` and `qc-today-812-v22.png`.
-- Horizontal overflow: none at 390 px and 812 px.
+### Comparison history
+
+- Pass 1: the previous implementation used a shared grid surface with separator lines and an artificial placeholder for odd counts.
+- Fix: removed placeholder rendering, replaced the shared surface with independent cards, and added odd-last-child full-width behavior.
+- Pass 2: browser verification at 390 × 844 confirmed five independent cards, no placeholder, 1 px card borders, 18 px radii, and a 366 px full-width final card. Selection and return interactions passed.
+- Pass 3: verification at 756 × 650 confirmed the responsive two-column structure remains stable. Browser console errors and warnings: none.
+
+### Remaining findings
+
+- No actionable P0, P1, or P2 mismatch remains. The larger apparent text/card scale in the source comes from its component-only crop and is acceptable in the real full-page PWA context.
 
 final result: passed
 
 ---
 
-# Design QA — Today intermediate breakpoint
+# Design QA — Mobile dark-mode fixes v69
 
-- source evidence: `audit-today-mid-before.png`
-- implementation evidence: `audit-today-mid-after.png`
-- viewport: 812 × 844 CSS px at density 1; regression check at 390 × 844 CSS px
-- state: Today, both brands, evening moon state
+## Source visual truth
+
+- Tasks source: `qa-audit-mobile-dark-v69/08-tasks-dark.png`, 390 × 844 px.
+- Inventory source: `qa-audit-mobile-dark-v69/07-inventory-dark.png`, 390 × 844 px.
+- New Sale source: `qa-audit-mobile-dark-v69/05-sale-dark.png`, 390 × 844 px.
+- User-approved scope: correct the three highest-impact dark-mode gaps without changing layout, content, routes, or data.
+
+## Implementation under test
+
+- Local URL: `http://127.0.0.1:8789/?qa=mobile-dark-fixes-v69-final#/tasks`.
+- Tasks capture: `qa-audit-mobile-dark-v69-fix/01-tasks-after.jpg`, 390 × 844 px.
+- Inventory capture: `qa-audit-mobile-dark-v69-fix/02-inventory-after.jpg`, 390 × 844 px.
+- New Sale capture: `qa-audit-mobile-dark-v69-fix/03-sale-after.jpg`, 390 × 844 px.
+- Same-input comparison: `qa-audit-mobile-dark-v69-fix/04-side-by-side.jpg`.
+- Viewport: 390 × 844 CSS px at device scale factor 1.
+- State: dark theme, empty operational dataset.
+- Focused comparison was not required because the affected cards and controls remain clearly legible at the full mobile viewport.
 
 ## Findings and comparison history
 
-1. [P1] The Persian date wrapped below the calendar and escaped the floating header because the mobile header activates at 860 px while the contextual-date layout activated only at 760 px. Fix: aligned the date-control breakpoint with the 860 px header breakpoint, reserved a 102 px single-line control, and centered icon and text.
-2. [P2] The moon icon was separated from the greeting because its inline flex treatment was missing between 761 and 860 px. Fix: applied the 24 px semantic icon tile and 7 px inline gap across the full mobile/tablet range.
-3. [P2] The greeting and brand selector had unstable intrinsic widths at the intermediate breakpoint. Fix: constrained the greeting minimum and selector width without changing the established two-column composition.
+### Pass 1 — blocked
+
+- P1: Tasks summary cards kept a white background while their primary text used the dark-theme near-white token, making the values effectively unreadable.
+- P1: Inventory barcode scan and empty-state reset controls retained light-theme backgrounds or browser-default grey treatment, creating poor contrast and an inconsistent state.
+- P1: New Sale management and scan actions retained light-theme color treatment and looked detached from the surrounding dark surface.
+
+### Fixes made
+
+- Mapped task summary cards and task filters to the existing dark surface, border, text, muted, and active-purple tokens.
+- Mapped inventory scan and empty-state reset actions to the dark purple-soft surface with the accessible dark-theme purple foreground.
+- Mapped the New Sale management and scan actions to the same dark-theme action treatment.
+- Scoped all corrections to mobile dark mode at 860 px and below.
+
+### Pass 2 — passed
+
+- Tasks summary background is `rgb(24, 26, 34)`, primary text is `rgb(243, 244, 247)`, and supporting text is `rgb(184, 187, 197)`.
+- Inventory scan and reset actions use `rgb(43, 37, 66)` with `rgb(165, 140, 255)` foreground.
+- New Sale scan and management actions use the same purple-soft and purple dark-theme tokens.
+- No horizontal page overflow or console errors were found on the three corrected routes.
+- The partially revealed final task-filter chip remains an intentional horizontal-scroll affordance and is not a regression.
+- No actionable P0, P1, or P2 issue remains in the approved scope.
 
 ## Required fidelity surfaces
 
-- Typography: Vazirmatn hierarchy and RTL text flow retained.
-- Spacing: header controls, greeting, and brand selector align without wrapping or overlap.
-- Color: existing purple/lilac and semantic moon tokens retained.
-- Assets: established icon system retained; no placeholder assets introduced.
-- Copy: date, weekday, greeting, and brand labels remain unchanged.
-- Responsiveness: document width equals viewport at both 812 px and 390 px.
-- Runtime: browser console has no errors.
+- Fonts and typography: Vazirmatn, Persian shaping, sizes, weights, wrapping, and hierarchy are unchanged.
+- Spacing and layout rhythm: card sizes, toolbar tracks, section gaps, navigation, and persistent bottom controls are unchanged.
+- Colors and visual tokens: corrected controls now use the existing dark-theme surface, line, text, muted, purple, and purple-soft tokens.
+- Image quality and assets: icons and all existing image assets remain unchanged and crisp.
+- Copy and content: all Persian labels and empty-state copy remain unchanged.
+
+## Interaction and implementation checks
+
+- Tasks, Inventory, and New Sale mobile dark-mode render: passed.
+- Horizontal page overflow: none at 390 × 844.
+- Browser console errors: none.
+- Inline scripts, service worker syntax, and repository whitespace: passed.
 
 final result: passed
 
 ---
 
-# Design QA — Inventory brand sheet
+# Design QA — Today status heading gap v67
 
-- source visual truth path: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_4ihY8M/Screenshot 1405-05-31 at 15.05.45.png`
-- implementation screenshot: `inventory-brand-sheet.png`
-- viewport: 390 × 844 CSS px at density 1
-- state: Inventory, «هاله سجادی» selected
+## Source visual truth
 
-## Evidence and required fidelity surfaces
+- User-reported focused screen: `qa-audit-status-heading-gap-v67/00-before.png`, 1906 × 428 px.
+- State: light theme, desktop Today dashboard, empty operational dataset.
 
-- Layout: one compact brand card replaces a permanently expanded three-option control; mobile management buttons remain hidden to preserve density.
-- Typography and color: Vazirmatn, purple active text, pale-lilac selector surface, and existing card tokens remain consistent with the product UI.
-- Copy: the three sheet choices are «هالین»، «هاله سجادی» and «هر دو برند».
-- Behavior: selecting «هاله سجادی» updates the mobile subtitle, all four metrics, inventory table, movement list, and stock-receipt product options.
-- Responsiveness: document width equals the 390 px viewport; no horizontal overflow.
-- Runtime: browser console checked with no errors.
+## Implementation under test
 
-## Comparison history
+- Local URL: `http://127.0.0.1:8767/?qa=status-heading-gap-v67#/today`.
+- Desktop capture: `qa-audit-status-heading-gap-v67/01-desktop-after.png`, 1440 × 900 CSS px at device scale factor 1.
+- Focused desktop crop: `qa-audit-status-heading-gap-v67/01-desktop-focus.png`, 950 × 220 px.
+- Mobile capture: `qa-audit-status-heading-gap-v67/02-mobile-after.png`, 390 × 844 CSS px at device scale factor 1.
+- Same-input focused comparison: `qa-audit-status-heading-gap-v67/03-side-by-side.png`.
 
-1. User-reported finding [P1]: Inventory was implicitly fixed to HALIN and offered no path to the Haleh Sajjadi warehouse. Fix: added a compact selector that opens the existing draggable bottom sheet and scopes the complete inventory workspace.
-2. User-requested refinement [P2]: a visible three-way segmented control would make the screen busy. Fix: options stay hidden until the compact «انبار فعال» card is tapped.
+## Findings and comparison history
+
+### Pass 1 — blocked
+
+- P2: the «وضعیت امروز» heading had no reliable vertical separation from the unified status card because the section gap was declared without a layout mode that applies `gap`.
+
+### Fixes made
+
+- Made the status section an explicit grid so its spacing token is consistently applied.
+- Set a 16 px desktop gap and a 12 px mobile gap while preserving the approved typography, cards, icons, colors, and interactions.
+
+### Pass 2 — passed
+
+- Browser geometry confirms 16 px visible separation on desktop and 12 px on mobile.
+- The section remains within the 390 px mobile viewport with no horizontal overflow.
+- No actionable P0, P1, or P2 issue remains in the corrected region.
+
+## Required fidelity surfaces
+
+- Fonts and typography: unchanged from the passed v66 scale; Persian shaping, weights, sizes, and line heights remain consistent.
+- Spacing and layout rhythm: heading-to-card separation now follows the intended section rhythm at both breakpoints.
+- Colors and tokens: unchanged.
+- Image quality and assets: existing icon assets remain unchanged and crisp; no replacement asset was introduced.
+- Copy and content: all Persian labels remain unchanged.
+
+## Interaction and implementation checks
+
+- Desktop and mobile browser render: passed.
+- Status-card behavior: unchanged.
+- Inline scripts, service worker syntax, and repository whitespace: passed.
 
 final result: passed
 
 ---
 
-# Design QA — Contextual Today header
+# Design QA — Unified Today status strip v65
 
-- source visual truth paths: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_idQmxc/Screenshot 1405-05-31 at 13.37.38.png`, `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_YVAlbh/Screenshot 1405-05-31 at 13.38.46.png`, `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_OzxJTP/Screenshot 1405-05-31 at 13.39.07.png`
-- implementation screenshot: `today-header-contextual.png`
-- viewport: 390 × 844 CSS px at density 1
-- pixels: greeting source crop 674 × 196 px; implementation 390 × 844 px
-- state: Today page, Saturday, no actionable notification, daytime icon
+## Source visual truth
 
-## Full-view and focused comparison evidence
+- Selected visual: `qa-audit-today-status-v65/00-selected-option-2.png`.
+- Source pixels: 1927 × 816 px.
+- Approved direction: one restrained white status surface with three equal RTL columns, subtle dividers, semantic icon tints, clear zero values, and quiet secondary labels.
 
-The rendered PWA preserves the compact floating header and Today hierarchy. The focused greeting comparison confirms the existing Vazirmatn hierarchy is retained while the contextual icon sits inline with the greeting. The calendar now includes the real Persian date, and the unrelated red badge is absent when there is no actionable item.
+## Implementation under test
 
-## Required fidelity surfaces
+- Local URL: `http://127.0.0.1:8767/?qa=today-status-v65-final#/today`.
+- Desktop capture: `qa-audit-today-status-v65/02-desktop-final.png` at a 1440 × 900 CSS viewport and device scale factor 1.
+- Mobile capture: `qa-audit-today-status-v65/04-mobile-final.png` at a 390 × 844 CSS viewport and device scale factor 1.
+- Focused implementation region: `qa-audit-today-status-v65/05-desktop-focus.png`, 930 × 186 px.
+- Same-input comparison: `qa-audit-today-status-v65/06-side-by-side.png`, 1873 × 900 px.
+- State: light theme, all brands, operational empty dataset, all three Today metrics equal to zero.
+- Density normalization: the generated source is a component concept with generous surrounding whitespace; the implementation focus is shown at its real in-app desktop width beside it. The comparison judges the component hierarchy and proportions rather than treating the source canvas as a complete app viewport.
 
-- Fonts and typography: Vazirmatn remains the sole UI font; greeting weight and weekday/date hierarchy remain consistent.
-- Spacing and layout rhythm: the date and calendar share one 92 px control; greeting icon uses a compact 24 px tile with no horizontal overflow.
-- Colors and visual tokens: sun uses the established soft semantic treatment; notification count uses soft purple instead of red.
-- Image quality and asset fidelity: the new time-of-day marks reuse the app's existing vector icon system and stroke language; no placeholder asset is present.
-- Copy and content: date is generated from the Persian calendar; notification count is generated from actionable CRM data rather than a hardcoded number.
+## Findings and comparison history
 
-## Comparison history
+### Pass 1 — blocked
 
-1. User-reported finding [P2]: the greeting lacked a time-of-day cue. Fix: added sun from 06:00–15:59 and moon outside that interval, inline with «روز بخیر هاله عزیزم». Post-fix evidence: `today-header-contextual.png`.
-2. User-reported finding [P2]: the red badge displayed an unrelated hardcoded 3. Fix: removed the hardcoded value, calculate actionable notifications, hide zero, and use the existing soft-purple token. Post-fix evidence: `today-header-contextual.png`.
-3. User-reported finding [P2]: the calendar icon gave no date context. Fix: added localized Persian day and month next to the icon. Post-fix evidence: `today-header-contextual.png`.
+- P2: the first mobile interpretation stacked all three metrics vertically, made the dashboard unnecessarily tall, and brought the persistent bottom navigation over the third row.
+- P2: the first desktop implementation placed the metric value beside the label, reproducing the detached black-dot feeling the redesign was intended to remove.
 
-## Primary checks
+### Fixes made
 
-- sun state verified at the current daytime hour
-- Persian date rendered as «۳۱ مرداد» from the device date
-- zero notification badge hidden and accessible label changed to «اعلانی ندارید»
-- document scroll width equals the 390 px viewport
-- browser console checked with no errors
+- Kept all three metrics inside one unified rounded surface and retained subtle semantic icon colors and column dividers.
+- Rebuilt each desktop metric hierarchy as label, prominent value, then muted supporting status, matching the selected option.
+- Changed the mobile layout to a compact three-column unified strip so all metrics remain visible without added scrolling or navigation overlap.
+- Preserved the existing icon library, Persian font system, RTL order, dark-mode tokens, focus styles, and functional navigation targets.
 
-final result: passed
+### Pass 2 — passed
 
----
-
-# Design QA — Today brand filter and inter-brand finance
-
-- source visual truth path: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-ca4163a5-df82-44c6-84e2-bf266f2a0951.png`
-- normalized source: `design-reference-finance-normalized.png`
-- implementation screenshot: `finance-today-mobile.png`
-- finance implementation screenshot: `finance-interbrand-mobile.png`
-- desktop resilience screenshot: `finance-today-desktop.png`
-- combined comparison: `design-finance-comparison.png`
-- viewport: 390 × 844 CSS px at density 1 for PWA; 1365 × 900 CSS px for desktop
-- pixels: source 862 × 1825 normalized to 390 × 969; implementation 390 × 969; finance capture 390 × 1124
-- state: Today page, «همه برندها» selected, empty sales data, settled inter-brand account
-
-## Full-view comparison evidence
-
-The implementation retains the selected mockup's floating header, weekday, personalized greeting, quiet three-way brand selector, single sales hero, horizontally scrollable status cards, compact priorities, and floating bottom navigation. The added inter-brand summary is a deliberately restrained operational row between the hero and status cards.
-
-## Focused region comparison evidence
-
-- Header and greeting: matching RTL hierarchy, Persian weekday, white/lilac glass surface, and purple line icons.
-- Brand selector: exact three states — همه برندها، هالین، هاله سجادی — with one soft-purple active segment.
-- Mobile density: no chart or recent-orders panel; status cards scroll horizontally and the page has no horizontal overflow.
-- Financial affordance: the inter-brand balance uses the existing status-pill, border, radius, and spacing tokens rather than introducing a new visual system.
+- Post-fix desktop evidence: `qa-audit-today-status-v65/02-desktop-final.png` and `qa-audit-today-status-v65/05-desktop-focus.png`.
+- Post-fix mobile evidence: `qa-audit-today-status-v65/04-mobile-final.png`.
+- Side-by-side evidence: `qa-audit-today-status-v65/06-side-by-side.png`.
+- No actionable P0, P1, or P2 mismatch remains.
 
 ## Required fidelity surfaces
 
-- Fonts and typography: Vazirmatn remains the only UI font; Persian joining, weights, line height, and RTL alignment are consistent.
-- Spacing and layout rhythm: 16 px mobile content inset, compact 12–14 px section rhythm, existing card radii, and persistent navigation clearance are preserved.
-- Colors and visual tokens: existing purple, pale lilac, green, orange, blue, border, and shadow tokens are reused.
-- Image quality and asset fidelity: no new raster illustration was required; established icon assets and the existing icon system are retained.
-- Copy and content: greeting, weekday, brand names, financial direction, settlement limit, and aggregate-sales explanation are explicit and Persian.
-
-## Comparison history
-
-1. Initial implementation finding [P1]: intrinsic grid width caused 484 px horizontal overflow in a 390 px viewport. Fix: constrained Today grid children and scrolling status row to the available inline size. Post-fix evidence: `finance-today-mobile.png`; measured document width equals viewport width at 390 px.
-2. Product requirement [P2]: the visual reference did not include an inter-brand financial summary. Fix: added one low-emphasis row only for «همه برندها», linking to Finance without increasing KPI-card density.
-3. Financial integrity finding [P1]: a settlement could be entered in the wrong direction or exceed the outstanding balance. Fix: preselect the current debtor/creditor, reject reversed direction, and cap settlement at the current balance.
+- Fonts and typography: the current Persian font stack, RTL alignment, optical weights, compact labels, and prominent tabular metric values are consistent with the selected direction and the rest of the product.
+- Spacing and layout rhythm: three equal tracks, 1 px dividers, 22 px desktop radius, restrained elevation, aligned icon/copy groups, and the compact mobile treatment preserve a clean executive rhythm.
+- Colors and tokens: white surface, neutral stroke, purple/orange/green icon tints, dark primary copy, muted secondary copy, and dark-mode overrides all use existing project tokens.
+- Image quality and assets: no raster placeholder, CSS drawing, emoji, or fabricated asset was added; the existing application icon library is reused at crisp responsive sizes.
+- Copy and content: Persian labels and status messages match the current product vocabulary; no internal or technical copy is exposed.
 
 ## Primary interactions tested
 
-- switching from «همه برندها» to «هالین» updates the active segment and dashboard scope immediately
-- Persian and English numeric input both normalize to 5,000,000
-- a 5,000,000 shared expense followed by 2,000,000 settlement produces a 3,000,000 balance
-- shared-expense form opens with distinct payer and beneficiary brands
-- aggregate sales are calculated only from orders; inter-brand entries remain in a separate ledger
-- PWA and desktop views have no horizontal overflow
-- browser console checked with no errors or warnings
+- Customer status card routes to the customer workspace: passed.
+- Payment status card routes to the finance workspace: passed.
+- Responsive rendering at 1440 × 900 and 390 × 844: passed.
+- Persistent mobile navigation remains visible and does not cover the status strip: passed.
+- Repository whitespace check: passed.
 
 ## Follow-up polish
 
-- [P3] The empty-data implementation is naturally shorter than the populated visual mockup; live tasks and sales expand the same components without changing hierarchy.
+- P3: the generated concept includes a small decorative purple title mark. It was intentionally omitted so the section remains consistent with the app's existing heading language and does not introduce a one-off decorative asset.
+
+final result: passed
+
+# Inventory redesign v60 — approved product-centered cards
+
+## Visual comparison
+
+- Approved reference: `Screenshot 1405-06-10 at 20.16.43.png`.
+- Final implementation: `qa-audit-inventory-2026-09-01/08-inventory-v60-final.png`.
+- Normalized reference: `qa-audit-inventory-2026-09-01/09-inventory-reference-normalized.png`.
+- Side-by-side evidence: `qa-audit-inventory-2026-09-01/10-inventory-v60-side-by-side.png`.
+- Result: the mobile hierarchy, toolbar order, stock-status filters, grouped product surface, expanded variant grid, action row, Persian typography, and persistent bottom navigation match the approved direction. Live catalog data and existing product photography are intentionally preserved.
+
+## Functional checks
+
+- Product search by code (`H333`) and clearing the query: passed.
+- `کم‌موجود` filter: passed with one matching product in the current dataset.
+- `ناموجود` filter: passed with two matching products in the current dataset.
+- Product expansion/collapse without reordering the list: passed.
+- Brand picker: passed.
+- Barcode scanner entry state: passed.
+- Stock receipt starts unselected and blocks an empty submission with an inline Persian error: passed.
+- Manual stock adjustment starts unselected and blocks an empty submission with an inline Persian error: passed.
+- Stock-movement history opens with product variants and an empty-state message when no movements exist: passed.
+- No inventory quantity was mutated during QA.
+- Browser console warnings/errors: none.
+- JavaScript syntax and repository whitespace checks: passed.
+
+## Follow-up polish
+
+- P3: the implementation uses the live blue-jeans catalog image for `H333` instead of the beige reference photo, preserving real product data rather than replacing it with a mock asset.
+- P3: app-shell touch targets remain consistent with the rest of the PWA and are slightly larger than the normalized reference in a few places.
 
 final result: passed
 
 ---
 
-# Design QA — صفحه مزون تأییدشده v2.5
+# Design QA — Approved wide product detail v59
 
-- مرجع تأییدشده: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-fcad45d2-cc8f-4c15-a51c-fa95db7653f5.png`
-- خروجی موبایل: `design-qa-mobile-final.png`
-- خروجی دسکتاپ: `design-qa-desktop-final.png`
-- اندازه تست موبایل: `423 × 926`
-- اندازه تست دسکتاپ: `1280 × 800`
+## Source visual truth
 
-## موارد بررسی‌شده
+- Approved demo: `qa-audit-products-2026-08-31/products-detail-wide-demo-v59.jpg`.
+- Demo viewport: 395 × 814 px at device scale factor 1.
+- Approved state: brand `هالین`, product `شلوار واید لگ ۳۳۳` selected, detail drawer open over the product catalog.
 
-- هدر، خوشامدگویی، انتخاب برند، کارت فروش و کارت‌های وضعیت با مرجع تطبیق داده شدند.
-- نوار موبایل سه‌تایی است و دقیقاً ۱۶ پیکسل از کف فاصله دارد.
-- نوار هنگام اسکرول ثابت می‌ماند و فوکوس لمسی کادر اضافه ایجاد نمی‌کند.
-- منوی همبرگری با «مشتریان» و «فروش جدید» در ابتدای فهرست باز می‌شود؛ «فرصت‌های فروش (به‌زودی)» مشخص است.
-- تغییر برند آیکون‌های وضعیت را حذف نمی‌کند.
-- مسیر سفارش‌ها و بازگشت به مزون کار می‌کند.
-- نمای دسکتاپ بدون اسکرول افقی و بدون اثر جانبی باقی مانده است.
-- خطای JavaScript و خطای کنسول مشاهده نشد.
+## Implementation under test
 
-final result: passed
+- Local URL: `http://127.0.0.1:8767/?qa=products-detail-wide-v59-final#/products`.
+- Final capture: `qa-audit-products-2026-08-31/products-detail-wide-v59-final.jpg`.
+- Same-input comparison: `qa-audit-products-2026-08-31/products-detail-wide-v59-comparison.jpg`.
+- CSS viewport and screenshot: 395 × 814 px, device scale factor 1.
+- A focused-region comparison was not required because the complete detail drawer and its relationship to the catalog and bottom navigation are readable at 1:1 in the full mobile viewport.
 
----
+## Findings and fixes
 
-# Design QA — Centered Today header
-
-- source visual truth path: `/var/folders/lw/tpzd48f130b_k1znvj6z9t700000gn/T/TemporaryItems/NSIRD_screencaptureui_2gOhKN/Screenshot 1405-06-06 at 10.46.57.png`
-- normalized source: `today-header-offcenter-source.png`
-- implementation screenshot: `today-header-narrow-fix.png`
-- combined comparison: `today-header-center-comparison.png`
-- viewport: 812 × 814 CSS px; compared header crop 812 × 91 px
-- pixels: source 1614 × 182 normalized to 812 × 91; implementation 812 × 91
-- state: Today page, Friday, zero unread messages
-
-## Full-view and focused comparison evidence
-
-The header crop is itself the focused region. The original flex layout and physical placement of the date and bell controls are preserved. Only the central title block is independently anchored to the horizontal center.
+- P2: the v58 detail drawer felt visually cramped for the product image, facts, and primary actions.
+- Fix: increased the drawer's horizontal and vertical breathing room, widened the image column, enlarged the product preview, strengthened the title and fact hierarchy, and increased action height while preserving bottom-navigation clearance.
+- The final implementation matches the approved demo in the same product, scroll, selection, and drawer state.
+- No actionable P0, P1, or P2 mismatch remains.
 
 ## Required fidelity surfaces
 
-- Fonts and typography: Vazirmatn hierarchy, weight, size, and line height are unchanged.
-- Spacing and layout rhythm: header controls keep their original edge positions while the title and weekday share the exact 406 px horizontal center.
-- Colors and visual tokens: existing white glass surface and purple icon/date tokens are unchanged.
-- Image quality and asset fidelity: calendar and bell icons are preserved without substitution.
-- Copy and content: «امروز» and «جمعه» remain unchanged and now share one center axis.
+- Typography: Persian RTL hierarchy remains consistent with the application while the product title and facts gain appropriate emphasis.
+- Spacing: wider image/facts separation, calmer drawer padding, and balanced action spacing match the approved demo.
+- Colors and surfaces: existing neutral drawer, purple primary action, borders, semantic stock color, and persistent navigation are unchanged.
+- Assets and content: the existing H333 product image and live product data are reused without placeholder or fabricated content.
 
-## Comparison history
+## Primary interactions tested
 
-1. User-reported finding [P2]: «جمعه» appeared off-center because the date control was wider than the bell control inside a `space-between` flex header. Initial fix used a symmetric grid, but it unnecessarily changed the whole header layout.
-2. User feedback [P1]: the grid fix changed more than requested. Fix: restored the original RTL flex layout and icon positions; applied absolute centering only to the existing title/weekday group. Post-fix evidence: `today-header-narrow-fix.png` and `today-header-center-comparison.png`.
+- Open H333 product detail: passed.
+- Open inventory history from the widened drawer: passed.
+- Open product edit form from the widened drawer: passed.
+- Browser console errors/warnings after final render: none.
+- JavaScript syntax and repository diff whitespace checks: passed.
 
-## Primary checks
+final result: passed
 
-- header geometric center: 406 px
-- title center: 406 px
-- weekday center: 406 px
-- measured center delta: 0 px
-- browser console checked with no errors or warnings
-- JavaScript syntax and `git diff --check` passed
+---
+
+# Design QA — Products redesign v58
+
+## Source visual truth
+
+- Selected concept: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-a9cb5ba3-f7a3-4b9b-b580-7971962d3855.png`
+- Source pixels: 873 × 1801 px.
+- Normalized source: `qa-audit-products-2026-08-31/products-reference-normalized.png`, resized to 395 × 814 px to match the PWA viewport aspect and density used for QA.
+
+## Implementation under test
+
+- Local URL: `http://127.0.0.1:8767/?qa=products-redesign-v58-final6#/products`
+- CSS viewport and screenshot: 395 × 814 px, device scale factor 1.
+- Main page capture: `qa-audit-products-2026-08-31/19-products-v58-final-page.jpg`.
+- Selected-product state: `qa-audit-products-2026-08-31/17-products-v58-detail-final.jpg`.
+- Full-view same-input comparison: `qa-audit-products-2026-08-31/products-v58-side-by-side-final.jpg`.
+- State: brand `هالین`, category `همه`, product `شلوار فلر ۲۵۸` selected, detail drawer open.
+- Focused-region comparison was not required: the normalized mobile views are shown at a readable 1:1 395 px width and the product grid, drawer, actions, facts, and persistent navigation are all legible in the full-view board.
+
+## Findings and comparison history
+
+### Pass 1 — blocked
+
+- P1: the prior products page was data-heavy and lacked a strong visual catalog, selection state, and operational detail surface.
+- P1: inventory filtering, product search, barcode entry, editing, and stock receipt were not available from one coherent workspace.
+- P2: the first detail drawer stacked image, facts, and actions vertically, making it substantially taller than the approved reference and hiding too much of the catalog.
+- P2: the product order followed the page RTL flow, placing the first selected product on the opposite side from the approved visual.
+- P2: a duplicated scan affordance appeared inside the search field as well as in the dedicated barcode button.
+
+### Fixes made
+
+- Rebuilt the workspace as an image-led two-column catalog with search, stock filter, barcode action, new-product action, live category tabs, selected state, price, color, and inventory status.
+- Added functional detail, edit, inventory overview, and stock-receipt flows without creating a new route.
+- Reworked the detail drawer into the reference composition: product image on the left, identity/facts/actions on the right, and the persistent navigation visible below it.
+- Reduced the drawer height, preserved readable Persian hierarchy, removed the duplicate scan affordance, and aligned the first product to the reference's left column while keeping every card internally RTL.
+- Kept live categories and product records as the source of truth; the tabs therefore reflect available data instead of hard-coded mock labels.
+
+### Pass 2 — passed
+
+- Post-fix evidence: `qa-audit-products-2026-08-31/17-products-v58-detail-final.jpg` and `qa-audit-products-2026-08-31/products-v58-side-by-side-final.jpg`.
+- No actionable P0, P1, or P2 difference remains.
+
+## Required fidelity surfaces
+
+- Fonts and typography: existing project Persian font stack, RTL alignment, hierarchy, weights, line height, and compact metadata are preserved; action labels no longer wrap.
+- Spacing and layout rhythm: two equal catalog tracks, compact toolbar and tabs, selected-card stroke, detail drawer proportions, safe area, and bottom-navigation clearance match the approved direction.
+- Colors and tokens: project purple, neutral surfaces, semantic green/orange stock states, subtle borders, and selected-state contrast are consistent.
+- Image quality and assets: existing product images are reused, object-fit is preserved, and no placeholder, CSS drawing, emoji, or fabricated product asset was introduced.
+- Copy and content: all visible app text is Persian, concise, operational, and derived from the current product data.
+
+## Primary interactions tested
+
+- Search by code (`H147`) and clear search: passed.
+- Category tab selection (`جین`): passed.
+- Low-stock filter (`کم‌موجود`) and reset: passed.
+- Open product details and selected state: passed.
+- Open edit form without mutating saved data: passed.
+- Open inventory overview and stock-receipt form without saving a receipt: passed.
+- Browser console errors/warnings after the final render: none.
+- JavaScript syntax and repository diff whitespace checks: passed.
+
+## Follow-up polish
+
+- P3: the existing app shell header and navigation retain slightly larger touch targets than the concept image so the redesign remains consistent with the rest of the PWA.
+- P3: category tab count varies with live data and can be shorter than the concept's four-tab example.
+
+final result: passed
+
+---
+
+# Design QA — Today typography scale v66
+
+## Source visual truth
+
+- User-reported screen: `qa-audit-today-typography-v66/00-user-report.png`, 2880 × 1800 px.
+- Normalized app-only crop: `qa-audit-today-typography-v66/00-user-report-app-normalized.png`, 1614 × 1050 px.
+- Focused reported status region: `qa-audit-today-typography-v66/04-status-before-focus-normalized.png`, normalized to 930 × 185 px.
+
+## Implementation under test
+
+- Local URL: `http://127.0.0.1:8767/?qa=today-type-v66-final#/today`.
+- Desktop capture: `qa-audit-today-typography-v66/01-desktop-after.png`, 1614 × 1050 CSS px at device scale factor 1.
+- Mobile capture: `qa-audit-today-typography-v66/02-mobile-after.png`, 390 × 844 CSS px at device scale factor 1.
+- Focused after region: `qa-audit-today-typography-v66/05-status-after-focus.png`, 930 × 185 px.
+- Same-input full comparison: `qa-audit-today-typography-v66/03-side-by-side.png`.
+- Same-input focused comparison: `qa-audit-today-typography-v66/06-focus-side-by-side.png`.
+- State: light theme, all brands, operational empty dataset.
+
+## Findings and comparison history
+
+### Pass 1 — blocked
+
+- P2: the status section title at 22 px was too close to the 24 px page and greeting titles, weakening hierarchy.
+- P2: 18 px card labels were visually dominant while the Persian zero metrics at 27 px had a much smaller ink box and read like detached dots.
+- P2: the 13 px secondary labels were too close to the 14 px supporting copy elsewhere, flattening the card hierarchy.
+
+### Fixes made
+
+- Rebalanced the desktop scale to 20 px section title, 16 px card labels, 32 px metric values, and 12 px secondary copy.
+- Preserved the existing 24 / 36 px page-to-display relationship so the hero remains the primary data surface.
+- Rebalanced mobile cards to 18 px section title, 12 px labels, 23 px values, and 9.5 px supporting copy without increasing card height.
+- Kept Persian numerals, Vazirmatn, RTL alignment, icon sizes, and the unified card layout unchanged.
+
+### Pass 2 — passed
+
+- The heading, label, metric, and support tiers now follow a clear 20 / 16 / 32 / 12 desktop relationship.
+- The mobile strip keeps all three metrics readable above the persistent navigation.
+- No actionable P0, P1, or P2 issue remains in the corrected Today typography surface.
+
+## Required fidelity surfaces
+
+- Fonts and typography: Vazirmatn, RTL shaping, Persian digits, weights, line heights, and the four-level hierarchy were checked at both target viewports.
+- Spacing and layout rhythm: the type changes fit the existing cards without wrapping, clipping, or changing the approved unified layout.
+- Colors and tokens: all existing text, semantic icon, and muted-copy colors are preserved.
+- Image quality and assets: existing icon assets remain unchanged and crisp; no replacement or placeholder was introduced.
+- Copy and content: all current Persian labels remain unchanged.
+
+## Interaction and implementation checks
+
+- Desktop and mobile render: passed.
+- Status-card navigation behavior: unchanged from the passed v65 interaction checks.
+- Inline scripts and service worker syntax: passed.
+- Repository whitespace check: passed.
+
+final result: passed
+
+---
+
+# Design QA — Today ink palette v68
+
+## Source visual truth
+
+- Approved prior Today screen: `qa-audit-status-heading-gap-v67/01-desktop-after.png`, 1165 × 814 px.
+- User-approved direction: replace pure black primary copy with a warmer charcoal carrying a subtle purple undertone; preserve semantic, purple, and muted colors.
+
+## Implementation under test
+
+- Local URL: `http://127.0.0.1:8767/?qa=today-ink-v68#/today`.
+- Desktop capture: `qa-audit-today-ink-v68/01-desktop-after.png`, 1165 × 814 px from a 1440 × 900 CSS viewport at device scale factor 1.
+- Mobile capture: `qa-audit-today-ink-v68/02-mobile-after.png`, 390 × 844 CSS px at device scale factor 1.
+- Same-input full comparison: `qa-audit-today-ink-v68/03-side-by-side.png`.
+- State: Today route, light theme, all brands, empty operational dataset.
+- Focused comparison was not required because the color change is consistently applied to the clearly legible primary text visible across the full-view board.
+
+## Findings and comparison history
+
+### Pass 1 — blocked
+
+- P2: primary text used several near-black values, including `#121216` and `#18191d`, which felt visually harsher than the app's purple-neutral design language.
+
+### Fixes made
+
+- Applied `#24212d` to Today-page titles, greeting, hero amount, status labels and values, interbrand heading, priority headings, and visible task titles.
+- Applied `#34303e` to inactive brand-switch labels.
+- Scoped the palette to the light-theme Today route so semantic green, active purple, muted copy, other routes, and night mode remain unchanged.
+
+### Pass 2 — passed
+
+- Desktop and mobile captures preserve the approved hierarchy, spacing, and layout without overflow.
+- Computed primary text color is `rgb(36, 33, 45)`; secondary status copy remains `rgb(154, 156, 167)`.
+- Real night-mode interaction confirms its primary text remains `rgb(243, 244, 247)`.
+- No actionable P0, P1, or P2 issue remains.
+
+## Required fidelity surfaces
+
+- Fonts and typography: family, weights, sizes, line heights, wrapping, and Persian shaping are unchanged.
+- Spacing and layout rhythm: unchanged; no new clipping or horizontal overflow at 1440 × 900 or 390 × 844.
+- Colors and tokens: the new purple-charcoal ink harmonizes with the brand palette while semantic and muted colors retain their original meaning.
+- Image quality and assets: icons and all existing assets remain unchanged.
+- Copy and content: all Persian text remains unchanged.
+
+## Interaction and implementation checks
+
+- Desktop and mobile render: passed.
+- Night-mode toggle and dark text treatment: passed.
+- Inline scripts, service worker syntax, and repository whitespace: passed.
 
 final result: passed

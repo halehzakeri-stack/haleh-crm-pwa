@@ -918,6 +918,89 @@ html[data-theme="dark"] .today-page{background:var(--bg)!important}html[data-the
 .sheet-back-v63{min-height:40px;margin:-2px 0 8px;padding:0 4px;background:transparent;color:var(--purple);display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:720}.sheet-back-v63 .icon{width:18px;height:18px}.sheet-back-v63:focus-visible{outline:2px solid var(--purple);outline-offset:3px;border-radius:8px}
 @media(max-width:860px){.sheet{padding-top:10px!important}.sheet-back-v63{min-height:44px;margin-top:-5px;font-size:13px}}
 </style>
+<style id="today-status-unified-v67">
+.today-status-section{display:grid;gap:16px}
+.today-status-section .section-title{margin:0;padding-inline:2px}
+.today-status-section .section-title h2{font-size:20px!important;font-weight:800!important;line-height:1.45!important;color:var(--text)}
+.today-status-scroll{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;width:100%!important;padding:0!important;overflow:hidden!important;border:1px solid #e7e7ee;border-radius:22px;background:#fff;box-shadow:0 14px 38px rgba(44,37,72,.07)}
+.today-status-card,.today-status-card:nth-child(4){display:grid!important;grid-template-columns:minmax(0,1fr) 64px!important;align-items:center!important;gap:20px!important;min-width:0!important;min-height:152px!important;margin:0!important;padding:28px 34px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;text-align:right!important;color:var(--text);transition:background-color .18s ease}
+.today-status-card:not(:last-child){border-inline-end:1px solid #e8e8ef!important}
+.today-status-card:hover{background:#fbfaff!important}
+.today-status-card:focus-visible{position:relative;z-index:1;outline:3px solid rgba(91,57,211,.25);outline-offset:-4px}
+.today-status-card .metric-icon{grid-column:2!important;grid-row:1!important;width:62px!important;height:62px!important;margin:0!important;border-radius:18px!important}
+.today-status-card .metric-icon .icon{width:34px!important;height:34px!important}
+.today-status-card>div:last-child{grid-column:1!important;grid-row:1!important;display:grid!important;grid-template-columns:1fr!important;align-items:start!important;justify-items:start!important;gap:3px!important;min-width:0!important}
+.today-status-card strong{grid-column:1!important;grid-row:1!important;font-size:16px!important;font-weight:750!important;line-height:1.45!important;color:var(--text)!important;white-space:nowrap}
+.today-status-card .value{position:static!important;grid-column:1!important;grid-row:2!important;width:auto!important;height:auto!important;overflow:visible!important;clip:auto!important;font-size:32px!important;font-weight:800!important;line-height:1.15!important;color:var(--text)!important;white-space:nowrap!important}
+.today-status-card small{grid-column:1!important;grid-row:3!important;display:block!important;margin-top:6px;font-size:12px!important;font-weight:500!important;line-height:1.55!important;color:#9a9ca7!important;white-space:nowrap}
+html[data-theme="dark"] .today-status-scroll{background:var(--surface);border-color:var(--line);box-shadow:0 16px 38px rgba(0,0,0,.22)}
+html[data-theme="dark"] .today-status-card:not(:last-child){border-color:var(--line)!important}
+html[data-theme="dark"] .today-status-card:hover{background:var(--surface2)!important}
+@media(max-width:1100px) and (min-width:861px){
+ .today-status-card,.today-status-card:nth-child(4){gap:13px!important;padding:24px 20px!important;grid-template-columns:minmax(0,1fr) 54px!important}
+ .today-status-card .metric-icon{width:54px!important;height:54px!important;border-radius:16px!important}
+ .today-status-card .metric-icon .icon{width:29px!important;height:29px!important}
+ .today-status-card strong{font-size:15px!important}.today-status-card .value{font-size:29px!important}.today-status-card small{font-size:11.5px!important}
+}
+@media(max-width:860px){
+ .today-status-section{gap:12px!important}.today-status-section .section-title{padding-inline:4px!important}.today-status-section .section-title h2{font-size:18px!important}
+ .today-status-scroll{grid-template-columns:repeat(3,minmax(0,1fr))!important;border-radius:19px;box-shadow:0 10px 28px rgba(44,37,72,.06)}
+ .today-status-card,.today-status-card:nth-child(4){display:flex!important;flex-direction:column!important;justify-content:center!important;gap:7px!important;min-height:126px!important;padding:11px 5px!important;text-align:center!important}
+ .today-status-card:not(:last-child){border-inline-end:1px solid #e8e8ef!important;border-bottom:0!important}
+ .today-status-card .metric-icon{width:40px!important;height:40px!important;flex:0 0 40px!important;border-radius:13px!important}.today-status-card .metric-icon .icon{width:23px!important;height:23px!important}
+ .today-status-card>div:last-child{display:grid!important;grid-template-columns:1fr!important;place-items:center!important;gap:0!important}.today-status-card strong{font-size:12px!important}.today-status-card .value{font-size:23px!important}.today-status-card small{margin-top:3px;font-size:9.5px!important}
+ html[data-theme="dark"] .today-status-card:not(:last-child){border-inline-end-color:var(--line)!important}
+}
+</style>
+<style id="today-ink-palette-v68">
+html:not([data-theme="dark"]) body:has(.today-page) h1,
+html:not([data-theme="dark"]) .today-page .today-greeting strong,
+html:not([data-theme="dark"]) .today-page .today-hero-copy h2,
+html:not([data-theme="dark"]) .today-page .today-hero-copy h2 span,
+html:not([data-theme="dark"]) .today-page .today-status-section .section-title h2,
+html:not([data-theme="dark"]) .today-page .today-status-card strong,
+html:not([data-theme="dark"]) .today-page .today-status-card .value,
+html:not([data-theme="dark"]) .today-page .interbrand-glance strong,
+html:not([data-theme="dark"]) .today-page .today-priority-card .section-title h2,
+html:not([data-theme="dark"]) .today-page .today-priority-card .list-row strong{color:#24212d!important}
+html:not([data-theme="dark"]) .today-page .dashboard-brand-switch button:not(.active){color:#34303e!important}
+</style>
+<style id="mobile-dark-gap-fixes-v69">
+@media(max-width:860px){
+ html[data-theme="dark"] .task-summary-card,
+ html[data-theme="dark"] .task-filter{
+  background:var(--surface)!important;
+  border-color:var(--line)!important;
+  color:var(--text)!important;
+ }
+ html[data-theme="dark"] .task-summary-card strong{color:var(--text)!important}
+ html[data-theme="dark"] .task-summary-card small{color:var(--sub)!important}
+ html[data-theme="dark"] .task-filter{color:var(--sub)!important}
+ html[data-theme="dark"] .task-filter.active{
+  background:var(--purpleSoft)!important;
+  border-color:color-mix(in srgb,var(--purple) 46%,var(--line))!important;
+  color:var(--purple)!important;
+ }
+ html[data-theme="dark"] .inventory-scan-inline,
+ html[data-theme="dark"] .sale-search .search-scan{
+  background:var(--purpleSoft)!important;
+  color:var(--purple)!important;
+ }
+ html[data-theme="dark"] .inventory-scan-inline .icon,
+ html[data-theme="dark"] .sale-search .search-scan .icon{
+  background:transparent!important;
+  color:inherit!important;
+ }
+ html[data-theme="dark"] .inventory-empty-v60 button{
+  min-height:36px;
+  padding:0 12px;
+  border-radius:10px;
+  background:var(--purpleSoft)!important;
+  color:var(--purple)!important;
+ }
+ html[data-theme="dark"] .category-manage{color:var(--purple)!important}
+}
+</style>
 </head>
 <body>
 <div id="app" class="app">
