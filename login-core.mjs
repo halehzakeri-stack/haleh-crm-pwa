@@ -1,0 +1,3 @@
+export function normalizePhone(value){return String(value??'').replace(/[۰-۹]/g,d=>String(d.charCodeAt(0)-1776)).replace(/[٠-٩]/g,d=>String(d.charCodeAt(0)-1632)).trim()}
+export function phoneError(value){const phone=normalizePhone(value);if(!phone)return 'شماره موبایل را وارد کنید.';if(!/^\d+$/.test(phone))return 'شماره موبایل فقط باید شامل رقم باشد.';if(phone.length!==11)return phone.length<11?'شماره موبایل کمتر از ۱۱ رقم است.':'شماره موبایل بیشتر از ۱۱ رقم است.';if(!phone.startsWith('09'))return 'شماره موبایل باید با ۰۹ شروع شود.';return ''}
+export function persianDigits(value){return String(value).replace(/[0-9٠-٩]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[Number(normalizePhone(d))])}

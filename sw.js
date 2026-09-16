@@ -1,9 +1,16 @@
-const CACHE = 'haleh-crm-v70-mezon-orb-cleanup';
+const CACHE = 'haleh-crm-v71-login-design';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
   '',
   'index.html',
+  'login.html',
+  'login.css',
+  'login.js',
+  'login-core.mjs',
+  'assets/login-hero-light.png',
+  'assets/login-hero-dark.png',
+  'assets/vendor/feather-4.29.2.min.js',
   'manifest.webmanifest',
   'vazirmatn.woff2',
   'icon-192.png',
@@ -43,14 +50,17 @@ self.addEventListener('fetch', event => {
   if (url.origin !== self.location.origin) return;
 
   if (event.request.mode === 'navigate') {
+    const documentUrl = url.pathname.endsWith('/login.html')
+      ? new URL('login.html', BASE_URL).href
+      : INDEX_URL;
     event.respondWith(
       fetch(event.request)
         .then(response => {
           const copy = response.clone();
-          caches.open(CACHE).then(cache => cache.put(INDEX_URL, copy));
+          caches.open(CACHE).then(cache => cache.put(documentUrl, copy));
           return response;
         })
-        .catch(() => caches.match(INDEX_URL))
+        .catch(() => caches.match(documentUrl))
     );
     return;
   }

@@ -564,3 +564,53 @@ final result: passed
 - Inline scripts, service worker syntax, repository whitespace, and browser console: passed.
 
 final result: passed
+
+---
+
+# Design QA — Login light and night v71
+
+## Scope and security boundary
+
+This pass verifies the selected login frontend and its local interactions, NOT real authentication. No identity backend exists; login, recovery and OTP explicitly report unavailable. Existing CRM routes are not secured by this screen. Production authentication remains blocked on the owner's account/provider choice. No credentials are sent or stored, no fake successful login is presented, and no production publication occurred.
+
+## Source and evidence
+
+- Light source: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-d7395c54-968f-4668-873b-96af2f21b9fe.png`.
+- Dark source: `/Users/mac/.codex/generated_images/01a016d7-5330-7902-a478-fde4d0c64819/exec-9935466d-c1c1-410b-94c2-df95eb1b32fb.png`.
+- Source images: 853 × 1844 pixels, normalized proportionally to the requested 390 × 844 CSS target.
+- Implementation: `http://127.0.0.1:8791/login.html`, browser-rendered `qa-login-v71/light-final.png` and `dark-final.png`, 390 × 844 pixels, density 1. Screenshot files contain JPEG pixels despite the .png suffix.
+- Full-view side-by-side inputs: `light-comparison-final.png`, `dark-comparison-final.png` in `qa-login-v71/`.
+- Focused form evidence: `light-form-comparison.png`, `dark-form-comparison.png` in that folder. The form comparison is needed to judge label sizing, inputs and CTA alignment.
+- Additional rendered evidence: `desktop-light.png`, `desktop-dark.png` at 1440 × 1024; `narrow-dark.png` at 320 × 740.
+- State: empty form, theme-specific phone/password login, no browser/device chrome.
+
+## Comparison history
+
+Pass 1: `light-comparison.png` and `dark-comparison.png` showed [P2] supporting copy/labels optically too small and later form actions about 17–24px below their source positions.
+
+Fix: adjusted supporting text and labels to 16px, tightened label leading, second-field spacing and CTA margin. Retained 32px mobile welcome heading and 31px brand heading, local Vazirmatn and all selected copy.
+
+Pass 2: opened final full and focused same-input comparisons. Form boundaries, major panel proportions, button placement and hierarchy now align. No actionable P0/P1/P2 visual mismatch remains within the frontend scope.
+
+## Required fidelity surfaces
+
+- Fonts/typography: local Vazirmatn variable font, correct Persian shaping and RTL, isolated Latin CRM, 16px input/label/supporting baseline. Generated mock font appearance is not exactly reproducible; small optical weight differences are P3.
+- Spacing/layout: 304px mobile hero, 22px form gutters, 49px inputs, 53px submit, no horizontal overflow at 390 or 320px. Form stays naturally scrollable for error text, keyboard and zoom. Desktop uses responsive two-column layout because no desktop reference was provided.
+- Colors/tokens: lavender light hero, plum night hero, off-white dark text, readable muted lavender, distinct input surfaces and violet primary action. Flat accessible CTA replaces the mock's very subtle gradient intentionally, avoiding a code-drawn visual asset.
+- Images: separately generated local storefront artwork per theme, no placeholders/custom SVG art, editable brand text not baked in. Supplied hero assets remain sharp, full-bleed and near-exact source aspect ratio. Minor storefront illustration variation is P3. Feather library icons provide the closest consistent line treatment.
+- Copy/content: exact «CRM مزون هاله» with no subtitle; field/action labels retained. Setup notice and return link added below the source viewport as necessary disclosure of the unconfigured auth boundary, not a fake auth promise.
+
+## Interaction checks
+
+- Browser: empty submit, too-short and too-long mobile values, valid Persian/Arabic digits, password reveal/hide, unavailable submit feedback, light/night toggle and theme persistence after reload: passed.
+- Return link to Today and mobile-menu link back to login: passed.
+- No horizontal overflow at 320 and 390 CSS px; desktop brand/main measure 720/1440px without horizontal overflow.
+- Browser console errors on login: none.
+- 7 automated tests: mobile normalization/validation/display and separate login/index online/offline document caching: passed.
+- App data stores and default operational state were not modified by the login implementation.
+
+## Remaining work
+
+Secure provider selection, authorized account provisioning, server-enforced data access, real sessions/logout, recovery and OTP must be implemented before calling this production authentication. See `LOGIN-SETUP.md`.
+
+final result: passed
