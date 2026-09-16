@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v69-mobile-dark-fixes';
+const CACHE = 'haleh-crm-v70-mezon-orb-cleanup';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [

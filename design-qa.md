@@ -514,3 +514,53 @@ final result: passed
 - Inline scripts, service worker syntax, and repository whitespace: passed.
 
 final result: passed
+
+---
+
+# Design QA — Mezon orb cleanup v70
+
+## Source visual truth
+
+- User-reported focused capture: `qa-audit-mezon-orb-v70/00-before.png`, 300 × 246 px.
+- Target: remove the black rectangular layer behind the storefront icon while preserving the circular dark-mode orb, purple halo, icon, label, and bottom navigation.
+
+## Implementation under test
+
+- Local URL: `http://127.0.0.1:8789/?qa=mezon-orb-v70-final#/today`.
+- Full implementation capture: `qa-audit-mezon-orb-v70/01-after-full.jpg`, 390 × 844 px.
+- Focused implementation capture: `qa-audit-mezon-orb-v70/02-after-focus.jpg`, 308 × 246 px.
+- Same-input comparison: `qa-audit-mezon-orb-v70/03-side-by-side.jpg`.
+- State: Today route, mobile dark theme, empty operational dataset.
+
+## Findings and comparison history
+
+### Pass 1 — blocked
+
+- P2: `.mezon-orb` inherited the dark surface background, producing a 74 × 31 px black rectangle behind the storefront icon inside the circular active navigation control.
+
+### Fix made
+
+- Set the dark-mode `.mezon-orb` background and border to transparent while leaving the circular `::before` and `::after` layers unchanged.
+
+### Pass 2 — passed
+
+- The rectangular layer is no longer visible in the focused comparison.
+- The orb and button backgrounds compute to transparent; the circular surface remains `rgb(24, 26, 34)` and the purple halo remains `rgb(33, 29, 50)`.
+- No horizontal overflow or browser console errors were found at 390 × 844.
+- No actionable P0, P1, or P2 issue remains in the approved scope.
+
+## Required fidelity surfaces
+
+- Fonts and typography: icon label typography and Persian shaping remain unchanged.
+- Spacing and layout rhythm: navigation dimensions, orb position, circle size, and safe-area spacing remain unchanged.
+- Colors and visual tokens: the unwanted rectangular surface was removed; approved dark surface and purple halo tokens remain intact.
+- Image quality and assets: the existing storefront icon remains unchanged and crisp.
+- Copy and content: the «مزون» label and all navigation copy remain unchanged.
+
+## Interaction and implementation checks
+
+- Active Today navigation state: passed.
+- Mobile dark-mode rendering: passed.
+- Inline scripts, service worker syntax, repository whitespace, and browser console: passed.
+
+final result: passed
