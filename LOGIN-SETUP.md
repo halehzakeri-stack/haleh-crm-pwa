@@ -10,11 +10,13 @@ The selected light and dark login design is implemented in `login.html`. Entry p
 - Local raster storefront hero assets and bundled Feather icons.
 - Separate offline cache documents for login and workspace.
 
-## Required before real authentication
+## Current temporary authentication
 
-No identity provider, account store, server, SMS provider or existing account configuration is present. Login, recovery and OTP display an explicit unavailable message and do not send or persist credentials. Remember-me is a form preference only; it does not currently create a session.
+The login form is connected to Supabase Auth. The owner signs in with the phone number shown in the form and its password; the phone number is mapped privately to the owner account because SMS login is not configured. A validated administrator session is saved only when “remember me” is selected. The public client contains only Supabase's publishable key, never a privileged key.
 
-Choose an authentication service and authorized users with the owner. Provision accounts through that service, then implement secure session management, server-enforced data access, expiry/logout, recovery and rate limits. Do not gate localStorage data with a hardcoded frontend password or call it secure authentication. Publishing this screen alone does not secure the existing CRM data.
+SMS recovery and one-time codes remain unavailable until an SMS provider is configured.
+
+The current CRM workspace is still stored locally in the browser. Authentication controls ordinary access to the PWA, but cloud-backed CRM data with server-enforced RLS is the next step before sharing the application with additional staff.
 
 The owner requested publication to the existing GitHub Pages PWA. Publication includes this frontend only; it does not activate authentication or secure the existing workspace.
 

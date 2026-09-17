@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v71-login-design';
+const CACHE = 'haleh-crm-v73-live-login-assets';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
@@ -62,6 +62,15 @@ self.addEventListener('fetch', event => {
         })
         .catch(() => caches.match(documentUrl))
     );
+    return;
+  }
+
+  // Authentication code must never be held back by an older offline shell.
+  if (['/login.js','/login-core.mjs','/login.css'].some(path => url.pathname.endsWith(path))) {
+    event.respondWith(fetch(event.request).then(response => {
+      if (response && response.ok) caches.open(CACHE).then(cache => cache.put(event.request, response.clone()));
+      return response;
+    }).catch(() => caches.match(event.request)));
     return;
   }
 

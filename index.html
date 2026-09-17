@@ -17,6 +17,7 @@
 <title>CRM هاله سجادی و هالین</title>
 <script>
 if(location.hash==='#/login')location.replace('./login.html');
+try{const authKey='haleh.crm.auth.v1',raw=localStorage.getItem(authKey)||sessionStorage.getItem(authKey),session=raw&&JSON.parse(raw);if(!session?.access_token||!session.expires_at||Date.now()>=session.expires_at){localStorage.removeItem(authKey);sessionStorage.removeItem(authKey);location.replace('./login.html')}}catch{location.replace('./login.html')}
 try{document.documentElement.dataset.theme=localStorage.getItem('hs.crm.v62.theme')==='dark'?'dark':'light'}catch{document.documentElement.dataset.theme='light'}
 </script>
 <style>
