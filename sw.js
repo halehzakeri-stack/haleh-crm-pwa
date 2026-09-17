@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v77-manager-role';
+const CACHE = 'haleh-crm-v78-shared-categories';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
