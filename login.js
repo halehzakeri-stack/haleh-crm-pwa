@@ -21,7 +21,7 @@ async function signIn(){
  if(!response?.ok||!result?.access_token)throw new Error('invalid');
  const userResponse=await fetch(`${SUPABASE_URL}/auth/v1/user`,{headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${result.access_token}`}}),user=await userResponse.json();
  const role=user.app_metadata?.haleh_crm_role;
- if(!userResponse.ok||!['admin','user','seller','accounting','inventory'].includes(role))throw new Error('forbidden');
+ if(!userResponse.ok||!['admin','manager','user','seller','accounting','inventory'].includes(role))throw new Error('forbidden');
  const store=byId('rememberLogin').checked?localStorage:sessionStorage;localStorage.removeItem(AUTH_KEY);sessionStorage.removeItem(AUTH_KEY);store.setItem(AUTH_KEY,JSON.stringify({access_token:result.access_token,refresh_token:result.refresh_token,expires_at:Date.now()+Number(result.expires_in||0)*1000,role}));
  location.replace('./index.html#/today');
 }

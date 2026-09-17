@@ -9,13 +9,13 @@ The selected light and dark login design is implemented in `login.html`. Entry p
 - Password visibility, keyboard submission, field errors, persisted light/dark theme shared with workspace, return navigation.
 - Local raster storefront hero assets and bundled Feather icons.
 - Separate offline cache documents for login, workspace, and user management.
-- Admin-only user management: the administrator can view local CRM accounts and create users with one of four roles: user, seller, accounting, or inventory.
+- User management: administrators can set every role; managers can manage non-admin accounts. Available roles are manager, user, seller, accounting, and inventory.
 
 ## Current temporary authentication
 
 The login form is connected to Supabase Auth. Account phone numbers are mapped privately to internal email identities because SMS login is not configured. A validated session is saved only when “remember me” is selected. The public client contains only Supabase's publishable key, never a privileged key.
 
-Roles are stored in Supabase `app_metadata` and checked by the server-side `crm-admin-users` Edge Function. The app uses role-based navigation for the current workspace: seller, accounting, and inventory users see only their assigned operational sections; only an administrator can open user management or create accounts.
+Roles are stored in Supabase `app_metadata` and checked by the server-side `crm-admin-users` Edge Function. The app uses role-based navigation for the current workspace: seller, accounting, and inventory users see only their assigned operational sections; managers have access to all CRM sections and can manage non-admin accounts, while only an administrator can assign or change the admin role.
 
 SMS recovery and one-time codes remain unavailable until an SMS provider is configured.
 
