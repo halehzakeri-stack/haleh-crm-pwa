@@ -12,6 +12,8 @@ const getSession=()=>{try{return JSON.parse(localStorage.getItem(SESSION)||sessi
 const session=getSession(),phone=document.querySelector('#staffPhone'),role=document.querySelector('#staffRole'),note=document.querySelector('#roleNote'),form=document.querySelector('#userForm'),status=document.querySelector('#userStatus'),list=document.querySelector('#userList'),count=document.querySelector('#userCount');
 const setStatus=(message,color='#17885e')=>{status.style.color=color;status.textContent=message};
 const headers=()=>({apikey:KEY,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'});
+function updateTheme(){const dark=document.documentElement.dataset.theme==='dark',button=document.querySelector('#usersTheme');button.textContent=dark?'☀':'☾';button.setAttribute('aria-label',dark?'فعال‌کردن حالت روشن':'فعال‌کردن حالت شب');button.setAttribute('aria-pressed',String(dark))}
+document.querySelector('#usersTheme').onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('hs.crm.v62.theme',next)}catch{}updateTheme()};
 async function verifyAdmin(){
   if(!session?.access_token)throw Error('login');
   const r=await fetch(URL+'/auth/v1/user',{headers:{apikey:KEY,Authorization:'Bearer '+session.access_token}}),user=await r.json();
@@ -52,4 +54,5 @@ form.onsubmit=async event=>{
     form.reset();role.value='user';note.textContent=roles.user.description;setStatus('کاربر ساخته شد؛ شماره موبایل و رمز موقت را با او به اشتراک بگذارید.');await loadUsers();
   }catch(error){setStatus(error.message==='duplicate'?'این شماره قبلاً ثبت شده است.':'ساخت کاربر انجام نشد.','#c64848')}finally{button.disabled=false}
 };
+updateTheme();
 try{await verifyAdmin();await loadUsers()}catch{location.replace('./login.html')}
