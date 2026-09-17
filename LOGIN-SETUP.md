@@ -1,6 +1,6 @@
 # Login implementation status
 
-The selected light and dark login design is implemented in `login.html`. Entry points: desktop sidebar, mobile menu, and `index.html#/login`. The existing operational workspace is deliberately NOT protected by this frontend screen.
+The selected light and dark login design is implemented in `login.html`. Entry points: desktop sidebar, mobile menu, and `index.html#/login`.
 
 ## Working now
 
@@ -8,15 +8,18 @@ The selected light and dark login design is implemented in `login.html`. Entry p
 - Exactly 11 mobile digits beginning with 09; Persian and Arabic keyboard digits accepted without truncating invalid extra input.
 - Password visibility, keyboard submission, field errors, persisted light/dark theme shared with workspace, return navigation.
 - Local raster storefront hero assets and bundled Feather icons.
-- Separate offline cache documents for login and workspace.
+- Separate offline cache documents for login, workspace, and user management.
+- Admin-only user management: the administrator can view local CRM accounts and create users with one of four roles: user, seller, accounting, or inventory.
 
 ## Current temporary authentication
 
-The login form is connected to Supabase Auth. The owner signs in with the phone number shown in the form and its password; the phone number is mapped privately to the owner account because SMS login is not configured. A validated administrator session is saved only when “remember me” is selected. The public client contains only Supabase's publishable key, never a privileged key.
+The login form is connected to Supabase Auth. Account phone numbers are mapped privately to internal email identities because SMS login is not configured. A validated session is saved only when “remember me” is selected. The public client contains only Supabase's publishable key, never a privileged key.
+
+Roles are stored in Supabase `app_metadata` and checked by the server-side `crm-admin-users` Edge Function. The app uses role-based navigation for the current workspace: seller, accounting, and inventory users see only their assigned operational sections; only an administrator can open user management or create accounts.
 
 SMS recovery and one-time codes remain unavailable until an SMS provider is configured.
 
-The current CRM workspace is still stored locally in the browser. Authentication controls ordinary access to the PWA, but cloud-backed CRM data with server-enforced RLS is the next step before sharing the application with additional staff.
+The current CRM workspace is still stored locally in the browser. Authentication and role-based navigation control ordinary PWA access, but cloud-backed CRM data with server-enforced RLS is the next step before sharing sensitive business data with additional staff.
 
 The owner requested publication to the existing GitHub Pages PWA. Publication includes this frontend only; it does not activate authentication or secure the existing workspace.
 

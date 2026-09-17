@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v74-users-mobile-menu';
+const CACHE = 'haleh-crm-v75-role-management';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
@@ -54,7 +54,9 @@ self.addEventListener('fetch', event => {
   if (event.request.mode === 'navigate') {
     const documentUrl = url.pathname.endsWith('/login.html')
       ? new URL('login.html', BASE_URL).href
-      : INDEX_URL;
+      : url.pathname.endsWith('/users.html')
+        ? new URL('users.html', BASE_URL).href
+        : INDEX_URL;
     event.respondWith(
       fetch(event.request)
         .then(response => {
@@ -68,7 +70,7 @@ self.addEventListener('fetch', event => {
   }
 
   // Authentication code must never be held back by an older offline shell.
-  if (['/login.js','/login-core.mjs','/login.css'].some(path => url.pathname.endsWith(path))) {
+  if (['/login.js','/login-core.mjs','/login.css','/users.js'].some(path => url.pathname.endsWith(path))) {
     event.respondWith(fetch(event.request).then(response => {
       if (response && response.ok) caches.open(CACHE).then(cache => cache.put(event.request, response.clone()));
       return response;
