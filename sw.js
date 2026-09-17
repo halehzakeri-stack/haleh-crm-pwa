@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v73-live-login-assets';
+const CACHE = 'haleh-crm-v74-users-mobile-menu';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
