@@ -8,6 +8,8 @@ const APP_SHELL = [
   'login.css',
   'login.js',
   'login-core.mjs',
+  'users.html',
+  'users.js',
   'assets/login-hero-light.png',
   'assets/login-hero-dark.png',
   'assets/vendor/feather-4.29.2.min.js',
