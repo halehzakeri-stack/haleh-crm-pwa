@@ -5,9 +5,13 @@
 create table if not exists public.crm_shared_catalogs (
   workspace_key text primary key check (workspace_key = 'haleh-main'),
   categories jsonb not null default '[]'::jsonb,
+  category_icons jsonb not null default '{}'::jsonb,
   updated_at timestamptz not null default now(),
   updated_by uuid references auth.users(id)
 );
+
+alter table public.crm_shared_catalogs
+  add column if not exists category_icons jsonb not null default '{}'::jsonb;
 
 alter table public.crm_shared_catalogs enable row level security;
 revoke all on table public.crm_shared_catalogs from anon, authenticated;

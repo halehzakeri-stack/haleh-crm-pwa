@@ -28,6 +28,12 @@ function categoriesFrom(value: unknown) {
     }).slice(0, 40);
 }
 
+const iconChoices = new Set(['jeans.png', 'casual.png', 'coat.png', 'shirt.png', 'suit.png', 'accessory.png']);
+function iconsFrom(value: unknown, categories: string[]) {
+  const source = value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
+  return Object.fromEntries(categories.map(name => [name, iconChoices.has(String(source[name] || '')) ? source[name] : 'casual.png']));
+}
+
 Deno.serve(async req => {
   const origin = req.headers.get('Origin') || '';
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors(origin) });
@@ -51,22 +57,26 @@ Deno.serve(async req => {
 
   if (body.action === 'get') {
     const { data, error: readError } = await admin.from('crm_shared_catalogs')
-      .select('categories, updated_at').eq('workspace_key', workspaceKey).maybeSingle();
+      .select('categories, category_icons, updated_at').eq('workspace_key', workspaceKey).maybeSingle();
     if (readError) return reply({ error: 'read_failed' }, 500, origin);
-    return reply({ categories: categoriesFrom(data?.categories), updatedAt: data?.updated_at || null }, 200, origin);
+    const categories = categoriesFrom(data?.categories);
+    return reply({ categories, categoryIcons: iconsFrom(data?.category_icons, categories), updatedAt: data?.updated_at || null }, 200, origin);
   }
 
   if (body.action === 'save') {
     if (!writers.has(role)) return reply({ error: 'forbidden' }, 403, origin);
     const categories = categoriesFrom(body.categories);
+    const categoryIcons = iconsFrom(body.categoryIcons, categories);
     const { data, error: writeError } = await admin.from('crm_shared_catalogs').upsert({
       workspace_key: workspaceKey,
       categories,
+      category_icons: categoryIcons,
       updated_at: new Date().toISOString(),
       updated_by: user.id
-    }, { onConflict: 'workspace_key' }).select('categories, updated_at').single();
+    }, { onConflict: 'workspace_key' }).select('categories, category_icons, updated_at').single();
     if (writeError) return reply({ error: 'write_failed' }, 500, origin);
-    return reply({ categories: categoriesFrom(data.categories), updatedAt: data.updated_at }, 200, origin);
+    const savedCategories = categoriesFrom(data.categories);
+    return reply({ categories: savedCategories, categoryIcons: iconsFrom(data.category_icons, savedCategories), updatedAt: data.updated_at }, 200, origin);
   }
 
   return reply({ error: 'invalid_action' }, 400, origin);
