@@ -3,12 +3,17 @@ import { createClient } from 'npm:@supabase/supabase-js@2.57.4';
 const workspaceKey = 'haleh-main';
 const readers = new Set(['admin', 'manager', 'user', 'seller', 'accounting', 'inventory']);
 const writers = new Set(['admin', 'manager', 'seller', 'inventory']);
-const cors = {
-  'Access-Control-Allow-Origin': 'https://halehzakeri-stack.github.io',
+const allowedOrigin = (origin: string) => (
+  origin === 'https://halehzakeri-stack.github.io' || origin === 'null' || /^http:\/\/127\.0\.0\.1:\d+$/.test(origin)
+    ? origin
+    : 'https://halehzakeri-stack.github.io'
+);
+const cors = (origin = '') => ({
+  'Access-Control-Allow-Origin': allowedOrigin(origin),
   'Access-Control-Allow-Headers': 'authorization, apikey, content-type',
   'Content-Type': 'application/json'
-};
-const reply = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: cors });
+});
+const reply = (body: unknown, status = 200, origin = '') => new Response(JSON.stringify(body), { status, headers: cors(origin) });
 
 function categoriesFrom(value: unknown) {
   if (!Array.isArray(value)) return [];
@@ -24,8 +29,9 @@ function categoriesFrom(value: unknown) {
 }
 
 Deno.serve(async req => {
-  if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
-  if (req.method !== 'POST') return reply({ error: 'method' }, 405);
+  const origin = req.headers.get('Origin') || '';
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: cors(origin) });
+  if (req.method !== 'POST') return reply({ error: 'method' }, 405, origin);
 
   const auth = req.headers.get('Authorization') || '';
   const caller = createClient(
@@ -35,7 +41,7 @@ Deno.serve(async req => {
   );
   const { data: { user }, error } = await caller.auth.getUser();
   const role = String(user?.app_metadata?.haleh_crm_role || '');
-  if (error || !user || !readers.has(role)) return reply({ error: 'forbidden' }, 403);
+  if (error || !user || !readers.has(role)) return reply({ error: 'forbidden' }, 403, origin);
 
   const body = await req.json().catch(() => ({}));
   const admin = createClient(
@@ -46,12 +52,12 @@ Deno.serve(async req => {
   if (body.action === 'get') {
     const { data, error: readError } = await admin.from('crm_shared_catalogs')
       .select('categories, updated_at').eq('workspace_key', workspaceKey).maybeSingle();
-    if (readError) return reply({ error: 'read_failed' }, 500);
-    return reply({ categories: categoriesFrom(data?.categories), updatedAt: data?.updated_at || null });
+    if (readError) return reply({ error: 'read_failed' }, 500, origin);
+    return reply({ categories: categoriesFrom(data?.categories), updatedAt: data?.updated_at || null }, 200, origin);
   }
 
   if (body.action === 'save') {
-    if (!writers.has(role)) return reply({ error: 'forbidden' }, 403);
+    if (!writers.has(role)) return reply({ error: 'forbidden' }, 403, origin);
     const categories = categoriesFrom(body.categories);
     const { data, error: writeError } = await admin.from('crm_shared_catalogs').upsert({
       workspace_key: workspaceKey,
@@ -59,9 +65,9 @@ Deno.serve(async req => {
       updated_at: new Date().toISOString(),
       updated_by: user.id
     }, { onConflict: 'workspace_key' }).select('categories, updated_at').single();
-    if (writeError) return reply({ error: 'write_failed' }, 500);
-    return reply({ categories: categoriesFrom(data.categories), updatedAt: data.updated_at });
+    if (writeError) return reply({ error: 'write_failed' }, 500, origin);
+    return reply({ categories: categoriesFrom(data.categories), updatedAt: data.updated_at }, 200, origin);
   }
 
-  return reply({ error: 'invalid_action' }, 400);
+  return reply({ error: 'invalid_action' }, 400, origin);
 });
