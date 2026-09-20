@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v80-product-form-validation';
+const CACHE = 'haleh-crm-v81-safe-update';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
@@ -14,6 +14,8 @@ const APP_SHELL = [
   'assets/login-hero-dark.png',
   'assets/vendor/feather-4.29.2.min.js',
   'manifest.webmanifest',
+  'release.json',
+  'pwa-update.js',
   'vazirmatn.woff2',
   'icon-192.png',
   'icon-512.png',
@@ -35,8 +37,11 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE)
       .then(cache => Promise.allSettled(APP_SHELL.map(asset => cache.add(asset))))
-      .then(() => self.skipWaiting())
   );
+});
+
+self.addEventListener('message', event => {
+  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {

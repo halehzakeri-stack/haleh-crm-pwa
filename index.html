@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 <meta name="apple-mobile-web-app-title" content="CRM مزون"/>
 <link rel="manifest" href="./manifest.webmanifest"/>
+<script type="module" src="./pwa-update.js"></script>
 <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png"/>
 <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png"/>
@@ -1521,7 +1522,6 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('#sheetHo
 $('#mobileBack').onclick=()=>{if($('#sheetHost .sheet'))return closeSheet('user');if(state.page==='today')return;if(state.page==='customers'&&state.customerProfileId){state.customerProfileId=null;state.customerProfileTab='overview';state.customerListView='active';render();return}if(state.page==='customers'&&state.customerListView!=='active'){state.customerListView='active';render();return}if(state.page==='sale'&&saleIsDrilledDown())resetSaleFilters();setPage('today')};
 const initial=location.hash.split('/')[1];if(initial&&META[initial])state.page=initial;setPage(state.page,false);injectIcons();
 runDailyBackup();
-if('serviceWorker'in navigator){let refreshingForUpdate=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(refreshingForUpdate)return;refreshingForUpdate=true;location.reload()});navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{})}
 })();
 </script>
 </body>
