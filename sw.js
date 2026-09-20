@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v81-safe-update';
+const CACHE = 'haleh-crm-v82-workspace-sync';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
