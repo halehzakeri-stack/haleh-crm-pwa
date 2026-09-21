@@ -1,6 +1,6 @@
 {
-  "version": "2026.09.20.5",
-  "cache": "haleh-crm-v85-production-followups",
-  "label": "پیگیری سفارش تولید و ثبت پرداخت‌های بعدی آمادهٔ دریافت است.",
-  "publishedAt": "2026-09-20T00:00:00.000Z"
+  "version": "2026.09.21.1",
+  "cache": "haleh-crm-v86-production-sale-polish",
+  "label": "بهبود خرید تولیدی، ناوبری فروش و نمایش اتمام موجودی آمادهٔ دریافت است.",
+  "publishedAt": "2026-09-21T00:00:00.000Z"
 }
