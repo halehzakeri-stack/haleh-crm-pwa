@@ -1,6 +1,6 @@
 {
-  "version": "2026.09.21.1",
-  "cache": "haleh-crm-v86-production-sale-polish",
-  "label": "بهبود خرید تولیدی، ناوبری فروش و نمایش اتمام موجودی آمادهٔ دریافت است.",
-  "publishedAt": "2026-09-21T00:00:00.000Z"
+  "version": "2026.09.26.1",
+  "cache": "haleh-crm-v87-partner-consignment-flow",
+  "label": "فلو فروشگاه‌های همکار: حواله امانی، گزارش دوره‌ای و تسویه ماهانه منتشر شد.",
+  "publishedAt": "2026-09-26T00:00:00.000Z"
 }
