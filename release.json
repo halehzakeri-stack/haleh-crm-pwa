@@ -1,6 +1,6 @@
 {
-  "version": "2026.09.26.1",
-  "cache": "haleh-crm-v87-partner-consignment-flow",
-  "label": "فلو فروشگاه‌های همکار: حواله امانی، گزارش دوره‌ای و تسویه ماهانه منتشر شد.",
+  "version": "2026.09.26.2",
+  "cache": "haleh-crm-v88-partner-direct-dispatch",
+  "label": "فلو سادهٔ فروشگاه‌های همکار: ارسال مستقیم کالا و تسویهٔ دوره‌ای منتشر شد.",
   "publishedAt": "2026-09-26T00:00:00.000Z"
 }

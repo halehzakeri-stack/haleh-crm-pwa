@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v87-partner-consignment-flow';
+const CACHE = 'haleh-crm-v88-partner-direct-dispatch';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
