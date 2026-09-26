@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v89-partner-home-icon';
+const CACHE = 'haleh-crm-v90-production-measurements';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
