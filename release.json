@@ -1,6 +1,6 @@
 {
-  "version": "2026.10.07.6",
-  "cache": "haleh-crm-v96-product-code-uniqueness",
-  "label": "نام تکراری مدل مجاز شد و کد کالا یکتا می‌ماند.",
+  "version": "2026.10.07.7",
+  "cache": "haleh-crm-v97-product-name-rule",
+  "label": "قانون نام تکراری در همهٔ فرم‌های کالا غیرفعال شد.",
   "publishedAt": "2026-10-07T00:00:00.000Z"
 }
