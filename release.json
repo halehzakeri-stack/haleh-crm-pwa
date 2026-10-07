@@ -1,6 +1,6 @@
 {
-  "version": "2026.09.26.4",
-  "cache": "haleh-crm-v90-production-measurements",
-  "label": "فرم اندازه‌گیری مشتری برای سفارش‌های تولیدی اضافه شد.",
-  "publishedAt": "2026-09-26T00:00:00.000Z"
+  "version": "2026.10.07.1",
+  "cache": "haleh-crm-v91-formal-entry-and-home-refinement",
+  "label": "ورود فرمالیته، بهبود هوم و جست‌وجوی کالا برای ارسال به فروشگاه اضافه شد.",
+  "publishedAt": "2026-10-07T00:00:00.000Z"
 }

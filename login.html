@@ -11,7 +11,7 @@
  <script>try{document.documentElement.dataset.theme=localStorage.getItem('hs.crm.v62.theme')==='dark'?'dark':'light'}catch{document.documentElement.dataset.theme='light'}</script>
  <link rel="stylesheet" href="./login.css">
  <script src="./assets/vendor/feather-4.29.2.min.js" defer></script>
- <script type="module" src="./login.js?v=75"></script>
+ <script type="module" src="./login.js?v=76"></script>
  <script type="module" src="./pwa-update.js"></script>
 </head>
 <body>
@@ -21,24 +21,9 @@
    <h1><bdi>CRM</bdi> مزون هاله</h1>
   </header>
   <section class="login-form-section" aria-labelledby="welcomeTitle">
-   <div class="form-heading"><h2 id="welcomeTitle">خوش آمدید</h2><p>برای ورود، اطلاعات حساب کاری را وارد کنید</p></div>
-   <form id="loginForm" novalidate>
-    <div class="form-field">
-     <label for="loginPhone">شماره موبایل</label>
-     <div class="input-wrap"><i data-feather="smartphone" aria-hidden="true"></i><input id="loginPhone" type="tel" inputmode="numeric" autocomplete="username" placeholder="۰۹۱۲۱۲۳۴۵۶۷" aria-describedby="phoneError" required></div>
-     <p class="field-error" id="phoneError" hidden></p>
-    </div>
-    <div class="form-field">
-     <label for="loginPassword">رمز عبور</label>
-     <div class="input-wrap password-wrap"><input id="loginPassword" type="password" autocomplete="current-password" placeholder="••••••••" aria-describedby="passwordError" required><button id="showPassword" type="button" aria-label="نمایش رمز عبور" aria-pressed="false"><i data-feather="eye" aria-hidden="true"></i></button></div>
-     <p class="field-error" id="passwordError" hidden></p>
-    </div>
-    <div class="login-options"><label class="remember"><input id="rememberLogin" type="checkbox" checked><span>مرا به‌خاطر بسپار</span></label><button class="text-button" id="recoverPassword" type="button">بازیابی رمز عبور</button></div>
-    <p id="loginStatus" class="login-status" role="alert" hidden></p>
-    <button class="login-submit" type="submit">ورود</button>
-    <div class="otp-row"><button class="text-button" id="otpLogin" type="button">ورود با رمز یک‌بارمصرف</button></div>
-   </form>
-   <p class="setup-notice">ورود موقت با شماره موبایل و رمز شما فعال است.</p>
+   <div class="form-heading"><h2 id="welcomeTitle">خوش آمدید</h2><p>برای ورود به پنل مزون، ادامه را بزنید.</p></div>
+   <button class="login-submit formal-entry-button" id="formalEnter" type="button">ورود به مزون</button>
+   <p class="setup-notice">ورود بدون نام کاربری و رمز عبور</p>
    <a class="workspace-return" href="./index.html#/today">بازگشت به مزون فعلی</a>
   </section>
  </main>
