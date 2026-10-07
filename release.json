@@ -1,6 +1,6 @@
 {
-  "version": "2026.10.07.3",
-  "cache": "haleh-crm-v93-product-brand-identity",
-  "label": "نام برند در شناسه و فرم کالاها اضافه شد.",
+  "version": "2026.10.07.4",
+  "cache": "haleh-crm-v94-source-brand-from-sheet",
+  "label": "نام برند محصولات از شیت مرجع هالین وارد شد.",
   "publishedAt": "2026-10-07T00:00:00.000Z"
 }
