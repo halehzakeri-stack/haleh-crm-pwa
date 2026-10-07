@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v94-source-brand-from-sheet';
+const CACHE = 'haleh-crm-v95-bilingual-size-display';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
