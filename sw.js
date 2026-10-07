@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v92-halin-jeans-opening-inventory';
+const CACHE = 'haleh-crm-v93-product-brand-identity';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
