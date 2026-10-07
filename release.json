@@ -1,6 +1,6 @@
 {
-  "version": "2026.10.07.5",
-  "cache": "haleh-crm-v95-bilingual-size-display",
-  "label": "نمایش سایز خارجی و معادل ایرانی اصلاح شد.",
+  "version": "2026.10.07.6",
+  "cache": "haleh-crm-v96-product-code-uniqueness",
+  "label": "نام تکراری مدل مجاز شد و کد کالا یکتا می‌ماند.",
   "publishedAt": "2026-10-07T00:00:00.000Z"
 }
