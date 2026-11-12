@@ -1090,7 +1090,9 @@ html:not([data-theme="dark"]) .today-page .dashboard-brand-switch button:not(.ac
 (()=>{
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 document.documentElement.dataset.barcodeEngine=typeof window.ZXingBrowser?.BrowserMultiFormatReader==='function'?'ready':'missing';
-const fmt=n=>new Intl.NumberFormat('fa-IR').format(Math.round(n||0));
+// Foreign apparel sizes are labels, not arithmetic values. Keep 22/32-style
+// sizes in Latin digits while localizing actual quantities and currency values.
+const fmt=n=>{const value=String(n??'').trim();if(/^\d{2}\/\d{2}$/.test(value))return value;return new Intl.NumberFormat('fa-IR').format(Math.round(n||0))};
 const faDigits=value=>String(value??'').replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
 // Sizes may be compound values such as 22/32, so they must never pass through
 // the numeric quantity formatter (which would render them as NaN / «ناعدد»).

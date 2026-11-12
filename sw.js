@@ -1,4 +1,4 @@
-const CACHE = 'haleh-crm-v97-product-name-rule';
+const CACHE = 'haleh-crm-v99-release-metadata';
 const BASE_URL = new URL('./', self.registration.scope);
 const INDEX_URL = new URL('index.html', BASE_URL).href;
 const APP_SHELL = [
@@ -75,7 +75,7 @@ self.addEventListener('fetch', event => {
   }
 
   // Authentication code must never be held back by an older offline shell.
-  if (['/login.js','/login-core.mjs','/login.css','/users.js'].some(path => url.pathname.endsWith(path))) {
+  if (['/login.js','/login-core.mjs','/login.css','/users.js','/release.json'].some(path => url.pathname.endsWith(path))) {
     event.respondWith(fetch(event.request).then(response => {
       if (response && response.ok) caches.open(CACHE).then(cache => cache.put(event.request, response.clone()));
       return response;
